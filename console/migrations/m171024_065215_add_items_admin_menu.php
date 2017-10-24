@@ -6,10 +6,10 @@ class m171024_065215_add_items_admin_menu extends Migration
 {
     public function safeUp()
     {
-        //$this->insert('{{%menu_link}}', ['id' => 'osago-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 100]);
-        //$this->insert('{{%menu_link_lang}}', ['link_id' => 'osago-main', 'label' => 'OSAGO', 'language' => 'en-US']);
-        //$this->insert('{{%menu_link}}', ['id' => 'osago', 'menu_id' => 'admin-menu', 'link' => 'epl/osago', 'parent_id'=>'osago-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
-        //$this->insert('{{%menu_link_lang}}', ['link_id' => 'osago', 'label' => 'OSAGO', 'language' => 'en-US']);
+        $this->insert('{{%menu_link}}', ['id' => 'osago-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 100]);
+        $this->insert('{{%menu_link_lang}}', ['link_id' => 'osago-main', 'label' => 'OSAGO', 'language' => 'en-US']);
+        $this->insert('{{%menu_link}}', ['id' => 'osago', 'menu_id' => 'admin-menu', 'link' => 'epl/osago', 'parent_id'=>'osago-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
+        $this->insert('{{%menu_link_lang}}', ['link_id' => 'osago', 'label' => 'OSAGO', 'language' => 'en-US']);
 
         $this->insert('{{%menu_link}}', ['id' => 'travel-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 101]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'travel-main', 'label' => 'Travel', 'language' => 'en-US']);
