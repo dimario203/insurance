@@ -69,4 +69,8 @@ class EplController extends Controller
         }
     }
 
+    public function actionAddCompany(){
+
+    }
+
 }

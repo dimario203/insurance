@@ -32,4 +32,9 @@ use yii\helpers\Url;
                 }
             ?>
         </table>
+    <div>
+        <a href="<?= Url::to(['epl/add-company'])?>">
+            <input type="button" value="Создать компанию"/>
+        </a>
+    </div>
 </div>
