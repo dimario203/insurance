@@ -4,6 +4,12 @@ use yii\helpers\Url;
 
 <div>
     <h2>Перечень компаний:</h2>
+    <?php
+    if(isset($mess)){?>
+        <h4 class="message-<?= $status?>"><?= $mess?></h4>
+        <?php
+    }
+    ?>
         <table>
             <tr>
                 <th>Название</th>

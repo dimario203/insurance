@@ -24,11 +24,21 @@ class CompanyEdite
     }
 
     public function updateCompany($post){
-
         $company = Company::findOne($post['comp_id']);
         if($company===null){
             return false;
         }
+        return $this->insertData($post,  $company);
+    }
+
+
+    public function addNewCompany($post){
+        $new_comp = new Company();
+        return $this->insertData($post,  $new_comp);
+    }
+
+
+    private function insertData($post, $company){
         if(isset($post['name']) && !empty($post['name'])){
             $company->name = $post['name'];
         }
@@ -45,19 +55,15 @@ class CompanyEdite
             $tmp_name = $_FILES["logo"]["tmp_name"];
             $root_path = $_SERVER['DOCUMENT_ROOT'];
             $name = basename($_FILES["logo"]["name"]);
-            move_uploaded_file($tmp_name, $root_path."/frontend/web/images/logo/$name");
-            $company->logo = "/images/logo/$name";
+            if(!empty($name)) {
+                move_uploaded_file($tmp_name, $root_path . "/frontend/web/images/logo/$name");
+                $company->logo = "/images/logo/$name";
+            }
         }
-
         if(!$company->save()){
             return false;
         } else {
             return true;
         }
-
-    }
-
-    public function addNewCompany($data){
-
     }
 }

@@ -7,12 +7,13 @@ use Yii;
 /**
  * This is the model class for table "company".
  *
- * @property integer $comp_id
+ * @property integer $company_id
  * @property string $name
  * @property string $url
  * @property string $phone
  * @property integer $commission
  * @property string $logo
+ * @property integer $visible
  */
 class Company extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['commission'], 'integer', 'max'=>11],
+            [['commission', 'visible'], 'integer'],
             [['name', 'url', 'logo'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 25],
         ];
@@ -43,12 +44,13 @@ class Company extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'comp_id' => Yii::t('app', 'Comp Id'),
-            'name' => Yii::t('app', 'Name'),
-            'url' => Yii::t('app', 'Url'),
-            'phone' => Yii::t('app', 'Phone'),
-            'commission' => Yii::t('app', 'Commission'),
-            'logo' => Yii::t('app', 'Logo'),
+            'company_id' => 'Company ID',
+            'name' => 'Name',
+            'url' => 'Url',
+            'phone' => 'Phone',
+            'commission' => 'Commission',
+            'logo' => 'Logo',
+            'visible' => 'Visible',
         ];
     }
 }
