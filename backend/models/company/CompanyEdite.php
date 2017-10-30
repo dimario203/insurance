@@ -11,6 +11,10 @@ namespace app\models\company;
 
 class CompanyEdite
 {
+    const  COMPANY_VISIBLE =1;
+    const  COMPANY_NOT_VISIBLE =0;
+
+
     public function getCompanies(){
         $models = Company::find()->asArray()->all();
 
@@ -18,13 +22,13 @@ class CompanyEdite
     }
 
     public function getCompany($comp_id){
-        $model = Company::find()->where(['comp_id'=>$comp_id])->asArray()->one();
+        $model = Company::find()->where(['company_id'=>$comp_id])->asArray()->one();
 
         return $model;
     }
 
     public function updateCompany($post){
-        $company = Company::findOne($post['comp_id']);
+        $company = Company::findOne($post['company_id']);
         if($company===null){
             return false;
         }
@@ -60,10 +64,15 @@ class CompanyEdite
                 $company->logo = "/images/logo/$name";
             }
         }
-        if(!$company->save()){
-            return false;
+        if(isset($post['visible']) && !empty($post['visible'])){
+            $company->visible = self::COMPANY_VISIBLE;
         } else {
-            return true;
+            $company->visible = self::COMPANY_NOT_VISIBLE;
+        }
+        if(!$company->save()){
+            return ['status'=>'error', 'name'=>$company->name];
+        } else {
+            return ['status'=>'ok', 'name'=>$company->name];
         }
     }
 }

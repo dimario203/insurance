@@ -67,8 +67,8 @@ return [
                 //add here local frontend controllers
                 '<controller:(test)>' => '<controller>/index',
                 '<controller:(test)>/<id:\d+>' => '<controller>/view',
-                '<controller:(epl)>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:(epl)>/<action:\w+>' => '<controller>/<action>',
+                '<controller>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller>/<action:\w+>' => '<controller>/<action>',
                 //yee cms and other modules routes
                 '<module:\w+>/' => '<module>/default/index',
                 '<module:\w+>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',

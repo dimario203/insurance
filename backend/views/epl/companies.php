@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 ?>
 
-<div>
+<div id="companies">
     <h2>Перечень компаний:</h2>
     <?php
     if(isset($mess)){?>
@@ -10,16 +10,27 @@ use yii\helpers\Url;
         <?php
     }
     ?>
-        <table>
-            <tr>
-                <th>Название</th>
-                <th>URL</th>
-                <th>Телефон</th>
-                <th>Комиссия</th>
-                <th>Логотип(140х56)</th>
-                <th></th>
-            </tr>
+        <table class="table-companies">
+            <col width="25%">
+            <col width="35%">
+            <col width="10%">
+            <col width="5%">
+            <col width="15%">
+            <col width="5%">
+            <col width="5%">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>URL</th>
+                    <th>Телефон</th>
+                    <th>Комиссия</th>
+                    <th>Логотип(140х56)</th>
+                    <th>Отображать</th>
+                    <th></th>
+                </tr>
+            </thead>
 
+            <tbody>
             <?php
                 foreach($companies as $company){?>
                    <tr>
@@ -28,8 +39,11 @@ use yii\helpers\Url;
                        <td><?= $company['phone']?></td>
                        <td><?= $company['commission']?></td>
                        <td><?= $company['logo']?></td>
+                       <td class="company-visible">
+                           <input type="checkbox" disabled <?=$company['visible']?'checked':''?>/>
+                       </td>
                        <td>
-                           <a href="<?= Url::to(['epl/edite-company', 'id'=>$company['comp_id']])?>">
+                           <a href="<?= Url::to(['epl/edite-company', 'id'=>$company['company_id']])?>">
                                 <input type="button" value="Редактировать"/>
                            </a>
                        </td>
@@ -37,10 +51,13 @@ use yii\helpers\Url;
                 <?php
                 }
             ?>
+            </tbody>
         </table>
-    <div>
+    <div class="button-add">
         <a href="<?= Url::to(['epl/add-company'])?>">
             <input type="button" value="Создать компанию"/>
         </a>
     </div>
 </div>
+
+

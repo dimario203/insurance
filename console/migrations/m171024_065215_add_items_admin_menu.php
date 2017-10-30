@@ -31,6 +31,9 @@ class m171024_065215_add_items_admin_menu extends Migration
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'companies-main', 'label' => 'Компании', 'language' => 'en-US']);
         $this->insert('{{%menu_link}}', ['id' => 'view-companies', 'menu_id' => 'admin-menu', 'link' => '/epl/get-companies', 'parent_id'=>'companies-main', 'image' => '', 'created_by' => 1, 'order' => 99]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'view-companies', 'label' => 'Список Компаний', 'language' => 'en-US']);
+
+        $this->insert('{{%menu_link}}', ['id' => 'settings-site-controll', 'menu_id' => 'admin-menu', 'link' => '/epl/get-ctrl-settings', 'parent_id'=>'settings', 'image' => '', 'created_by' => 1, 'order' => 0]);
+        $this->insert('{{%menu_link_lang}}', ['link_id' => 'settings-site-controll', 'label' => 'Управление сайтом', 'language' => 'en-US']);
     }
 
     public function safeDown()
@@ -39,19 +42,4 @@ class m171024_065215_add_items_admin_menu extends Migration
 
         return false;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m171024_065215_add_items_admin_menu cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

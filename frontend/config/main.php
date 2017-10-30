@@ -47,7 +47,7 @@ return [
                 '<action:[\w \-]+>' => 'site/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
-            'nonMultilingualUrls' => [
+           'nonMultilingualUrls' => [
                 'auth/default/oauth',
             ],
         ],

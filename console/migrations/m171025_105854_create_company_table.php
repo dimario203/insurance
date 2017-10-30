@@ -13,6 +13,7 @@ class m171025_105854_create_company_table extends Migration
             'phone' => $this->string(25),
             'commission' => $this->integer(11),
             'logo' => $this->string(),
+            'visible' => $this->SmallInteger(1)->defaultValue(1),
         ]);
     }
 

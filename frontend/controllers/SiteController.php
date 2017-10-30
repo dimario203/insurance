@@ -8,7 +8,9 @@ use frontend\models\ContactForm;
 use yeesoft\page\models\Page;
 use yeesoft\post\models\Post;
 use Yii;
+use yii\base\Module;
 use yii\data\Pagination;
+use yii\helpers\Url;
 
 /**
  * Site controller
@@ -20,6 +22,19 @@ class SiteController extends \yeesoft\controllers\BaseController
     /**
      * @inheritdoc
      */
+
+    public function init(){
+        parent::init();
+        $on_off=1;
+        $url_request = \Yii::$app->request->pathInfo;
+        //print_r($url_request); die();
+        if($on_off==1 && $url_request!='site-maintenance'){
+            //print_r($url_request); die(111);
+            return $this->redirect('site-maintenance');
+        }
+
+    }
+
     public function actions()
     {
         return [
@@ -38,6 +53,12 @@ class SiteController extends \yeesoft\controllers\BaseController
      *
      * @return mixed
      */
+
+    public function actionSiteMaintenance(){
+        return $this->render('site-maintenance');
+    }
+
+
     public function actionIndex($slug = 'index')
     {
         // display home page
@@ -111,6 +132,8 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionContact()
     {
+        /*$url_request = \Yii::$app->request->pathInfo;
+        print_r($url_request); die();*/
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {

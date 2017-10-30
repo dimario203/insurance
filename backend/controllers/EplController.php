@@ -55,18 +55,17 @@ class EplController extends Controller
     public function actionUpdateCompany(){
         $post = \Yii::$app->request->post();
         $comp = new CompanyEdite();
-        if(!empty($post) && isset($post['comp_id']) && !empty($post['comp_id'])){
-            if($comp->updateCompany($post)){
-                $mess = 'Данные компании обновлены';
-                $status = 'ok';
+        if(!empty($post) && isset($post['company_id']) && !empty($post['company_id'])){
+            $result = $comp->updateCompany($post);
+            if($result['status']=='ok'){
+                $mess = 'Данные компании '.$result['name'].' обновлены';
             } else {
-                $mess = 'Данные компании не обновлены';
-                $status = 'error';
+                $mess = 'Данные компании '.$result['name'].' не обновлены';
             }
             $companies = $comp->getCompanies();
-            return $this->render('companies', ['companies'=>$companies, 'mess' => $mess, 'status'=>$status]);
+            return $this->render('companies', ['companies'=>$companies, 'mess' => $mess, 'status'=>$result['status']]);
         } else {
-            $mess = 'Данные компании не обновлены. Попробуйте снова';
+            $mess = 'Данные компании '.$post['name']?$post['name']:''.' не обновлены. Попробуйте снова';
             $status = 'error';
             $companies = $comp->getCompanies();
             return $this->render('companies', ['companies'=>$companies, 'mess' => $mess, 'status'=>$status]);
@@ -81,16 +80,20 @@ class EplController extends Controller
         }
         $comp = new CompanyEdite();
         $result = $comp->addNewCompany($post);
-        if($result){
+        if($result['status']=='ok'){
             $companies = $comp->getCompanies();
-            $mess = 'Компания создана';
-            return $this->render('companies', ['companies'=>$companies, 'mess'=>$mess, 'status'=>'ok']);
+            $mess = 'Компания '.$result['name'].' создана';
+            return $this->render('companies', ['companies'=>$companies, 'mess'=>$mess, 'status'=>$result['status']]);
         } else{
             $mess = 'Компания не создана';
-            return $this->render('add-company', ['mess'=>$mess, 'status'=>'error']);
+            return $this->render('add-company', ['mess'=>$mess, 'status'=>$result['status']]);
         }
 
 
+    }
+
+    public function actionGetCtrlSettings(){
+        return $this->render('get-ctrl-settings');
     }
 
 }

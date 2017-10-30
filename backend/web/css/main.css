@@ -1,0 +1,57 @@
+/*companies*/
+#companies .table-companies,
+#company .table-company{
+    background-color: white;
+    width: 80%;
+    border: 1px solid #d8d0d0;
+}
+#companies .table-companies tr,
+#company .table-company tr{
+    border-bottom: 1px solid #d8d0d0;
+}
+#companies .table-companies th, td,
+#company .table-company th, td {
+    border-right: 1px solid #d8d0d0;
+}
+#companies .table-companies th,
+#companies .table-companies td,
+#company .table-company th{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#companies .message-ok,
+#company .message-ok{
+    color: #03bf03;;
+}
+#companies .message-error,
+#company .message-error{
+    color: red;
+}
+#companies .button-add,
+#company .button-save{
+    margin-top: 20px;
+}
+#companies .table-companies thead,
+#company .table-company thead{
+    height: 25px;
+    line-height: 25px;
+    background-color: #e8e8e8;
+}
+#companies .table-companies tr:nth-child(odd){
+    background-color: rgba(251, 251, 255, 0.54);
+}
+#companies .table-companies tr:hover{
+    background-color: rgba(226, 226, 230, 0.54);;
+}
+#company .table-company input{
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: none;
+}
+#company .table-company .company-logo{
+   padding-left: 5px;
+}
+#companies .table-companies .company-visible{
+    text-align: center;
+}

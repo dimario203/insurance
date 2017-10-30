@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 ?>
 
-<div>
+<div id="company">
     <h2>Компания "<?= $company['name'] ?>"</h2>
     <?php
     if(isset($mess)){?>
@@ -11,14 +11,24 @@ use yii\helpers\Url;
     }
     ?>
     <form method="post" action="<?= Url::to(['epl/update-company'])?>" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <th>Название</th>
-                <th>URL</th>
-                <th>Телефон</th>
-                <th>Комиссия</th>
-                <th>Логотип - имя файла</th>
-            </tr>
+        <table class="table-company">
+            <col width="25%">
+            <col width="35%">
+            <col width="10%">
+            <col width="5%">
+            <col width="20%">
+            <col width="5%">
+
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>URL</th>
+                    <th>Телефон</th>
+                    <th>Комиссия</th>
+                    <th>Логотип - имя файла</th>
+                    <th>Отображать</th>
+                </tr>
+            </thead>
 
             <tr>
                 <td>
@@ -34,13 +44,17 @@ use yii\helpers\Url;
                     <input type="text" name="commission" value="<?= $company['commission'] ?>" size="11"/>
                 </td>
                 <td>
+                    <span class="company-logo"><?= basename($company['logo']);?></span><br/>
                     <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                    <input type="file" name="logo"/>
+                    <input type="file" accept="image/*" name="logo"/>
+                </td>
+                <td class="company-visible">
+                    <input type="checkbox" name="visible" <?=$company['visible']?'checked':''?>/>
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="comp_id" value="<?= $company['comp_id'] ?>">
+        <input type="hidden" name="company_id" value="<?= $company['company_id'] ?>">
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-        <input type="submit" value="Сохранить"/>
+        <input class="button-save" type="submit" value="Сохранить"/>
     </form>
 </div>

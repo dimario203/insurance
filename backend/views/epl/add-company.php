@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 ?>
 
-<div>
+<div id="company">
     <h2>Введите данные о новой компании</h2>
     <?php
     if(isset($mess)){?>
@@ -11,14 +11,23 @@ use yii\helpers\Url;
     }
     ?>
     <form method="post" action="<?= Url::to(['epl/add-company'])?>" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <th>Название</th>
-                <th>URL</th>
-                <th>Телефон</th>
-                <th>Комиссия</th>
-                <th>Логотип - имя файла</th>
-            </tr>
+        <table class="table-company">
+            <col width="25%">
+            <col width="35%">
+            <col width="10%">
+            <col width="5%">
+            <col width="20%">
+            <col width="5%">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>URL</th>
+                    <th>Телефон</th>
+                    <th>Комиссия</th>
+                    <th>Логотип - имя файла</th>
+                    <th>Отображать</th>
+                </tr>
+            </thead>
 
             <tr>
                 <td>
@@ -37,9 +46,12 @@ use yii\helpers\Url;
                     <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
                     <input type="file" name="logo"/>
                 </td>
+                <td class="company-visible">
+                    <input type="checkbox" name="visible"/>
+                </td>
             </tr>
         </table>
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-        <input type="submit" value="Сохранить"/>
+        <input class="button-save" type="submit" value="Сохранить"/>
     </form>
 </div>
