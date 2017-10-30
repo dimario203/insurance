@@ -30,7 +30,8 @@ class SiteController extends \yeesoft\controllers\BaseController
         //print_r($url_request); die();
         if($on_off==1 && $url_request!='site-maintenance'){
             //print_r($url_request); die(111);
-            return $this->redirect('site-maintenance');
+            \Yii::$app->catchAll = ['site-maintenance'];
+            //return $this->redirect('site-maintenance');
         }
 
     }

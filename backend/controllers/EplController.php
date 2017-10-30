@@ -92,8 +92,4 @@ class EplController extends Controller
 
     }
 
-    public function actionGetCtrlSettings(){
-        return $this->render('get-ctrl-settings');
-    }
-
 }
