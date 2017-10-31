@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\actions\PageAction;
 use frontend\actions\PostAction;
 use frontend\models\ContactForm;
+use frontend\models\Geo;
 use yeesoft\page\models\Page;
 use yeesoft\post\models\Post;
 use Yii;
@@ -27,12 +28,6 @@ class SiteController extends \yeesoft\controllers\BaseController
         parent::init();
         $on_off=1;
         $url_request = \Yii::$app->request->pathInfo;
-        //print_r($url_request); die();
-        if($on_off==1 && $url_request!='site-maintenance'){
-            //print_r($url_request); die(111);
-            \Yii::$app->catchAll = ['site-maintenance'];
-            //return $this->redirect('site-maintenance');
-        }
 
     }
 
@@ -160,4 +155,14 @@ class SiteController extends \yeesoft\controllers\BaseController
     {
         return $this->render('about');
     }
+
+
+    public function actionTestGeo(){
+        $o['ip'] = '37.0.127.119';
+        $geo = new Geo($o);
+        $data_geo = $geo->get_value();
+        $ip = $geo->get_ip();
+        print_r($data_geo);
+    }
+
 }
