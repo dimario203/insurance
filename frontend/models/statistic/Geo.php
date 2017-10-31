@@ -1,5 +1,5 @@
 <?php
-namespace frontend\models;
+namespace frontend\models\statistic;
 
 
 class Geo {
