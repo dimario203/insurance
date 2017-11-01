@@ -34,7 +34,7 @@ class Geo {
      * Если false, то данные постоянно будут запрашиваться с ipgeobase
      * @return array OR string - дополнительно читайте комментарии внутри функции.
      */
-    public function get_value($key = null, $cookie = true) {
+    public function get_value($key = null, $cookie = false) {
         $key_array = array('inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng');
         if (!in_array($key, $key_array)) {
             $key = null;
