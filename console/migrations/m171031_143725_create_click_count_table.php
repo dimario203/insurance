@@ -11,9 +11,10 @@ class m171031_143725_create_click_count_table extends Migration
             'polis_type' => $this->SmallInteger(1)->notNull(),
             'date' => $this->integer()->notNull(),
             'region_id' => $this->integer(),
+            'company_id' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-click_count_pol_type',
             'click_count',
             'polis_type'
@@ -23,7 +24,7 @@ class m171031_143725_create_click_count_table extends Migration
             'idx-click_count_date',
             'click_count',
             'date'
-        );
+        );*/
 
         $this->createIndex(
             'idx-click_count_region_id',
@@ -31,7 +32,7 @@ class m171031_143725_create_click_count_table extends Migration
             'region_id'
         );
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-click_count_pol_type_date_region_id',
             'click_count',
             ['polis_type', 'date', 'region_id']
@@ -41,7 +42,7 @@ class m171031_143725_create_click_count_table extends Migration
             'idx-click_count_pol_type_date',
             'click_count',
             ['polis_type', 'date']
-        );
+        );*/
 
         $this->addForeignKey(
             'fk-click_count-region_id',
@@ -51,16 +52,41 @@ class m171031_143725_create_click_count_table extends Migration
             'region_id',
             'CASCADE'
         );
+
+        $this->createIndex(
+            'idx-click_count_company_id',
+            'click_count',
+            'company_id'
+        );
+
+        $this->addForeignKey(
+            'fk-click_count-company_id',
+            'click_count',
+            'company_id',
+            'company',
+            'company_id',
+            'CASCADE'
+        );
     }
 
     public function Down()
     {
         $this->dropForeignKey(
-            'fk-click_count-region_id',
+            'fk-click_count-company_id',
             'click_count'
         );
 
         $this->dropIndex(
+            'idx-click_count_company_id',
+            'click_count'
+        );
+
+        $this->dropForeignKey(
+            'fk-click_count-region_id',
+            'click_count'
+        );
+
+        /*$this->dropIndex(
             'idx-click_count_pol_type_date',
             'click_count'
         );
@@ -68,14 +94,14 @@ class m171031_143725_create_click_count_table extends Migration
         $this->dropIndex(
             'idx-click_count_pol_type_date_region_id',
             'click_count'
-        );
+        );*/
 
         $this->dropIndex(
             'idx-click_count_region_id',
             'click_count'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-click_count_date',
             'click_count'
         );
@@ -83,7 +109,7 @@ class m171031_143725_create_click_count_table extends Migration
         $this->dropIndex(
             'idx-click_count_pol_type',
             'click_count'
-        );
+        );*/
 
         $this->dropTable('click_count');
     }

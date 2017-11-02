@@ -11,6 +11,7 @@ namespace backend\controllers;
 
 use app\models\company\Company;
 use app\models\company\CompanyEdite;
+use app\models\statistic\ClickCountStatistic;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -90,6 +91,14 @@ class EplController extends Controller
         }
 
 
+    }
+
+
+    public function actionGetStatistic(){
+        $post = \Yii::$app->request->post();
+        $stat = new ClickCountStatistic();
+        $data = $stat->clickCountStatictic($post);
+        return $this->render('get-statistic', ['data'=>$data]);
     }
 
 }

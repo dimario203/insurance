@@ -34,7 +34,7 @@ class Geo {
      * Если false, то данные постоянно будут запрашиваться с ipgeobase
      * @return array OR string - дополнительно читайте комментарии внутри функции.
      */
-    public function get_value($key = null, $cookie = false) {
+    public function get_value($key = null, $cookie = true) {
         $key_array = array('inetnum', 'country', 'city', 'region', 'district', 'lat', 'lng');
         if (!in_array($key, $key_array)) {
             $key = null;
@@ -63,7 +63,7 @@ class Geo {
         }
         $data = $this->get_geobase_data();
         if (!empty($data)) {
-            setcookie('geobase', serialize($data), time() + 3600 * 24 * 7, '/'); //устанавливаем куки на неделю
+            setcookie('geobase', serialize($data), time() + 3600 * 24 * 1, '/'); //устанавливаем куки на неделю
         }
         return $data;
     }
