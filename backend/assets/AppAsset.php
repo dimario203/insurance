@@ -20,11 +20,14 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/main.css',
-        'assets2/calendar/tcal.css'
+        'assets2/calendar/tcal.css',
+
 
     ];
     public $js = [
         'assets2/calendar/tcal.js',
+        'assets2/highcharts/highcharts.js',
+        'assets2/highcharts/exporting.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

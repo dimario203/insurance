@@ -19,6 +19,8 @@ class ClickCountStatistic
 
 
     public function clickCountStatictic($post){
+        $data = [];
 
+        return $data;
     }
 }
