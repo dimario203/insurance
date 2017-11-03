@@ -3,7 +3,7 @@
         <div class="settings">
             <div class="statistic-polis">
                 <div class="statistic-polis-header">
-                    <H2>Выберите вид страховки</H2>
+                    <H4>Выберите вид страховки</H4>
                 </div>
                 <div class="statistic-items-body">
                     <span class="statistic-items">
@@ -29,34 +29,92 @@
                 </div>
             </div>
             <div class="region-company">
-                <div class="statistic-items-body">
-                    <h5>По регионам</h5>
-                    <input type="radio" name="region_company" value="1"/>
+                <div class="statistic-polis-header">
+                    <H4>Выберите параметры</H4>
+                </div>
+                <div class="statistic-items-region">
+                    <span class="header-items">По регионам</span>
+                    <input type="checkbox" name="company_id" checked value="1"/>
                     <select name="region_id">
 
                     </select>
                 </div>
-                <div class="statistic-items-body">
-                    <h5>По компаниям</h5>
-                    <input type="radio" name="region_company" value="2"/>
+                <div class="statistic-items-region">
+                    <span class="header-items">По компаниям</span>
+                    <input type="checkbox" name="region_id" value="2"/>
                     <select name="company_id">
 
                     </select>
                 </div>
             </div>
             <div class="period">
-                <div>
-                    <input type="text" name="date1" class="tcal" value="" />
-                    <input type="text" name="date2" class="tcal" value="" />
-
+                <div class="statistic-polis-header">
+                    <H4>Выберите период</H4>
                 </div>
+                <div class="statistic-items-period">
+                    <sapn class="header-items">С какого</sapn>
+                    <input type="text" name="date_in" class="tcal" value="" />
+                </div>
+                <div class="statistic-items-period">
+                    <span class="header-items">По какой</span>
+                    <input type="text" name="date_out" class="tcal" value="" />
+                </div>
+
             </div>
         </div>
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-        <input type="submit" value="Получить статистику"/>
+        <input class="button-ok" type="submit" value="Получить статистику"/>
     </form>
 </div>
 
 <style>
+    #statistic,
+    #statistic .button-ok{
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+    #statistic .statistic-items-body,
+    #statistic .region-company .statistic-items-region,
+    #statistic .period .statistic-items-period{
+        border: 5px groove rgba(228, 224, 224, 0.44);
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 20px;
+        margin-bottom: 10px;
+        background-color: rgba(236, 236, 236, 0.57);
+    }
+    #statistic .statistic-items-body{
+        display: inline-block;
+        vertical-align: top;
+    }
+   #statistic .region-company,
+   #statistic .period{
+        width: 50%;
+    }
+    #statistic .statistic-items-body .statistic-items{
+        margin-left: 20px;
+    }
+    #statistic .statistic-items-body .statistic-items:first-child{
+        margin-left: 0px;
+    }
+    #statistic .region-company .statistic-items-region,
+    #statistic .period .statistic-items-period{
+        display: inline-block;
+        width: 30%;
+    }
+    #statistic .statistic-polis-header{
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    #statistic .header-items{
+        display: block;
+        font-weight: bold;
+    }
+    #statistic .button-ok{
+        border-radius: 2px;
+        height: 30px;
+    }
 
 </style>
