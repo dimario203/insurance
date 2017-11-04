@@ -89,16 +89,34 @@ class EplController extends Controller
             $mess = 'Компания не создана';
             return $this->render('add-company', ['mess'=>$mess, 'status'=>$result['status']]);
         }
-
-
     }
 
 
-    public function actionGetStatistic(){
+    public function actionGetRegionStatistic(){
+        $data = [];
+        $message = [];
         $post = \Yii::$app->request->post();
         $stat = new ClickCountStatistic();
-        $data = $stat->clickCountStatictic($post);
-        return $this->render('get-statistic', ['data'=>$data]);
+        $regions = $stat->getRegions();
+        if(!empty($post)){
+            //print_r($post['polis']); die('345');
+            $empty_post_data = 0;
+            if(!isset($post['region'])){
+                $message['region'] = 'Вы не выбрали регион. Выберите пожалуйста регион';
+                $empty_post_data = 1;
+            }
+            if(!isset($post['polis']['osago']) && !isset($post['polis']['travel']) && !isset($post['polis']['live']) && !isset($post['polis']['realty']) && !isset($post['polis']['kasko'])){
+                $message['polis'] = 'Вы не выбрали тип страхования. Выберите пожалуйста тип страхования';
+                $empty_post_data = 1;
+            }
+            if($empty_post_data==1){
+                return $this->render('get-region-statistic', ['data'=>$data, 'regions'=>$regions, 'message'=>$message]);
+            }
+
+            $data = $stat->clickRegionStatictic($post);
+            //print_r($data);die('date');
+        }
+        return $this->render('get-region-statistic', ['data'=>$data, 'regions'=>$regions]);
     }
 
 }

@@ -20,21 +20,22 @@ class Statistic
     const POLIS_TYPE_KASKO = 5;
 
 
-    public function addClick($polis_type){
+    public function addClick($polis_type, $company_id){
         $model = new ClickCount();
         $model->polis_type = $polis_type;
         $model->date = time();
+        $model->company_id = $company_id;
         if (filter_input(INPUT_COOKIE, 'geo_click')) {
             $model->region_id = (filter_input(INPUT_COOKIE, 'geo_click'));
         } else {
             $geo = new Geo();
-            $data_geo = $geo->get_value();
+            $data_geo = $geo->get_value();/**/
 
 
-            /*$o['ip'] = '217.66.24.13';
+            /*$o['ip'] = '37.0.123.65';
             $geo = new Geo($o);
             $data_geo = $geo->get_value();
-            $data_geo['city'] = 'Каза';/**/
+            //$data_geo['city'] = 'Каза';/**/
 
 
             if ($data_geo == []) {

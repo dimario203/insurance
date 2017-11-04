@@ -3,6 +3,7 @@
 namespace app\models\statistic;
 
 use Yii;
+use \app\models\polis\Region;
 
 /**
  * This is the model class for table "click_count".

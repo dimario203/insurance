@@ -160,8 +160,9 @@ class SiteController extends \yeesoft\controllers\BaseController
 
     public function actionTestGeo(){
         $stat = new Statistic();
-        $polis_type = Statistic::POLIS_TYPE_OSAGO;
-        if($stat->addClick($polis_type)){
+        $polis_type = Statistic::POLIS_TYPE_REALTY;
+        $company_id = 1;
+        if($stat->addClick($polis_type, $company_id)){
             echo 'work';
         }
         //$o['ip'] = '37.0.127.119';

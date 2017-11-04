@@ -28,6 +28,8 @@ class AppAsset extends AssetBundle
         'assets2/calendar/tcal.js',
         'assets2/highcharts/highcharts.js',
         'assets2/highcharts/exporting.js',
+        /*'assets2/highcharts/highcharts.js',
+        'assets2/highcharts/exporting.js',*/
     ];
     public $depends = [
         'yii\web\YiiAsset',
