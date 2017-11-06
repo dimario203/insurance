@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "yeesoft/yii2-yee-cms",
   "description": "Yee CMS Based on Yii 2 Advanced Project Template",
   "keywords": [
@@ -19,6 +19,13 @@
     "issues": "https://github.com/yeesoft/yii2-yee-cms/issues/new",
     "source": "https://github.com/yeesoft/yii2-yee-cms"
   },
+"repositories": [
+    {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+    }
+],
+
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
@@ -38,7 +45,8 @@
     "yeesoft/yii2-yee-seo": "~0.1.0",
     "yeesoft/yii2-comments": "~0.1.0",
     "yeesoft/yii2-yee-comment": "~0.1.0",
-    "kartik-v/yii2-widget-select2": "@dev"
+    "kartik-v/yii2-widget-select2": "@dev",
+    "bower-asset/highcharts",
   },
   "require-dev": {
     "yiisoft/yii2-codeception": "~2.0.5",

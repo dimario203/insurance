@@ -2,21 +2,15 @@
 use kartik\select2\Select2;
 ?>
 
-<script src="/admin/assets2/highcharts/highcharts.js"></script>
-<script src="/admin/assets2/highcharts/exporting.js"></script>
+<!--<script src="/admin/assets2/highcharts/highcharts.js"></script>
+<script src="/admin/assets2/highcharts/exporting.js"></script>-->
 
 <div id="statistic">
-    <form method="post" action="<?= \yii\helpers\Url::toRoute(['epl/get-region-statistic'])?>">
+    <form id="statistic-form" method="post" action="<?= \yii\helpers\Url::toRoute(['epl/get-region-statistic'])?>">
         <div class="settings">
             <div class="statistic-polis">
                 <div class="statistic-polis-header">
-                    <?php
-                        if(isset($message['polis'])){
-                            echo "<h4 class='attintion-message'>".$message['polis']."</h4>";
-                        } else {
-                            echo "<h4>Выберите вид страховки</h4>";
-                        }
-                    ?>
+                    <h4 class="message-polis">Выберите вид страховки</h4>
                 </div>
                 <div class="statistic-items-body">
                     <span class="statistic-items">
@@ -43,13 +37,7 @@ use kartik\select2\Select2;
             </div>
             <div class="region-company">
                 <div class="statistic-polis-header">
-                    <?php
-                        if(isset($message['region'])){
-                            echo "<h4 class='attintion-message'>".$message['region']."</h4>";
-                        } else {
-                            echo "<h4>Выберите регион</h4>";
-                        }
-                    ?>
+                    <h4 class="message-region">Выберите регион</h4>
                 </div>
                 <div class="statistic-items-region">
                     <?php
@@ -88,8 +76,17 @@ use kartik\select2\Select2;
     </form>
 </div>
 
+<div id="container-diagram" style="min-width: 310px; max-width: 800px; min-height: 800px; margin: 0 auto"></div>
 
 <?php
+
+
+//\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']
+$this->registerJsFile(\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);
+?>
+
+<?php
+/*
 if(isset($data['categories'])) {
     ?>
 
@@ -269,6 +266,7 @@ if(isset($data['categories'])) {
     </script>
     <?php
 }
+*/
 ?>
 
 <style>
@@ -326,7 +324,8 @@ if(isset($data['categories'])) {
     #statistic .statistic-select{
         width: 50%;
     }
-    #statistic .attintion-message{
+    #statistic .message-region.attention,
+    #statistic .message-polis.attention{
         color: red;
     }
 

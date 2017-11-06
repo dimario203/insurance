@@ -98,7 +98,7 @@ class EplController extends Controller
         $post = \Yii::$app->request->post();
         $stat = new ClickCountStatistic();
         $regions = $stat->getRegions();
-        if(!empty($post)){
+        /*if(!empty($post)){
             //print_r($post['polis']); die('345');
             $empty_post_data = 0;
             if(!isset($post['region'])){
@@ -115,8 +115,34 @@ class EplController extends Controller
 
             $data = $stat->clickRegionStatictic($post);
             //print_r($data);die('date');
-        }
-        return $this->render('get-region-statistic', ['data'=>$data, 'regions'=>$regions]);
+        }*/
+        return $this->render('get-region-statistic', ['regions'=>$regions]);
     }
 
+
+    public function actionGetRegionStatisticAjax(){
+        $data = [];
+        $message = [];
+        $post = \Yii::$app->request->post();
+        $stat = new ClickCountStatistic();
+        if(!empty($post)){
+            //print_r($post['polis']); die('345');
+            $empty_post_data = 0;
+            if(!isset($post['region'])){
+                $message['region'] = 'Вы не выбрали регион. Выберите пожалуйста регион';
+                $empty_post_data = 1;
+            }
+            if(!isset($post['polis']['osago']) && !isset($post['polis']['travel']) && !isset($post['polis']['live']) && !isset($post['polis']['realty']) && !isset($post['polis']['kasko'])){
+                $message['polis'] = 'Вы не выбрали тип страхования. Выберите пожалуйста тип страхования';
+                $empty_post_data = 1;
+            }
+            if($empty_post_data==1){
+                return json_encode(['data'=>$data, 'message'=>$message]);
+            }
+
+            $data = $stat->clickRegionStatictic1($post);
+            //print_r($data);die('date');
+        }
+        return json_encode(['data'=>$data, 'message'=>$message]);
+    }
 }
