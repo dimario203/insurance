@@ -1,9 +1,12 @@
 <?php
 use kartik\select2\Select2;
+use backend\assets\DiagramAsset;
+
+DiagramAsset::register($this);
 ?>
 
-<!--<script src="/admin/assets2/highcharts/highcharts.js"></script>
-<script src="/admin/assets2/highcharts/exporting.js"></script>-->
+
+
 
 <div id="statistic">
     <form id="statistic-form" method="post" action="<?= \yii\helpers\Url::toRoute(['epl/get-region-statistic'])?>">
@@ -82,7 +85,7 @@ use kartik\select2\Select2;
 
 
 //\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']
-$this->registerJsFile(\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);
+//$this->registerJsFile(\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);
 ?>
 
 <?php

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3f83ff601ad87c50fa09ec2c79017daf",
-    "content-hash": "3a12c2d4d69c5f82c0bcda906f5339b8",
+    "content-hash": "aa38166e06986ec4110eeafd25d433fe",
     "packages": [
         {
             "name": "2amigos/yii2-file-upload-widget",
@@ -63,7 +62,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2017-10-17 11:18:48"
+            "time": "2017-10-17T11:18:48+00:00"
         },
         {
             "name": "2amigos/yii2-gallery-widget",
@@ -124,7 +123,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2017-09-09 16:01:44"
+            "time": "2017-09-09T16:01:44+00:00"
         },
         {
             "name": "bower-asset/blueimp-canvas-to-blob",
@@ -303,6 +302,48 @@
             ]
         },
         {
+            "name": "bower-asset/highcharts",
+            "version": "v6.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/highcharts/highcharts-dist.git",
+                "reference": "7b6db41f67cd49f86cf0766376d675e17062c6fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/highcharts/highcharts-dist/zipball/7b6db41f67cd49f86cf0766376d675e17062c6fe",
+                "reference": "7b6db41f67cd49f86cf0766376d675e17062c6fe",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "highcharts.js"
+            },
+            "time": "2017-10-20T07:33:25+00:00"
+        },
+        {
+            "name": "bower-asset/inputmask",
+            "version": "3.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
+                "reference": "14873e5775964275d13621cbe2b52e4448af3707"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/14873e5775964275d13621cbe2b52e4448af3707",
+                "reference": "14873e5775964275d13621cbe2b52e4448af3707",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7"
+            },
+            "type": "bower-asset",
+            "license": [
+                "http://opensource.org/licenses/mit-license.php"
+            ]
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.2.4",
             "source": {
@@ -388,76 +429,17 @@
             }
         },
         {
-            "name": "bower-asset/jquery.inputmask",
-            "version": "3.3.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RobinHerbots/Inputmask.git",
-                "reference": "14873e5775964275d13621cbe2b52e4448af3707"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/Inputmask/zipball/14873e5775964275d13621cbe2b52e4448af3707",
-                "reference": "14873e5775964275d13621cbe2b52e4448af3707",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.7"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "./dist/inputmask/inputmask.js",
-                    "./dist/inputmask/inputmask.extensions.js",
-                    "./dist/inputmask/inputmask.date.extensions.js",
-                    "./dist/inputmask/inputmask.numeric.extensions.js",
-                    "./dist/inputmask/inputmask.phone.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.js",
-                    "./dist/inputmask/global/document.js",
-                    "./dist/inputmask/global/window.js",
-                    "./dist/inputmask/phone-codes/phone.js",
-                    "./dist/inputmask/phone-codes/phone-be.js",
-                    "./dist/inputmask/phone-codes/phone-nl.js",
-                    "./dist/inputmask/phone-codes/phone-ru.js",
-                    "./dist/inputmask/phone-codes/phone-uk.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jqlite.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.jquery.js",
-                    "./dist/inputmask/dependencyLibs/inputmask.dependencyLib.js",
-                    "./dist/inputmask/bindings/inputmask.binding.js"
-                ],
-                "bower-asset-ignore": [
-                    "**/*",
-                    "!dist/*",
-                    "!dist/inputmask/*",
-                    "!dist/min/*",
-                    "!dist/min/inputmask/*"
-                ]
-            },
-            "license": [
-                "http://opensource.org/licenses/mit-license.php"
-            ],
-            "description": "Inputmask is a javascript library which creates an input mask.  Inputmask can run against vanilla javascript, jQuery and jqlite.",
-            "keywords": [
-                "form",
-                "input",
-                "inputmask",
-                "jquery",
-                "mask",
-                "plugins"
-            ]
-        },
-        {
             "name": "bower-asset/metismenu",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/onokumus/metismenu.git",
-                "reference": "412043318ac2cf5c589154d6042d7ac45fffc0be"
+                "reference": "524e4d347d1f5168bdb5ba3059700a37110ae931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onokumus/metismenu/zipball/412043318ac2cf5c589154d6042d7ac45fffc0be",
-                "reference": "412043318ac2cf5c589154d6042d7ac45fffc0be",
+                "url": "https://api.github.com/repos/onokumus/metismenu/zipball/524e4d347d1f5168bdb5ba3059700a37110ae931",
+                "reference": "524e4d347d1f5168bdb5ba3059700a37110ae931",
                 "shasum": ""
             },
             "require": {
@@ -495,7 +477,8 @@
                 "toggle",
                 "twbs",
                 "twitter"
-            ]
+            ],
+            "time": "2017-10-30T18:48:24+00:00"
         },
         {
             "name": "bower-asset/punycode",
@@ -561,7 +544,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-10-14 08:42:41"
+            "time": "2017-10-14T08:42:41+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -621,7 +604,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2017-07-16 21:13:23"
+            "time": "2017-07-16T21:13:23+00:00"
         },
         {
             "name": "components/bootstrap",
@@ -689,7 +672,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2016-07-26 05:59:20"
+            "time": "2016-07-26T05:59:20+00:00"
         },
         {
             "name": "components/jquery",
@@ -731,7 +714,7 @@
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2017-03-21 07:01:49"
+            "time": "2017-03-21T07:01:49+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -778,7 +761,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2017-06-03 02:28:16"
+            "time": "2017-06-03T02:28:16+00:00"
         },
         {
             "name": "fortawesome/font-awesome",
@@ -826,7 +809,7 @@
                 "font",
                 "icon"
             ],
-            "time": "2016-10-24 15:52:54"
+            "time": "2016-10-24T15:52:54+00:00"
         },
         {
             "name": "ikimea/browser",
@@ -874,7 +857,7 @@
             "keywords": [
                 "browser"
             ],
-            "time": "2017-06-09 09:14:21"
+            "time": "2017-06-09T09:14:21+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -931,7 +914,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2015-09-19 16:54:05"
+            "time": "2015-09-19T16:54:05+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -982,7 +965,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-29 06:18:14"
+            "time": "2017-09-29T06:18:14+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1035,7 +1018,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-08-07 18:12:36"
+            "time": "2017-08-07T18:12:36+00:00"
         },
         {
             "name": "nicolasbize/magicsuggest",
@@ -1072,7 +1055,7 @@
             ],
             "description": "MagicSuggest is a multiple selection auto suggest combo box for Bootstrap 3.",
             "homepage": "http://nicolasbize.com/magicsuggest",
-            "time": "2014-10-16 23:17:26"
+            "time": "2014-10-16T23:17:26+00:00"
         },
         {
             "name": "omgdef/yii2-multilingual-behavior",
@@ -1120,7 +1103,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-02-12 10:38:57"
+            "time": "2016-02-12T10:38:57+00:00"
         },
         {
             "name": "paulzi/yii2-nested-intervals",
@@ -1166,7 +1149,7 @@
                 "nested sets",
                 "yii2"
             ],
-            "time": "2016-10-13 22:33:11"
+            "time": "2016-10-13T22:33:11+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -1218,7 +1201,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2017-01-11 14:05:47"
+            "time": "2017-01-11T14:05:47+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1272,7 +1255,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-05-01 15:54:03"
+            "time": "2017-05-01T15:54:03+00:00"
         },
         {
             "name": "tijsverkoyen/akismet",
@@ -1311,7 +1294,7 @@
             ],
             "description": "Akismet is a wrapper-class to communicate with the Akismet API.",
             "homepage": "https://github.com/tijsverkoyen/Akismet",
-            "time": "2016-07-19 13:50:18"
+            "time": "2016-07-19T13:50:18+00:00"
         },
         {
             "name": "tinymce/tinymce",
@@ -1357,7 +1340,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2017-10-05 11:39:51"
+            "time": "2017-10-05T11:39:51+00:00"
         },
         {
             "name": "webvimark/date-range-picker",
@@ -1381,7 +1364,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "dangrossman daterangepicker yii 2 gridview",
-            "time": "2017-02-27 19:12:56"
+            "time": "2017-02-27T19:12:56+00:00"
         },
         {
             "name": "yeesoft/yii2-comments",
@@ -1419,7 +1402,7 @@
                 }
             ],
             "description": "Comments Module For Yii2 Framework",
-            "time": "2017-04-16 16:27:45"
+            "time": "2017-04-16T16:27:45+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-auth",
@@ -1457,7 +1440,7 @@
                 }
             ],
             "description": "Authorization Module For Yee CMS",
-            "time": "2017-03-01 10:53:02"
+            "time": "2017-03-01T10:53:02+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-comment",
@@ -1494,7 +1477,7 @@
                 }
             ],
             "description": "Comments Module For Yee CMS",
-            "time": "2017-03-01 10:56:12"
+            "time": "2017-03-01T10:56:12+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-core",
@@ -1535,7 +1518,7 @@
                 }
             ],
             "description": "Core Module For Yee CMS",
-            "time": "2017-03-04 21:03:45"
+            "time": "2017-03-04T21:03:45+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-media",
@@ -1574,7 +1557,7 @@
                 }
             ],
             "description": "Media Module For Yee CMS",
-            "time": "2017-03-01 12:07:50"
+            "time": "2017-03-01T12:07:50+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-menu",
@@ -1610,7 +1593,7 @@
                 }
             ],
             "description": "Menu Module For Yee CMS",
-            "time": "2017-03-01 11:33:34"
+            "time": "2017-03-01T11:33:34+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-page",
@@ -1647,7 +1630,7 @@
                 }
             ],
             "description": "Page Module For Yee CMS",
-            "time": "2017-03-01 11:38:39"
+            "time": "2017-03-01T11:38:39+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-post",
@@ -1686,7 +1669,7 @@
                 }
             ],
             "description": "Post Module For Yee CMS",
-            "time": "2017-04-05 14:36:58"
+            "time": "2017-04-05T14:36:58+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-seo",
@@ -1722,7 +1705,7 @@
                 }
             ],
             "description": "SEO Module For Yee CMS",
-            "time": "2017-03-01 11:23:59"
+            "time": "2017-03-01T11:23:59+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-settings",
@@ -1758,7 +1741,7 @@
                 }
             ],
             "description": "Settings Module For Yee CMS",
-            "time": "2017-03-01 11:20:48"
+            "time": "2017-03-01T11:20:48+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-translation",
@@ -1794,7 +1777,7 @@
                 }
             ],
             "description": "Translation Module For Yee CMS",
-            "time": "2017-03-01 10:59:24"
+            "time": "2017-03-01T10:59:24+00:00"
         },
         {
             "name": "yeesoft/yii2-yee-user",
@@ -1833,7 +1816,7 @@
                 }
             ],
             "description": "User Module For Yee CMS",
-            "time": "2017-03-01 10:18:47"
+            "time": "2017-03-01T10:18:47+00:00"
         },
         {
             "name": "yiidoc/yii2-timeago",
@@ -1875,25 +1858,25 @@
                 "timeago",
                 "yii"
             ],
-            "time": "2015-01-31 12:54:19"
+            "time": "2015-01-31T12:54:19+00:00"
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.12",
+            "version": "2.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "70acbecc75cb26b6cd66d16be0b06e4b73db190d"
+                "reference": "9f82b8f0df9adb4b8a410be5aaa97818153689d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/70acbecc75cb26b6cd66d16be0b06e4b73db190d",
-                "reference": "70acbecc75cb26b6cd66d16be0b06e4b73db190d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/9f82b8f0df9adb4b8a410be5aaa97818153689d9",
+                "reference": "9f82b8f0df9adb4b8a410be5aaa97818153689d9",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
-                "bower-asset/jquery.inputmask": "~3.2.2 | ~3.3.5",
+                "bower-asset/inputmask": "~3.2.2 | ~3.3.5",
+                "bower-asset/jquery": "3.2.*@stable | 3.1.*@stable | 2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable",
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0",
@@ -1975,24 +1958,24 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2017-06-05 14:33:41"
+            "time": "2017-11-02T22:09:29+00:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-authclient.git",
-                "reference": "eec33d8584558aac1ec8d68ba605a898cee2d6e8"
+                "reference": "22463dbfd4a53b16fec9b6286e762e31d3fdeee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/eec33d8584558aac1ec8d68ba605a898cee2d6e8",
-                "reference": "eec33d8584558aac1ec8d68ba605a898cee2d6e8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/22463dbfd4a53b16fec9b6286e762e31d3fdeee0",
+                "reference": "22463dbfd4a53b16fec9b6286e762e31d3fdeee0",
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2-httpclient": "~2.0.1"
+                "yiisoft/yii2-httpclient": "~2.0.5"
             },
             "suggest": {
                 "spomky-labs/jose": "required for JWS,JWT or JWK related flows like OpenIDConnect"
@@ -2027,7 +2010,7 @@
                 "oauth",
                 "yii2"
             ],
-            "time": "2017-06-23 09:45:49"
+            "time": "2017-11-03T12:32:29+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2073,7 +2056,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2017-10-09 19:48:22"
+            "time": "2017-10-09T19:48:22+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2123,24 +2106,24 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-12-20 13:26:02"
+            "time": "2016-12-20T13:26:02+00:00"
         },
         {
             "name": "yiisoft/yii2-httpclient",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-httpclient.git",
-                "reference": "720e3c9bdda260abffe61babfe39b91c4308ac4c"
+                "reference": "0417cb05f810890297f79877ccf51865834fb394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/720e3c9bdda260abffe61babfe39b91c4308ac4c",
-                "reference": "720e3c9bdda260abffe61babfe39b91c4308ac4c",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/0417cb05f810890297f79877ccf51865834fb394",
+                "reference": "0417cb05f810890297f79877ccf51865834fb394",
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2": "~2.0.0"
+                "yiisoft/yii2": "~2.0.13"
             },
             "type": "yii2-extension",
             "extra": {
@@ -2170,7 +2153,7 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2017-06-23 09:36:13"
+            "time": "2017-11-03T11:22:03+00:00"
         },
         {
             "name": "yiisoft/yii2-imagine",
@@ -2218,7 +2201,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2016-11-03 19:28:39"
+            "time": "2016-11-03T19:28:39+00:00"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -2268,7 +2251,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2016-07-22 22:26:59"
+            "time": "2016-07-22T22:26:59+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2318,7 +2301,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2017-05-01 08:29:00"
+            "time": "2017-05-01T08:29:00+00:00"
         }
     ],
     "packages-dev": [
@@ -2397,7 +2380,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2017-08-15 16:48:10"
+            "time": "2017-08-15T16:48:10+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -2435,7 +2418,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -2481,7 +2464,7 @@
                 "yii2"
             ],
             "abandoned": "codeception/codeception",
-            "time": "2017-05-22 12:08:21"
+            "time": "2017-05-22T12:08:21+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -2528,7 +2511,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-10-09 20:30:01"
+            "time": "2017-10-09T20:30:01+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -2575,7 +2558,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2015-03-01T06:22:44+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -2628,7 +2611,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18 14:09:46"
+            "time": "2016-03-18T14:09:46+00:00"
         }
     ],
     "aliases": [],
