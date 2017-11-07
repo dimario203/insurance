@@ -20,11 +20,13 @@
     padding-right: 5px;
 }
 #companies .message-ok,
-#company .message-ok{
-    color: #03bf03;;
+#company .message-ok,
+#site-settings .message-ok{
+    color: #03bf03;
 }
 #companies .message-error,
-#company .message-error{
+#company .message-error,
+#site-settings .message-error{
     color: red;
 }
 #companies .button-add,
@@ -61,7 +63,8 @@
 
 /*--------Statistic-------------*/
 #statistic,
-#statistic .button-ok{
+#statistic .button-ok,
+#site-settings .button-ok{
     margin-left: 20px;
     margin-top: 20px;
 }
@@ -85,7 +88,8 @@
 #statistic .period{
     width: 50%;
 }
-#statistic .statistic-items-body .statistic-items{
+#statistic .statistic-items-body .statistic-items,
+#site-settings .site-settings-items{
     margin-left: 20px;
 }
 #statistic .statistic-items-body .statistic-items:first-child{
@@ -132,8 +136,34 @@
     min-height: 500px;
     margin: 30px;
 }
-#statistic .statistic-title{
+#statistic .statistic-title,
+#site-settings .settings-title{
     height: 40px;
     border-bottom: 1px solid #d2d2d2;
 }
 /*----------end Statistic----------*/
+
+
+
+/*--------Settings-------------*/
+#site-settings{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#site-settings .on-off-site,
+#site-settings .on-off-polis{
+    margin: 30px 20px;
+    padding: 20px;
+    background: #eaeaea;
+    border-radius: 5px;
+}
+#site-settings .site-settings--form-item{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+#site-settings .site-settings-items:nth-child(2){
+    margin-left: 0px;
+}
+
+/*--------end Settings-----------*/

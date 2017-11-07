@@ -1,5 +1,5 @@
 <div id="site-settings">
-    <h2>Настройки сайта</h2>
+    <h2 class="settings-title">Настройки сайта</h2>
     <?php
     if(isset($mess)){?>
         <h4 class="message-<?= $status?>"><?= $mess?></h4>
@@ -7,49 +7,53 @@
     }
     ?>
     <form method="post" action="<?= \yii\helpers\Url::to(['site-settings/save-settings'])?>">
-        <fieldset class="on-off-site">
-            <legend>Включить / выключить сайт</legend>
+        <div class="on-off-site">
+            <h4 class="site-settings--form-item">Включить / выключить сайт</h4>
             <select name="is_available">
                 <option <?= $settings['is_available'] == 1 ? 'selected' : '' ?> value="1">Вкл</option>
                 <option <?= $settings['is_available'] == 0 ? 'selected' : '' ?> value="0">Выкл</option>
             </select>
-        </fieldset>
+        </div>
 
 
-        <fieldset class="on-off-polis">
-            <legend>Включить / выключить отображение продуктов на сайте</legend>
+        <div class="on-off-polis">
+            <h4 class="site-settings--form-item">Включить / выключить отображение продуктов на сайте</h4>
             <span class="site-settings-items">
-                        <input class="settings-input" type="checkbox" name="polis[osago]" value="1" checked/>
+                        <input class="settings-input" type="checkbox" name="polis[osago]" value="1" <?= $settings['find_osago'] == 1 ? 'checked' : '' ?>/>
                          ОСАГО
             </span>
             <span class="site-settings-items">
-                        <input class="settings-input" type="checkbox" name="polis[travel]" value="2" checked/>
+                        <input class="settings-input" type="checkbox" name="polis[travel]" value="2" <?= $settings['find_travel'] == 1 ? 'checked' : '' ?>/>
                         Путишествия
             </span>
             <span class="site-settings-items">
-                       <input class="settings-input" type="checkbox" name="polis[live]" value="3" checked/>
+                       <input class="settings-input" type="checkbox" name="polis[live]" value="3" <?= $settings['find_live'] == 1 ? 'checked' : '' ?>/>
                        Жизнь и Здоровье
             </span>
             <span class="site-settings-items">
-                        <input class="settings-input" type="checkbox" name="polis[realty]" value="4" checked/>
+                        <input class="settings-input" type="checkbox" name="polis[realty]" value="4" <?= $settings['find_realty'] == 1 ? 'checked' : '' ?>/>
                         Недвижимость
             </span>
             <span class="site-settings-items">
-                        <input class="settings-input" type="checkbox" name="polis[kasko]" value="5"/>
+                        <input class="settings-input" type="checkbox" name="polis[kasko]" value="5" <?= $settings['find_kasko'] == 1 ? 'checked' : '' ?>/>
                         КАСКО
             </span>
             <span class="site-settings-items">
-                        <input class="settings-input-all" type="checkbox" name="polis[all]" value="6"/>
+                        <input class="settings-input-all" type="checkbox" name="polis[all]" value="6" <?= $settings['find_all'] == 0 ? 'checked' : '' ?>/>
                         Отключить все
             </span>
-        </fieldset>
+        </div>
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-        <input type="submit" value="Сохранить"/>
+        <input class="button-ok" type="submit" value="Сохранить"/>
     </form>
 </div>
 
 <?php
 $script = <<< JS
+    if($('.settings-input-all').prop('checked')){
+          $('.settings-input').prop('disabled', true);
+          $('.settings-input').prop('checked', false);
+        }
     $('.settings-input-all').click(function(){
         var el = this;
         if($(this).prop('checked')){
