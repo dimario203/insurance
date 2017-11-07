@@ -72,42 +72,6 @@ class Statistic
                                     ->one();
                                 if ($locality != []) {//Проверяем, возможно у нас есть область
                                     $this->checkLocality($data_geo['city'], $locality, $model);
-
-                                    /*$region_names_vk = $this->apiVkCity($data_geo['city']);
-                                    if(isset($region_names_vk['response']) && $region_names_vk['response']!=[]){
-                                        $key_row_vk=0;
-                                        $count_city = 0;//Счетчик совпадений, в области может быть несколько городов с подобными названиями
-                                        foreach($region_names_vk['response'] as $key=>$region_name){
-                                            if(isset($region_name['region'])){
-                                                if(strcasecmp(trim($region_name['region']), $locality['name'])==0){
-                                                    $count_city++;
-                                                    $key_row_vk = $key;
-                                                }
-                                            } else {
-                                                if(strcasecmp(trim($region_name['title']), $locality['name'])==0){
-                                                    $count_city++;
-                                                    $key_row_vk = $key;
-                                                }
-                                            }
-                                        }
-                                        if($count_city==1){//Если мы нашли одно совпадение с контактом, то берем имя нашего региона из vk.com, а область из таблички 'locality'
-                                            $new_region_name = trim($region_names_vk['response'][$key_row_vk]['title']);
-                                            $find_vk_name_in_table = Region::find()
-                                                ->where(['name'=>$new_region_name, 'locality_id'=>$locality['locality_id']])
-                                                ->asArray()
-                                                ->limit(1)
-                                                ->one();
-                                            if($find_vk_name_in_table!=[]){//Если мы таки нашли имя из vk.com в таблице, то берем его id
-                                                $model->region_id = $find_vk_name_in_table['region_id'];
-                                            } else {//Если нет, то создаем новый регион
-                                                $new_region_id = $this->newRegion($new_region_name, $locality['locality_id']);
-                                                $model->region_id = $new_region_id;
-                                            }
-                                        } else {//Если мы не нашли такой области в ответе, который присылает vk.com, то создаем новый регион и область берем ту, которую нашли в табличке 'locality'
-                                            $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                                            $model->region_id = $new_region_id;
-                                        }
-                                    }*/
                                 } else {//Если область не найдена, попробуем поискать область из контакта
                                     $locality = Locality::find()
                                         ->where(['name' => trim($region_vk['response'][0]['title'])])
@@ -116,42 +80,6 @@ class Statistic
                                         ->one();
                                     if ($locality != []) {//Проверяем, возможно у нас есть имя по vk.com
                                         $this->checkLocality($data_geo['city'], $locality, $model);
-
-                                        /*$region_names_vk = $this->apiVkCity($data_geo['city']);
-                                        if(isset($region_names_vk['response']) && $region_names_vk['response']!=[]){
-                                            $key_row_vk=0;
-                                            $count_city = 0;//Счетчик совпадений, в области может быть несколько городов с подобными названиями
-                                            foreach($region_names_vk['response'] as $key=>$region_name){
-                                                if(isset($region_name['region'])){
-                                                    if(strcasecmp(trim($region_name['region']), $locality['name'])==0){
-                                                        $count_city++;
-                                                        $key_row_vk = $key;
-                                                    }
-                                                } else {
-                                                    if(strcasecmp(trim($region_name['title']), $locality['name'])==0){
-                                                        $count_city++;
-                                                        $key_row_vk = $key;
-                                                    }
-                                                }
-                                            }
-                                            if($count_city==1){//Если мы нашли одно совпадение с контактом, то берем имя нашего региона из vk.com, а область из таблички 'locality'
-                                                $new_region_name = trim($region_names_vk['response'][$key_row_vk]['title']);
-                                                $find_vk_name_in_table = Region::find()
-                                                    ->where(['name'=>$new_region_name, 'locality_id'=>$locality['locality_id']])
-                                                    ->asArray()
-                                                    ->limit(1)
-                                                    ->one();
-                                                if($find_vk_name_in_table!=[]){//Если мы таки нашли имя из vk.com в таблице, то берем его id
-                                                    $model->region_id = $find_vk_name_in_table['region_id'];
-                                                } else {//Если нет, то создаем новый регион
-                                                    $new_region_id = $this->newRegion($new_region_name, $locality['locality_id']);
-                                                    $model->region_id = $new_region_id;
-                                                }
-                                            } else {//Если мы не нашли такой области в ответе, который присылает vk.com, то создаем новый регион и область берем ту, которую нашли в табличке 'locality'
-                                                $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                                                $model->region_id = $new_region_id;
-                                            }
-                                        }*/
                                     } else {
                                         $new_region_id = $this->newLocalityAndRegion($data_geo['region'], $data_geo['city']);
                                         $model->region_id = $new_region_id;
@@ -171,48 +99,7 @@ class Statistic
                         ->limit(1)
                         ->one();
                     if ($locality != []) {//Если область есть, то пробуем найти название города в vk.com(чтобы стандартизировать имена с vk.com) и создаем новый регион привязанный к этой области
-                        //print_r($locality); die('34');
                         $this->checkLocality($data_geo['city'], $locality, $model);
-
-                        /*$region_names_vk = $this->apiVkCity($data_geo['city']);
-                        if(isset($region_names_vk['response']) && $region_names_vk['response']!=[]){
-                            $key_row_vk=0;
-                            $count_city = 0;//Счетчик совпадений, в области может быть несколько городов с подобными названиями
-                            foreach($region_names_vk['response'] as $key=>$region_name){
-                                if(isset($region_name['region'])){
-                                    if(strcasecmp(trim($region_name['region']), $locality['name'])==0){
-                                        $count_city++;
-                                        $key_row_vk = $key;
-                                    }
-                                } else {
-                                    if(strcasecmp(trim($region_name['title']), $locality['name'])==0){
-                                        $count_city++;
-                                        $key_row_vk = $key;
-                                    }
-                                }
-                            }
-                            if($count_city==1){//Если мы нашли одно совпадение с контактом, то берем имя нашего региона из vk.com, а область из таблички 'locality'
-                                $new_region_name = trim($region_names_vk['response'][$key_row_vk]['title']);
-                                $find_vk_name_in_table = Region::find()
-                                    ->where(['name'=>$new_region_name, 'locality_id'=>$locality['locality_id']])
-                                    ->asArray()
-                                    ->limit(1)
-                                    ->one();
-                                if($find_vk_name_in_table!=[]){//Если мы таки нашли имя из vk.com в таблице, то берем его id
-                                    $model->region_id = $find_vk_name_in_table['region_id'];
-                                } else {//Если нет, то создаем новый регион
-                                    $new_region_id = $this->newRegion($new_region_name, $locality['locality_id']);
-                                    $model->region_id = $new_region_id;                            }
-
-                            } else {//Если мы не нашли такой области в ответе, который присылает vk.com, то создаем новый регион и область берем ту, которую нашли в табличке 'locality'
-                                $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                                $model->region_id = $new_region_id;
-                            }
-                        } else {//Если ответ от vk.com пустой, то создаем новый регион в найденной области
-                            $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                            $model->region_id = $new_region_id;
-                        }*/
-
                     } else {//Если область тоже не найдена, то создаем новую область и регион, предварительно стандартизировав данные с vk.com
                         $region_vk = $this->apiVkRegion($data_geo['region']);
                         if (isset($region_vk['response'][0]) && $region_vk['response'][0] != []) {
@@ -224,46 +111,6 @@ class Statistic
                         }
                         if ($locality != []) {
                             $this->checkLocality($data_geo['city'], $locality, $model);
-
-                            /*$region_names_vk = $this->apiVkCity($data_geo['city']);
-                            if(isset($region_names_vk['response']) && $region_names_vk['response']!=[]){
-                                $key_row_vk=0;
-                                $count_city = 0;//Счетчик совпадений, в области может быть несколько городов с подобными названиями
-                                foreach($region_names_vk['response'] as $key=>$region_name){
-                                    if(isset($region_name['region'])){
-                                        if(strcasecmp(trim($region_name['region']), $locality['name'])==0){
-                                            $count_city++;
-                                            $key_row_vk = $key;
-                                        }
-                                    } else {
-                                        if(strcasecmp(trim($region_name['title']), $locality['name'])==0){
-                                            $count_city++;
-                                            $key_row_vk = $key;
-                                        }
-                                    }
-                                }
-                                if($count_city==1){//Если мы нашли одно совпадение с контактом, то берем имя нашего региона из vk.com, а область из таблички 'locality'
-                                    $new_region_name = trim($region_names_vk['response'][$key_row_vk]['title']);
-                                    $find_vk_name_in_table = Region::find()
-                                        ->where(['name'=>$new_region_name, 'locality_id'=>$locality['locality_id']])
-                                        ->asArray()
-                                        ->limit(1)
-                                        ->one();
-                                    if($find_vk_name_in_table!=[]){//Если мы таки нашли имя из vk.com в таблице, то берем его id
-                                        $model->region_id = $find_vk_name_in_table['region_id'];
-                                    } else {//Если нет, то создаем новый регион
-                                        $new_region_id = $this->newRegion($new_region_name, $locality['locality_id']);
-                                        $model->region_id = $new_region_id;                            }
-
-                                } else {//Если мы не нашли такой области в ответе, который присылает vk.com, то создаем новый регион и область берем ту, которую нашли в табличке 'locality'
-                                    $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                                    $model->region_id = $new_region_id;
-                                }
-                            } else {//Если ответ от vk.com пустой, то создаем новый регион в найденной области
-                                $new_region_id = $this->newRegion($data_geo['city'], $locality['locality_id']);
-                                $model->region_id = $new_region_id;
-                            }*/
-
                         } else {
                             $region_names_vk = $this->apiVkCity($data_geo['city']);
                             if (isset($region_names_vk['response']) && $region_names_vk['response'] != []) {//Если есть совпадение названий городов по vk.com
