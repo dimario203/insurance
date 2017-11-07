@@ -2,6 +2,7 @@
 
 namespace app\models\statistic;
 
+use app\models\company\Company;
 use Yii;
 use \app\models\polis\Region;
 
@@ -56,5 +57,10 @@ class ClickCount extends \yii\db\ActiveRecord
     public function getRegion()
     {
         return $this->hasOne(Region::className(), ['region_id' => 'region_id']);
+    }
+
+    public function getCompany()
+    {
+        return $this->hasOne(Company::className(), ['company_id' => 'company_id']);
     }
 }

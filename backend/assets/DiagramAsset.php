@@ -18,11 +18,9 @@ class DiagramAsset extends AssetBundle
     public $js = [
         "highcharts.js",
         "modules/exporting.js",
-        "/admin/app/js/diagramRegion.js"
+        "modules/series-label.js",
     ];
     public $depends = [
         '\yii\web\JqueryAsset',
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }

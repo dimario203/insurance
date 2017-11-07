@@ -55,3 +55,85 @@
 #companies .table-companies .company-visible{
     text-align: center;
 }
+
+/*--------end companyes---------------*/
+
+
+/*--------Statistic-------------*/
+#statistic,
+#statistic .button-ok{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+#statistic .statistic-items-body,
+#statistic .region-company .statistic-items-region,
+#statistic .period .statistic-items-period{
+    border: 5px groove rgba(228, 224, 224, 0.44);
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+    background-color: rgba(236, 236, 236, 0.49);
+}
+#statistic .statistic-items-body{
+    display: inline-block;
+    vertical-align: top;
+}
+#statistic .region-company,
+#statistic .period{
+    width: 50%;
+}
+#statistic .statistic-items-body .statistic-items{
+    margin-left: 20px;
+}
+#statistic .statistic-items-body .statistic-items:first-child{
+    margin-left: 0px;
+}
+#statistic .period .statistic-items-period{
+    display: inline-block;
+    width: 30%;
+}
+#statistic .region-company .statistic-items-region{
+    width: 70%;
+}
+#statistic .statistic-polis-header{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+#statistic .header-items{
+    display: block;
+    font-weight: bold;
+}
+#statistic .button-ok{
+    border-radius: 2px;
+    height: 30px;
+    color:  #444444;
+}
+#statistic .statistic-select{
+    width: 50%;
+}
+#statistic .message-region.attention,
+#statistic .message-polis.attention,
+#container-diagram.attention h4,
+#container-diagram-dynamic.attention h4{
+    color: red;
+}
+#container-diagram{
+    min-width: 310px;
+    max-width: 800px;
+    min-height: 1000px;
+    margin: 30px;
+}
+#container-diagram-dynamic{
+    min-width: 310px;
+    max-width: 800px;
+    min-height: 500px;
+    margin: 30px;
+}
+#statistic .statistic-title{
+    height: 40px;
+    border-bottom: 1px solid #d2d2d2;
+}
+/*----------end Statistic----------*/

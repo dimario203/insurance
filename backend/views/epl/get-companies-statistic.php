@@ -6,7 +6,7 @@ DiagramAsset::register($this);
 ?>
 
 <div id="statistic">
-    <h2 class="statistic-title">Статистика покупок по регионам</h2>
+    <h2 class="statistic-title">Статистика покупок по компаниям</h2>
     <form id="statistic-form" method="post">
         <div class="settings">
             <div class="statistic-polis">
@@ -22,7 +22,7 @@ DiagramAsset::register($this);
                         <input class="statistic-input" type="checkbox" name="polis[travel]" value="2" checked/>
                         Путишествия
                     </span>
-                   <span class="statistic-items">
+                    <span class="statistic-items">
                        <input class="statistic-input" type="checkbox" name="polis[live]" value="3" checked/>
                        Жизнь и Здоровье
                    </span>
@@ -38,17 +38,17 @@ DiagramAsset::register($this);
             </div>
             <div class="region-company">
                 <div class="statistic-polis-header">
-                    <h4 class="message-region">Выберите регион</h4>
+                    <h4 class="message-companies">Выберите Компанию</h4>
                 </div>
                 <div class="statistic-items-region">
                     <?php
                     echo Select2::widget([
-                        'name' => 'region',
+                        'name' => 'companies',
                         'language' => 'ru',
                         'value' => '',
-                        'data' => $regions,
+                        'data' => $companies,
                         'theme' => Select2::THEME_KRAJEE,
-                        'options' => ['multiple' => true, 'placeholder' => 'Выберте регионы ...'],
+                        'options' => ['multiple' => true, 'placeholder' => 'Выберте компании ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
@@ -76,7 +76,8 @@ DiagramAsset::register($this);
     <div id="container-diagram"></div>
 </div>
 
+
 <?php
-$this->registerJsFile(\yii\helpers\Url::toRoute(['/app/js/diagramRegion.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);
+$this->registerJsFile(\yii\helpers\Url::toRoute(['/app/js/diagramCompany.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);
 ?>
 

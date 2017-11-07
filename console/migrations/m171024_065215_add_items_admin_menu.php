@@ -44,8 +44,8 @@ class m171024_065215_add_items_admin_menu extends Migration
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'region-statistic', 'label' => 'Статистика Регионов', 'language' => 'en-US']);
         $this->insert('{{%menu_link}}', ['id' => 'company-statistic', 'menu_id' => 'admin-menu', 'link' => '/epl/get-company-statistic', 'parent_id'=>'statistic-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'company-statistic', 'label' => 'Статистика Компаний', 'language' => 'en-US']);
-        $this->insert('{{%menu_link}}', ['id' => 'dinamic-statistic', 'menu_id' => 'admin-menu', 'link' => '/epl/get-dinamic-statistic', 'parent_id'=>'statistic-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
-        $this->insert('{{%menu_link_lang}}', ['link_id' => 'dinamic-statistic', 'label' => 'Динамика покупок', 'language' => 'en-US']);
+        $this->insert('{{%menu_link}}', ['id' => 'dynamic-statistic', 'menu_id' => 'admin-menu', 'link' => '/epl/get-dynamic-statistic', 'parent_id'=>'statistic-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
+        $this->insert('{{%menu_link_lang}}', ['link_id' => 'dynamic-statistic', 'label' => 'Динамика покупок', 'language' => 'en-US']);
     }
 
     public function safeDown()

@@ -12,10 +12,11 @@ namespace backend\controllers;
 use app\models\settings\EditSiteSettings;
 use app\models\settings\SiteSettings;
 use yii\web\Controller;
+use yeesoft\controllers\admin\DashboardController;
 
-class SiteSettingsController Extends Controller
+class SiteSettingsController Extends DashboardController
 {
-    public $layout = '@vendor/yeesoft/yii2-yee-core/views/layouts/admin/main.php';
+    //public $layout = '@vendor/yeesoft/yii2-yee-core/views/layouts/admin/main.php';
 
     public function actionGetSettings(){
         $set = new EditSiteSettings();

@@ -1,5 +1,5 @@
 $('#statistic-form').submit(function() {
-    var postTo = "/admin/admin-ajax/get-region-statistic-ajax";
+    var postTo = "/admin/admin-ajax/get-company-statistic-ajax";
     var msg   = $('#statistic-form').serialize();
     $.post(postTo, msg , renderDiagram, 'json');
     return false;
@@ -7,13 +7,12 @@ $('#statistic-form').submit(function() {
 
 
 function renderDiagram(data){
-
-    if(data.message.region != undefined ){
-        $('.message-region').addClass('attention');
-        $('.message-region').html(data.message.region);
+    if(data.message.companies != undefined ){
+        $('.message-companies').addClass('attention');
+        $('.message-companies').html(data.message.companies);
     } else {
-        $('.message-region').toggleClass('attention', false);
-        $('.message-region').html('Выберите регион');
+        $('.message-companies').toggleClass('attention', false);
+        $('.message-companies').html('Выберите регион');
     }
     if(data.message.polis!=undefined){
         $('.message-polis').addClass('attention');
@@ -31,7 +30,7 @@ function renderDiagram(data){
                 type: 'bar'
             },
             title: {
-                text: 'Статистика по регионам с '+data.data.date.data_start+' по '+data.data.date.date_end,
+                text: 'Статистика по компаниям с '+data.data.date.data_start+' по '+data.data.date.date_end,
             },
             subtitle: {
                 text: 'Ресурс: <a href="/">epolis.shop</a>'
