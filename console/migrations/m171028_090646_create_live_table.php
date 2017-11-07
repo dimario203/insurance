@@ -17,11 +17,11 @@ class m171028_090646_create_live_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-live-age_sum_work_payh_pays',
             'live',
             ['age', 'sum_insured', 'work', 'pay_hospital', 'pay_surgery']
-        );
+        );*/
 
         $this->createIndex(
             'idx-live-company_id',
@@ -51,10 +51,10 @@ class m171028_090646_create_live_table extends Migration
             'live'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-live-age_sum_work_payh_pays',
             'live'
-        );
+        );*/
 
         $this->dropTable('live');
     }

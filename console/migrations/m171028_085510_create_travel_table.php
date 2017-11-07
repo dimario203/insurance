@@ -16,11 +16,11 @@ class m171028_085510_create_travel_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-travel-countr_dur_age_sum',
             'travel',
             ['country_id', 'duration', 'age', 'sum_insured']
-        );
+        );*/
 
         $this->createIndex(
             'idx-travel-company_id',
@@ -75,10 +75,10 @@ class m171028_085510_create_travel_table extends Migration
             'travel'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-travel-countr_dur_age_sum',
             'travel'
-        );
+        );*/
 
         $this->dropTable('travel');
     }

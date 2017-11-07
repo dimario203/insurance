@@ -6,7 +6,7 @@ class m171024_065215_add_items_admin_menu extends Migration
 {
     public function safeUp()
     {
-        $this->insert('{{%menu_link}}', ['id' => 'osago-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 105]);
+        /*$this->insert('{{%menu_link}}', ['id' => 'osago-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 105]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'osago-main', 'label' => 'OSAGO', 'language' => 'en-US']);
         $this->insert('{{%menu_link}}', ['id' => 'osago', 'menu_id' => 'admin-menu', 'link' => '/epl/osago', 'parent_id'=>'osago-main', 'image' => '', 'created_by' => 1, 'order' => 100]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'osago', 'label' => 'OSAGO', 'language' => 'en-US']);
@@ -25,7 +25,7 @@ class m171024_065215_add_items_admin_menu extends Migration
         $this->insert('{{%menu_link}}', ['id' => 'realty-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 108]);
         $this->insert('{{%menu_link_lang}}', ['link_id' => 'realty-main', 'label' => 'Realty', 'language' => 'en-US']);
         $this->insert('{{%menu_link}}', ['id' => 'realty', 'menu_id' => 'admin-menu', 'link' => '/epl/realty', 'parent_id'=>'realty-main', 'image' => '', 'created_by' => 1, 'order' => 103]);
-        $this->insert('{{%menu_link_lang}}', ['link_id' => 'realty', 'label' => 'Realty', 'language' => 'en-US']);
+        $this->insert('{{%menu_link_lang}}', ['link_id' => 'realty', 'label' => 'Realty', 'language' => 'en-US']);*/
 
         /*Comapanies*/
         $this->insert('{{%menu_link}}', ['id' => 'companies-main', 'menu_id' => 'admin-menu', 'link' => '', 'image' => '', 'created_by' => 1, 'order' => 99]);
@@ -50,8 +50,24 @@ class m171024_065215_add_items_admin_menu extends Migration
 
     public function safeDown()
     {
-        echo "m171024_065215_add_items_admin_menu cannot be reverted.\n";
+        /*Statistic*/
+        $this->delete('menu_link_lang', ['link_id' => 'dynamic-statistic', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'dynamic-statistic']);
+        $this->delete('menu_link_lang', ['link_id' => 'company-statistic', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'company-statistic']);
+        $this->delete('menu_link_lang', ['link_id' => 'region-statistic', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'region-statistic']);
+        $this->delete('menu_link_lang', ['link_id' => 'statistic-main', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'statistic-main']);
 
-        return false;
+        /*Site control*/
+        $this->delete('menu_link_lang', ['link_id' => 'settings-site-controll', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'settings-site-controll']);
+
+        /*Comapanies*/
+        $this->delete('menu_link_lang', ['link_id' => 'view-companies', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'view-companies']);
+        $this->delete('menu_link_lang', ['link_id' => 'companies-main', 'language' => 'en-US']);
+        $this->delete('menu_link', ['id' => 'companies-main']);
     }
 }

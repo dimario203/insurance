@@ -14,11 +14,11 @@ class m171027_212252_create_Civil_responsibility_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-civ-resp-comp_cntr_dur',
             'civil_responsibility',
             ['company_id', 'country_id', 'duration']
-        );
+        );*/
 
         $this->createIndex(
             'idx-civ-resp-company_id',
@@ -73,10 +73,10 @@ class m171027_212252_create_Civil_responsibility_table extends Migration
             'civil_responsibility'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-civ-resp-comp_cntr_dur',
             'civil_responsibility'
-        );
+        );*/
 
         $this->dropTable('civil_responsibility');
     }

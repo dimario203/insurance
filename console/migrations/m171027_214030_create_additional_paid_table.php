@@ -13,11 +13,11 @@ class m171027_214030_create_additional_paid_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-add-paid-comp_paid',
             'additional_paid',
             ['company_id', 'paid_id']
-        );
+        );*/
 
         $this->createIndex(
             'idx-add-paid-company_id',
@@ -72,10 +72,10 @@ class m171027_214030_create_additional_paid_table extends Migration
             'additional_paid'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-add-paid-comp_paid',
             'additional_paid'
-        );
+        );*/
 
         $this->dropTable('additional_paid');
     }

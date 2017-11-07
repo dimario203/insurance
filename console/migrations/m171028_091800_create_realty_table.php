@@ -17,11 +17,11 @@ class m171028_091800_create_realty_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-realty-reg_rep_leas_constr_civ',
             'realty',
             ['region_id', 'repair_price', 'lease', 'constraction_price', 'civil_resp']
-        );
+        );*/
 
         $this->createIndex(
             'idx-realty-company_id',
@@ -76,10 +76,10 @@ class m171028_091800_create_realty_table extends Migration
             'realty'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-realty-reg_rep_leas_constr_civ',
             'realty'
-        );
+        );*/
 
         $this->dropTable('realty');
     }

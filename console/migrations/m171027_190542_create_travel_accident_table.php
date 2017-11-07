@@ -15,11 +15,11 @@ class m171027_190542_create_travel_accident_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-tr-acci_comp_cntr_dur_sum',
             'travel_accident',
             ['company_id', 'country_id', 'duration', 'sum_insured']
-        );
+        );*/
 
         $this->createIndex(
             'idx-tr-acci_company_id',
@@ -74,10 +74,10 @@ class m171027_190542_create_travel_accident_table extends Migration
           'travel_accident'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-tr-acci_comp_cntr_dur_sum',
             'travel_accident'
-        );
+        );*/
 
         $this->dropTable('travel_accident');
     }

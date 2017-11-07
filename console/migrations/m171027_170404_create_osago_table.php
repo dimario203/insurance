@@ -16,11 +16,11 @@ class m171027_170404_create_osago_table extends Migration
             'price' => $this->integer(),
         ]);
 
-        $this->createIndex(
+        /*$this->createIndex(
             'idx-osago-reg_pow_age_exp',
             'osago',
             ['region_id', 'power', 'age', 'experience']
-        );
+        );*/
 
         $this->createIndex(
             'idx-osago-region_id',
@@ -50,10 +50,10 @@ class m171027_170404_create_osago_table extends Migration
             'osago'
         );
 
-        $this->dropIndex(
+        /*$this->dropIndex(
             'idx-osago-reg_pow_age_exp',
             'osago'
-        );
+        );*/
 
         $this->dropTable('osago');
     }
