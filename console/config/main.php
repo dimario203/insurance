@@ -28,8 +28,8 @@ return [
                 ],
             ],
         ],
-        'parser' => [
-            'class' => 'components\parser\Parsers',
+        'parserManager' => [
+            'class' => 'components\parser\ParserManager',
             'parsers' => include 'parsers.php',
 
         ],

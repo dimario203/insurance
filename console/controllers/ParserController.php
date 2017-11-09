@@ -9,12 +9,12 @@
 namespace console\controllers;
 
 use yii\console\Controller;
-use components\parser\ParserManager;
+use components\parser\ParserManager1;
 
 class ParserController extends Controller
 {
     public function actionParse(){
-        \Yii::$app->parser->runParser();
+        \Yii::$app->parserManager->runParser();
         return 1;
     }
 }
