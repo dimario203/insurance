@@ -2,10 +2,10 @@
 
 return [
 	[
-		'parser' => 'alfaParser',
+		'parser' => 'AlfaParser',
 		'params' => array(),
 	],
 	[
-		'parsers' => 'ingosstrahParser',
+		'parser' => 'ingosstrahParser',
 	],
 ];

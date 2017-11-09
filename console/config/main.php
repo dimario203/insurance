@@ -16,7 +16,7 @@ return [
             'class' => 'console\controllers\MigrateController'
         ],
         'parser' => [
-            'class' => 'console\controllers\ParserController'
+            'class' => 'console\controllers\ParserController',
         ],
     ],
     'components' => [
@@ -27,6 +27,11 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'parser' => [
+            'class' => 'components\parser\Parsers',
+            'parsers' => include 'parsers.php',
+
         ],
     ],
     'params' => $params,
