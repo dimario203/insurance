@@ -15,6 +15,9 @@ return [
         'migrate' => [
             'class' => 'console\controllers\MigrateController'
         ],
+        'parser' => [
+            'class' => 'console\controllers\ParserController'
+        ],
     ],
     'components' => [
         'log' => [
