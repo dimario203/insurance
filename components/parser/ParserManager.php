@@ -22,10 +22,9 @@ Class ParserManager extends Component
     public $parsers;
 
 
-
-    public function getParser(){
-
-    }
+    /**
+     *
+     */
 
     public function runParser() {
         $countParsers = count($this->parsers);

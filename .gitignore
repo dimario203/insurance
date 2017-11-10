@@ -18,6 +18,16 @@ Thumbs.db
 # composer vendor dir
 /vendor
 /common/config/main-local.php
+/common/config/params-local.php
+/frontend/runtime
+/backend/runtime
+/backend/For_Test
+/console/runtime
+/frontend/config/main-local.php
+/frontend/config/params-local.php
+/backend/config/main-local.php
+/backend/config/params-local.php
+composer.lock
 
 # composer itself is not needed
 composer.phar
