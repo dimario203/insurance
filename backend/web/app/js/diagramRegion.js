@@ -79,7 +79,9 @@ function renderDiagram(data){
             series: data.data.polis
         });
     } else {
-        $('#container-diagram').addClass('attention');
-        $('#container-diagram').html('<h4>За выбранный период покупок нет</h4>');
+        if(data.message.polis==undefined && data.message.region == undefined){
+            $('#container-diagram').addClass('attention');
+            $('#container-diagram').html('<h4>За выбранный период покупок нет</h4>');
+        }
     }
 }

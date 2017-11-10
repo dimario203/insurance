@@ -59,8 +59,10 @@ function renderDiagram(data){
             series: data.data.polis
         });
     } else {
-        $('#container-diagram-dynamic').addClass('attention');
-        $('#container-diagram-dynamic').html('<h4>За выбранный период покупок нет</h4>');
+        if(data.message.polis==undefined){
+            $('#container-diagram').addClass('attention');
+            $('#container-diagram').html('<h4>За выбранный период покупок нет</h4>');
+        }
     }
 }
 

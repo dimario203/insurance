@@ -1,4 +1,3 @@
-<!--<div id="site-settings">-->
 <ul class="breadcrumb">
     <li><a href="/admin">Главное Меню</a></li>
     <li class="active">Настройки сайта</li>
@@ -22,53 +21,38 @@
                         <option <?= $settings['is_available'] == 0 ? 'selected' : '' ?> value="0">Выкл</option>
                     </select>
                 </div>
-
-
                 <div class="on-off-polis">
                     <h4 class="site-settings--form-item">Включить / выключить отображение продуктов на сайте</h4>
-
                 <div class="checkbox">
                     <input class="settings-input form-control" type="checkbox" name="polis[osago]"
                            value="1" <?= $settings['find_osago'] == 1 ? 'checked' : '' ?>/>
                     <label>ОСАГО</label>
-
                 </div>
-
-
                 <div class="checkbox">
                      <input class="settings-input form-control" type="checkbox" name="polis[travel]"
                             value="2" <?= $settings['find_travel'] == 1 ? 'checked' : '' ?>/>
                      <label>Путешествия</label>
                 </div>
-
-
                  <div class="checkbox">
                       <input class="settings-input form-control" type="checkbox" name="polis[live]"
                              value="3" <?= $settings['find_live'] == 1 ? 'checked' : '' ?>/>
                       <label>Жизнь и Здоровье</label>
                  </div>
-
-
                <div class="checkbox">
                     <input class="settings-input form-control" type="checkbox" name="polis[realty]"
                            value="4" <?= $settings['find_realty'] == 1 ? 'checked' : '' ?>/>
                     <label>Недвижимость</label>
                </div>
-
-
                 <div class="checkbox">
                         <input class="settings-input form-control" type="checkbox" name="polis[kasko]"
                                value="5" <?= $settings['find_kasko'] == 1 ? 'checked' : '' ?>/>
                         <label>КАСКО</label>
                 </div>
-
-
                  <div class="checkbox">
                       <input class="settings-input-all form-control" type="checkbox" name="polis[all]"
                              value="6" <?= $settings['find_all'] == 0 ? 'checked' : '' ?>/>
                       <label>Отключить все</label>
                  </div>
-
                 </div>
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Сохранить"/>

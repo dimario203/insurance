@@ -1,62 +1,5 @@
 /*companies*/
-#companies .table-companies,
-#company .table-company{
-    background-color: white;
-    width: 80%;
-    border: 1px solid #d8d0d0;
-}
-#companies .table-companies tr,
-#company .table-company tr{
-    border-bottom: 1px solid #d8d0d0;
-}
-#companies .table-companies th, td,
-#company .table-company th, td {
-    border-right: 1px solid #d8d0d0;
-}
-#companies .table-companies th,
-#companies .table-companies td,
-#company .table-company th{
-    padding-left: 5px;
-    padding-right: 5px;
-}
-#companies .message-ok,
-#company .message-ok,
-#site-settings .message-ok{
-    color: #03bf03;
-}
-#companies .message-error,
-#company .message-error,
-#site-settings .message-error{
-    color: red;
-}
-#companies .button-add,
-#company .button-save{
-    margin-top: 20px;
-}
-#companies .table-companies thead,
-#company .table-company thead{
-    height: 25px;
-    line-height: 25px;
-    background-color: #e8e8e8;
-}
-#companies .table-companies tr:nth-child(odd){
-    background-color: rgba(251, 251, 255, 0.54);
-}
-#companies .table-companies tr:hover{
-    background-color: rgba(226, 226, 230, 0.54);;
-}
-#company .table-company input{
-    width: 100%;
-    padding-left: 5px;
-    padding-right: 5px;
-    border: none;
-}
-#company .table-company .company-logo{
-   padding-left: 5px;
-}
-#companies .table-companies .company-visible{
-    text-align: center;
-}
+
 #post-grid .button-add a{
     color: white;
     text-decoration: none;
@@ -97,7 +40,8 @@
     max-width: 300px;
     word-wrap: break-word;
 }
-#post-grid {
+#post-grid,
+#post-grid-pjax{
     overflow: auto;
 }
 
@@ -105,64 +49,13 @@
 
 
 /*--------Statistic-------------*/
-#statistic,
-#statistic .button-ok,
-.site-settings .button-ok{
+.site-settings .button-ok,
+.statistic .button-ok{
     margin-left: 20px;
     margin-top: 20px;
 }
-#statistic .statistic-items-body,
-#statistic .region-company .statistic-items-region,
-#statistic .period .statistic-items-period{
-    border: 5px groove rgba(228, 224, 224, 0.44);
-    border-radius: 5px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    margin-bottom: 10px;
-    background-color: rgba(236, 236, 236, 0.49);
-}
-#statistic .statistic-items-body{
-    display: inline-block;
-    vertical-align: top;
-}
-#statistic .region-company,
-#statistic .period{
-    width: 50%;
-}
-#statistic .statistic-items-body .statistic-items,
-#site-settings .site-settings-items{
-    margin-left: 20px;
-}
-#statistic .statistic-items-body .statistic-items:first-child{
-    margin-left: 0px;
-}
-#statistic .period .statistic-items-period{
-    display: inline-block;
-    width: 30%;
-}
-#statistic .region-company .statistic-items-region{
-    width: 70%;
-}
-#statistic .statistic-polis-header{
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-#statistic .header-items{
-    display: block;
-    font-weight: bold;
-}
-#statistic .button-ok{
-    border-radius: 2px;
-    height: 30px;
-    color:  #444444;
-}
-#statistic .statistic-select{
-    width: 50%;
-}
-#statistic .message-region.attention,
-#statistic .message-polis.attention,
+.statistic .message-region.attention,
+.statistic .message-polis.attention,
 #container-diagram.attention h4,
 #container-diagram-dynamic.attention h4{
     color: red;
@@ -170,7 +63,7 @@
 #container-diagram{
     min-width: 310px;
     max-width: 800px;
-    min-height: 1000px;
+    min-height: 800px;
     margin: 30px;
 }
 #container-diagram-dynamic{
@@ -179,41 +72,60 @@
     min-height: 500px;
     margin: 30px;
 }
-#statistic .statistic-title,
-#site-settings .settings-title{
-    height: 40px;
-    border-bottom: 1px solid #d2d2d2;
+.statistic .header-items{
+    width: 70px;
+    display: inline-block;
+}
+.statistic .region-company{
+    width: 50%;
+}
+@media (max-width: 930px) {
+    .statistic .region-company{
+        width: 90%;
+    }
+    #container-diagram{
+        margin: 30px 5px 30px 5px;
+    }
+    #container-diagram-dynamic{
+        margin: 30px 5px 30px 5px;
+    }
 }
 /*----------end Statistic----------*/
 
 
 
 /*--------Settings-------------*/
-#site-settings{
-    margin-top: 20px;
-    margin-left: 20px;
-}
+
 .site-settings .on-off-site,
-.site-settings .on-off-polis{
+.site-settings .on-off-polis,
+.statistic .statistic-polis,
+.statistic .region-company,
+.statistic .period{
     margin: 30px 20px;
 }
 .site-settings .on-off-site h4,
-.site-settings .on-off-polis h4{
+.site-settings .on-off-polis h4,
+.statistic .statistic-polis-header,
+.statistic .statistic-polis h4,
+.statistic .region-company h4,
+.statistic .period h4{
     color: black;
 }
-.site-settings .checkbox{
+.site-settings .checkbox,
+.statistic .checkbox,
+.period .statistic-items-period{
     padding-top: 5px;
+}
+.statistic .statistic-items-body .checkbox{
+    padding-right: 20px;
 }
 .site-settings .input-sm{
     width: 100px;
 }
-#site-settings .site-settings--form-item{
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-#site-settings .site-settings-items:nth-child(2){
-    margin-left: 0px;
+.statistic .statistic-items-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /*--------end Settings-----------*/
