@@ -57,6 +57,51 @@
 #companies .table-companies .company-visible{
     text-align: center;
 }
+#post-grid .button-add a{
+    color: white;
+    text-decoration: none;
+}
+#post-grid .company-visible .visible-label{
+    background-color: green;
+}
+#post-grid .company-visible .invisible-label{
+    background-color: darkred;
+}
+#post-grid .company-visible{
+    text-align:center;
+    vertical-align: middle;
+}
+#post-grid .table-company > tbody > tr > td{
+    vertical-align: middle;
+}
+#post-grid .message-ok,
+#company .message-ok,
+#site-settings .message-ok{
+    color: #03bf03;
+}
+#post-grid .message-error,
+#company .message-error,
+#site-settings .message-error{
+    color: red;
+}
+#post-grid .table-company > tbody > tr{
+    border-left: 1px solid #dddddd;
+}
+#post-grid .table-company > tbody:last-child{
+    border-bottom: 1px solid #dddddd;
+}
+.company .table-company tr,
+.company .table-company td{
+    border: none;
+}
+#post-grid .table-company .company-td-url{
+    min-width: 100px;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+#post-grid {
+    overflow: auto;
+}
 
 /*--------end companyes---------------*/
 

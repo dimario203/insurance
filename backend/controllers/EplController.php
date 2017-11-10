@@ -60,14 +60,14 @@ class EplController extends DashboardController
         if(!empty($post) && isset($post['company_id']) && !empty($post['company_id'])){
             $result = $comp->updateCompany($post);
             if($result['status']=='ok'){
-                $mess = 'Данные компании '.$result['name'].' обновлены';
+                $mess = 'Данные компании "'.$result['name'].'" обновлены';
             } else {
-                $mess = 'Данные компании '.$result['name'].' не обновлены';
+                $mess = 'Данные компании "'.$result['name'].'" не обновлены';
             }
             $companies = $comp->getCompanies();
             return $this->render('companies', ['companies'=>$companies, 'mess' => $mess, 'status'=>$result['status']]);
         } else {
-            $mess = 'Данные компании '.$post['name']?$post['name']:''.' не обновлены. Попробуйте снова';
+            $mess = 'Данные компании "'.$post['name']?$post['name']:''.'" не обновлены. Попробуйте снова';
             $status = 'error';
             $companies = $comp->getCompanies();
             return $this->render('companies', ['companies'=>$companies, 'mess' => $mess, 'status'=>$status]);
@@ -84,7 +84,7 @@ class EplController extends DashboardController
         $result = $comp->addNewCompany($post);
         if($result['status']=='ok'){
             $companies = $comp->getCompanies();
-            $mess = 'Компания '.$result['name'].' создана';
+            $mess = 'Компания "'.$result['name'].'" создана';
             return $this->render('companies', ['companies'=>$companies, 'mess'=>$mess, 'status'=>$result['status']]);
         } else{
             $mess = 'Компания не создана';
