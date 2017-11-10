@@ -75,13 +75,11 @@
     vertical-align: middle;
 }
 #post-grid .message-ok,
-#company .message-ok,
-#site-settings .message-ok{
+.site-settings .message-ok{
     color: #03bf03;
 }
 #post-grid .message-error,
-#company .message-error,
-#site-settings .message-error{
+.site-settings .message-error{
     color: red;
 }
 #post-grid .table-company > tbody > tr{
@@ -109,7 +107,7 @@
 /*--------Statistic-------------*/
 #statistic,
 #statistic .button-ok,
-#site-settings .button-ok{
+.site-settings .button-ok{
     margin-left: 20px;
     margin-top: 20px;
 }
@@ -195,12 +193,19 @@
     margin-top: 20px;
     margin-left: 20px;
 }
-#site-settings .on-off-site,
-#site-settings .on-off-polis{
+.site-settings .on-off-site,
+.site-settings .on-off-polis{
     margin: 30px 20px;
-    padding: 20px;
-    background: #eaeaea;
-    border-radius: 5px;
+}
+.site-settings .on-off-site h4,
+.site-settings .on-off-polis h4{
+    color: black;
+}
+.site-settings .checkbox{
+    padding-top: 5px;
+}
+.site-settings .input-sm{
+    width: 100px;
 }
 #site-settings .site-settings--form-item{
     font-size: 14px;
