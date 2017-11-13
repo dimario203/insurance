@@ -46,6 +46,27 @@ return [
             'class' => 'yeesoft\comment\CommentModule',
         ],
     ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\PathController',
+            'access' => ['@'],
+            'disabledCommands' => ['netmount'],
+            'root' => [
+                'baseUrl'=>'/uploads',
+                'basePath'=>'@frontend/web/uploads',
+                'name' => 'Files'
+            ],
+            'watermark' => [
+                'source'         => __DIR__.'/logo.png', // Path to Water mark image
+                'marginRight'    => 5,          // Margin right pixel
+                'marginBottom'   => 5,          // Margin bottom pixel
+                'quality'        => 95,         // JPEG image save quality
+                'transparency'   => 70,         // Water mark image transparency ( other than PNG )
+                'targetType'     => IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP, // Target image formats ( bit-field )
+                'targetMinPixel' => 200         // Target image minimum pixel size
+            ]
+        ]
+    ],
     'components' => [
         'request' => [
             'baseUrl' => '/admin',
@@ -65,6 +86,7 @@ return [
             'multilingualRules' => false,
             'rules' => array(
                 //yee cms and other modules routes
+                '<controller:(elfinder)>/<action:\w+>/' => '<controller>/<action>',
                 '<module:\w+>/' => '<module>/default/index',
                 '<module:\w+>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
                 '<module:\w+>/<action:(create)>' => '<module>/default/<action>',
@@ -91,5 +113,6 @@ return [
             'errorAction' => 'site/error',
         ],
     ],
+
     'params' => $params,
 ];

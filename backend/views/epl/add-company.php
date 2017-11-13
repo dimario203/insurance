@@ -1,6 +1,11 @@
 <?php
 
 use yii\helpers\Url;
+use yeesoft\widgets\ActiveForm;
+use yeesoft\media\widgets\TinyMce;
+use yeesoft\media\widgets\Gallery;
+use mihaildev\elfinder\InputFile;
+use mihaildev\elfinder\ElFinder;
 
 ?>
 <ul class="breadcrumb">
@@ -65,9 +70,20 @@ use yii\helpers\Url;
                         </tr>
                     </thead>
                 </table>
+                <?=InputFile::widget([
+                    'language'   => 'ru',
+                    'controller' => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
+                    'path' => '', // будет открыта папка из настроек контроллера с добавлением указанной под деритории
+                    'filter'     => '',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+                    'name'       => 'myinput',
+                    'value'      => '',
+                ]);?>
+
+
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-save btn btn-sm btn-primary" type="submit" value="Сохранить"/>
             </form>
+            <?=Gallery::widget(['pageSize' => 15, 'mode' => 'modal']);?>
         </div>
     </div>
 </div>
