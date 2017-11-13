@@ -64,11 +64,6 @@ return [
             'enablePrettyUrl' => true,
             'multilingualRules' => false,
             'rules' => array(
-                //add here local frontend controllers
-                '<controller:(test)>' => '<controller>/index',
-                '<controller:(test)>/<id:\d+>' => '<controller>/view',
-                '<controller>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller>/<action:\w+>' => '<controller>/<action>',
                 //yee cms and other modules routes
                 '<module:\w+>/' => '<module>/default/index',
                 '<module:\w+>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
@@ -76,7 +71,11 @@ return [
                 '<module:\w+>/<controller:\w+>' => '<module>/<controller>/index',
                 '<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
                 '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
-                'osago' => 'site/osago',
+                //add here local frontend controllers
+                '<controller:(test)>' => '<controller>/index',
+                '<controller:(test)>/<id:\d+>' => '<controller>/view',
+                '<controller>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller>/<action:\w+>' => '<controller>/<action>',
             )
         ],
         'log' => [
