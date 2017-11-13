@@ -1,3 +1,9 @@
+function sendForm(){
+    var postTo = "/admin/admin-ajax/get-company-statistic-ajax";
+    var msg   = $('#statistic-form').serialize();
+    $.post(postTo, msg , renderDiagram, 'json');
+}
+
 $('#statistic-form').submit(function() {
     var postTo = "/admin/admin-ajax/get-company-statistic-ajax";
     var msg   = $('#statistic-form').serialize();
@@ -12,7 +18,7 @@ function renderDiagram(data){
         $('.message-companies').html(data.message.companies);
     } else {
         $('.message-companies').toggleClass('attention', false);
-        $('.message-companies').html('Выберите регион');
+        $('.message-companies').html('Выберите компанию');
     }
     if(data.message.polis!=undefined){
         $('.message-polis').addClass('attention');
@@ -84,3 +90,5 @@ function renderDiagram(data){
         }
     }
 }
+
+sendForm();

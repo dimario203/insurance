@@ -17,22 +17,26 @@ class ClickCountStatistic
 
     public function getRegions(){
         $result = [];
+        $region_ids = [];
         $local_regins = Locality::find()->asArray()->with('regions')->all();
         foreach($local_regins as $local_regin){
             foreach($local_regin['regions'] as $region){
                 $result[$local_regin['name']][$region['region_id']] = $region['name'];
+                $region_ids[] = $region['region_id'];
             }
         }
-        return $result;
+        return ['regions'=>$result, 'region_ids'=>$region_ids];
     }
 
     public function getCompanies(){
         $result = [];
+        $company_ids = [];
         $companies = Company::find()->asArray()->all();
         foreach($companies as $company){
             $result[$company['company_id']] = $company['name'];
+            $company_ids[] = $company['company_id'];
         }
-        return $result;
+        return ['companies'=>$result, 'company_ids'=>$company_ids];
     }
 
     public function clickCompaniesStatictic($post){
@@ -157,14 +161,17 @@ class ClickCountStatistic
             $data['date']['date_end'] = date('m/d/Y');
             $date_out = time();
         }
-
-        $clicks = ClickCount::find()
+        $query = ClickCount::find()
             ->where(['in', 'polis_type', $post['polis']])
-            ->andWhere(['in', 'region_id', $post['region']])
-            ->andWhere(['between', 'date', $date_in, $date_out])
+            ->andWhere(['between', 'date', $date_in, $date_out]);
+        if(isset($post['region'])){
+            $query =  $query->andWhere(['in', 'region_id', $post['region']]);
+        }
+        $clicks = $query
             ->with(['region'])
             ->asArray()
             ->all();
+
         $count_reg_click = [];
         if($clicks!=[]) {
             foreach ($clicks as $click) {

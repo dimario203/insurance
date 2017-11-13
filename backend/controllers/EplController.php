@@ -95,15 +95,19 @@ class EplController extends DashboardController
 
     public function actionGetRegionStatistic(){
         $stat = new ClickCountStatistic();
-        $regions = $stat->getRegions();
-        return $this->render('get-region-statistic', ['regions'=>$regions]);
+        $result = $stat->getRegions();
+        $regions = $result['regions'];
+        $defoult_regions = $result['region_ids'];
+        return $this->render('get-region-statistic', ['regions'=>$regions, 'defoult_regions'=>$defoult_regions]);
     }
 
 
     public function actionGetCompanyStatistic(){
         $stat = new ClickCountStatistic();
-        $companies = $stat->getCompanies();
-        return $this->render('get-companies-statistic', ['companies'=>$companies]);
+        $result = $stat->getCompanies();
+        $companies = $result['companies'];
+        $company_ids = $result['company_ids'];
+        return $this->render('get-companies-statistic', ['companies'=>$companies, 'company_ids'=>$company_ids]);
     }
 
     public function actionGetDynamicStatistic(){

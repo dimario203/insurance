@@ -12,7 +12,7 @@ DiagramAsset::register($this);
 <div class="panel panel-default">
     <div class="panel-body">
         <div id="post-grid-pjax" class="statistic">
-            <form id="statistic-form" method="post">
+            <form id="statistic-form" method="post" name="a_form">
                 <div class="settings">
                     <div class="statistic-polis">
                         <h4 class="message-polis">Выберите вид страховки</h4>
@@ -46,7 +46,7 @@ DiagramAsset::register($this);
                             echo Select2::widget([
                                 'name' => 'companies',
                                 'language' => 'ru',
-                                'value' => '',
+                                'value' => $company_ids,
                                 'data' => $companies,
                                 'theme' => Select2::THEME_KRAJEE,
                                 'options' => ['multiple' => true, 'placeholder' => 'Выберте компании ...'],
@@ -62,6 +62,16 @@ DiagramAsset::register($this);
                         <div class="statistic-items-period">
                             <sapn class="header-items">С какого</sapn>
                             <input type="text" name="date_in" class="tcal" value=""/>
+                            <script language="JavaScript">
+                                var CAL_INIT = {
+                                'controlname': 'date_in',
+                                    'formname': 'a_form',
+                                    'dataformat':  'm/d/Y h:i'
+                                    'selected': '10/31/2017 00:00',
+                                    'today': '10/31/2017 00:00',
+                                }
+                                new calendar(CAL_INIT, CAL_TPL1);
+                            </script>
                         </div>
                         <div class="statistic-items-period">
                             <span class="header-items">По какой</span>
@@ -69,6 +79,7 @@ DiagramAsset::register($this);
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Получить статистику"/>
             </form>
             <div id="container-diagram"></div>

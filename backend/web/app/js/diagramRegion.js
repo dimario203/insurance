@@ -1,3 +1,9 @@
+function sendForm(){
+    var postTo = "/admin/admin-ajax/get-region-statistic-ajax";
+    var msg   = $('#statistic-form').serialize();
+    $.post(postTo, msg , renderDiagram, 'json');
+}
+
 $('#statistic-form').submit(function() {
     var postTo = "/admin/admin-ajax/get-region-statistic-ajax";
     var msg   = $('#statistic-form').serialize();
@@ -85,3 +91,5 @@ function renderDiagram(data){
         }
     }
 }
+
+sendForm();

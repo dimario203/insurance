@@ -50,7 +50,7 @@ DiagramAsset::register($this);
                             echo Select2::widget([
                                 'name' => 'region',
                                 'language' => 'ru',
-                                'value' => '',
+                                'value' => $defoult_regions,
                                 'data' => $regions,
                                 'theme' => Select2::THEME_KRAJEE,
                                 'options' => ['multiple' => true, 'placeholder' => 'Выберте регионы ...'],
@@ -72,6 +72,7 @@ DiagramAsset::register($this);
                             <input type="text" name="date_out" class="tcal" value="" />
                         </div>
                     </div>
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Получить статистику"/>
             </form>
             <div id="container-diagram"></div>

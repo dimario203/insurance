@@ -51,6 +51,7 @@ DiagramAsset::register($this);
 
                     </div>
                 </div>
+                <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Получить статистику"/>
             </form>
             <div id="container-diagram-dynamic"></div>
