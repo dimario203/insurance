@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yeesoft\media\widgets\FileInput;
 ?>
 <ul class="breadcrumb">
     <li><a href="/admin">Главное Меню</a></li>
@@ -17,7 +18,7 @@ use yii\helpers\Url;
                 <?php
             }
             ?>
-            <form method="post" action="<?= Url::to(['epl/update-company']) ?>" enctype="multipart/form-data">
+            <form method="post" action="<?= Url::to(['epl/update-company']) ?>">
                 <table class="table-company table table-striped">
                     <col width="25%">
                     <col width="35%">
@@ -56,9 +57,7 @@ use yii\helpers\Url;
                                        value="<?= $company['commission'] ?>" size="11"/>
                             </td>
                             <td>
-                                <!--<span class="company-logo"><?= basename($company['logo']); ?></span><br/>-->
-                                <input type="hidden" name="MAX_FILE_SIZE" value="300000"/>
-                                <input class="form-control" type="file" accept="image/*" name="logo"/>
+                                <?=FileInput::widget(['name'=>'logo']);?>
                             </td>
                             <td class="company-visible">
                                 <div class="checkbox">

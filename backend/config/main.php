@@ -62,7 +62,7 @@ return [
                 'marginBottom'   => 5,          // Margin bottom pixel
                 'quality'        => 95,         // JPEG image save quality
                 'transparency'   => 70,         // Water mark image transparency ( other than PNG )
-                'targetType'     => IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP, // Target image formats ( bit-field )
+                'targetType'     => '', // Target image formats ( bit-field )  IMG_GIF|IMG_JPG|IMG_PNG|IMG_WBMP
                 'targetMinPixel' => 200         // Target image minimum pixel size
             ]
         ]

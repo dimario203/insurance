@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yeesoft\widgets\ActiveForm;
 use yeesoft\media\widgets\TinyMce;
-use yeesoft\media\widgets\Gallery;
+use yeesoft\media\widgets\FileInput;
 use mihaildev\elfinder\InputFile;
 use mihaildev\elfinder\ElFinder;
 
@@ -24,7 +24,7 @@ use mihaildev\elfinder\ElFinder;
                 <?php
             }
             ?>
-            <form method="post" action="<?= Url::to(['epl/add-company']) ?>" enctype="multipart/form-data">
+            <form method="post" action="<?= Url::to(['epl/add-company']) ?>">
                 <table class="table-company table table-striped">
                     <col width="25%">
                     <col width="35%">
@@ -58,8 +58,7 @@ use mihaildev\elfinder\ElFinder;
                                 <input class="form-control" type="text" name="commission" size="11"/>
                             </td>
                             <td>
-                                <input type="hidden" name="MAX_FILE_SIZE" value="300000"/>
-                                <input class="form-control" type="file" name="logo"/>
+                                <?=FileInput::widget(['name'=>'logo']);?>
                             </td>
                             <td class="company-visible">
                                 <div class="checkbox">
@@ -70,20 +69,9 @@ use mihaildev\elfinder\ElFinder;
                         </tr>
                     </thead>
                 </table>
-                <?=InputFile::widget([
-                    'language'   => 'ru',
-                    'controller' => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
-                    'path' => '', // будет открыта папка из настроек контроллера с добавлением указанной под деритории
-                    'filter'     => '',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
-                    'name'       => 'myinput',
-                    'value'      => '',
-                ]);?>
-
-
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-save btn btn-sm btn-primary" type="submit" value="Сохранить"/>
             </form>
-            <?=Gallery::widget(['pageSize' => 15, 'mode' => 'modal']);?>
         </div>
     </div>
 </div>

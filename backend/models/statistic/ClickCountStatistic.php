@@ -76,7 +76,7 @@ class ClickCountStatistic
                 $data['polis']['osago'] = ['name' => 'ОСАГО'];
             }
             if (isset($post['polis']['travel'])) {
-                $data['polis']['travel'] = ['name' => 'Путишествия'];
+                $data['polis']['travel'] = ['name' => 'Путешествия'];
             }
             if (isset($post['polis']['live'])) {
                 $data['polis']['live'] = ['name' => 'Жизнь и Здоровье'];
@@ -186,7 +186,7 @@ class ClickCountStatistic
                 $data['polis']['osago'] = ['name' => 'ОСАГО'];
             }
             if (isset($post['polis']['travel'])) {
-                $data['polis']['travel'] = ['name' => 'Путишествия'];
+                $data['polis']['travel'] = ['name' => 'Путешествия'];
             }
             if (isset($post['polis']['live'])) {
                 $data['polis']['live'] = ['name' => 'Жизнь и Здоровье'];
@@ -298,7 +298,7 @@ class ClickCountStatistic
                 $data['polis']['osago'] = ['name' => 'ОСАГО'];
             }
             if (isset($post['polis']['travel'])) {
-                $data['polis']['travel'] = ['name' => 'Путишествия'];
+                $data['polis']['travel'] = ['name' => 'Путешествия'];
             }
             if (isset($post['polis']['live'])) {
                 $data['polis']['live'] = ['name' => 'Жизнь и Здоровье'];

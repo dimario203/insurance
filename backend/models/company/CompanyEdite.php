@@ -55,14 +55,8 @@ class CompanyEdite
         if(isset($post['commission']) && !empty($post['commission'])){
             $company->commission = $post['commission'];
         }
-        if(isset($_FILES['logo']) && !empty($_FILES['logo'])){
-            $tmp_name = $_FILES["logo"]["tmp_name"];
-            $root_path = $_SERVER['DOCUMENT_ROOT'];
-            $name = basename($_FILES["logo"]["name"]);
-            if(!empty($name)) {
-                move_uploaded_file($tmp_name, $root_path . "/frontend/web/images/logo/$name");
-                $company->logo = "/images/logo/$name";
-            }
+        if(isset($post['logo']) && !empty($post['logo'])){
+            $company->logo = trim($post['logo']);
         }
         if(isset($post['visible']) && !empty($post['visible'])){
             $company->visible = self::COMPANY_VISIBLE;
