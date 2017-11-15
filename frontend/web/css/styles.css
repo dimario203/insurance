@@ -1,0 +1,128 @@
+body {
+    min-height: 100vh;
+}
+
+.flex-grow {
+    flex: 1;
+}
+
+.red {
+    color: #F22031;
+    /*color: rgb(242, 32, 49);*/
+}
+
+.bg-red {
+    background-color: #F22031;
+}
+
+footer .nav-link {
+    color: white;
+}
+
+footer .small .nav-link {
+    color: white;
+    padding: 0.5rem 0.5rem;
+}
+
+
+.header-home-bg {
+    /*background-image: url("../images/home-baner.png");*/
+    border-bottom-left-radius: 100% 10%;
+    border-bottom-right-radius: 100% 10%;
+}
+
+#header-home-bg {
+    position: fixed;
+    /*top: 50%;*/
+    left: 50%;
+    min-width: 100%;
+    /*min-height: 100%;*/
+    width: auto;
+    /*height: auto;*/
+    height: 1500px;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url("../images/home-baner.png") no-repeat;
+    background-size: cover;
+    border-bottom-left-radius: 100% 10%;
+    border-bottom-right-radius: 100% 10%;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.header .card-body {
+    border-bottom: #F22031 solid 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.header .card-footer {
+    background-color: #F22031;
+    color: #ffffff;
+}
+
+.card .card-images {
+    height: 120px;
+}
+
+.vl-white {
+    border-left: 4px dotted #ffffff;
+    height: 50px;
+    left: -2px;
+}
+
+.vl-red {
+    border-left: 4px dotted #F22031;
+    height: 100px;
+    left: -2px;
+}
+
+.content-bg {
+    background-image: url("../images/background.png");
+}
+
+.font-size-3 {
+    font-size: 3rem;
+}
+
+.top-to-bottom {
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(134, 142, 150, 0.7)), to(rgba(0, 0, 0, 0))) 1 100%;
+    -webkit-border-image: -webkit-linear-gradient(top, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image: -moz-linear-gradient(top, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    -o-border-image: -o-linear-gradient(to bottom, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    border-image: linear-gradient(to bottom, rgba(134, 142, 150, 0.5) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+}
+
+.bottom-to-top {
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0)), to(rgba(134, 142, 150, 0.7))) 1 100%;
+    -webkit-border-image: -webkit-linear-gradient(bottom, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image: -moz-linear-gradient(bottom, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    -o-border-image: -o-linear-gradient(to top, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+    border-image: linear-gradient(to top, rgba(134, 142, 150, 0.5) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 1 100%;
+}
+
+.left-to-right {
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(134, 142, 150, 0.7)), to(rgba(0, 0, 0, 0))) 100% 1;
+    -webkit-border-image: -webkit-linear-gradient(left, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    -moz-border-image: -moz-linear-gradient(left, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    -o-border-image: -o-linear-gradient(to right, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    border-image: linear-gradient(to right, rgba(134, 142, 150, 0.5) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+}
+
+.right-to-left {
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0)), to(rgba(134, 142, 150, 0.7))) 100% 1;
+    -webkit-border-image: -webkit-linear-gradient(right, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    -moz-border-image: -moz-linear-gradient(right, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    -o-border-image: -o-linear-gradient(to left, rgba(134, 142, 150, 0.7) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+    border-image: linear-gradient(to left, rgba(134, 142, 150, 0.5) 90%, rgba(134, 142, 150, 0) 90%, rgba(0, 0, 0, 0)) 100% 1;
+}
