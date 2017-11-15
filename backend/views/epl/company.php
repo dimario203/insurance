@@ -57,7 +57,7 @@ use yeesoft\media\widgets\FileInput;
                                        value="<?= $company['commission'] ?>" size="11"/>
                             </td>
                             <td>
-                                <?=FileInput::widget(['name'=>'logo']);?>
+                                <?=FileInput::widget(['name'=>'logo', 'value'=>$company['logo']]);?>
                             </td>
                             <td class="company-visible">
                                 <div class="checkbox">
