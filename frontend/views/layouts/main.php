@@ -5,6 +5,7 @@
 use common\widgets\Alert;
 use frontend\assets\AppAsset;
 use frontend\assets\ThemeAsset;
+use frontend\assets\DesigneAsset;
 use yeesoft\models\Menu;
 use yeesoft\widgets\LanguageSelector;
 use yeesoft\widgets\Nav as Navigation;
@@ -13,10 +14,13 @@ use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yeesoft\comment\widgets\RecentComments;
+use frontend\widgets\NavMenu;
+use frontend\widgets\Footer;
 
-Yii::$app->assetManager->forceCopy = true;
-AppAsset::register($this);
-ThemeAsset::register($this);
+//Yii::$app->assetManager->forceCopy = true;
+//AppAsset::register($this);
+//ThemeAsset::register($this);
+DesigneAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -28,88 +32,30 @@ ThemeAsset::register($this);
     <?= $this->renderMetaTags() ?>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="d-flex flex-column">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
+    <?=NavMenu::widget() ?>
+
     <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->settings->get('general.title', 'Yee Site', Yii::$app->language),
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = Menu::getMenuItems('main-menu');
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('yee/auth', 'Signup'), 'url' => \yii\helpers\Url::to(['/auth/default/signup'])];
-        $menuItems[] = ['label' => Yii::t('yee/auth', 'Login'), 'url' => ['/auth/default/login']];
-    } else {
-        $menuItems[] = [
-            'label' => Yii::$app->user->identity->username,
-            'url' => ['/auth/default/profile'],
-        ];
-
-        $menuItems[] = [
-            'label' => Yii::t('yee/auth', 'Logout'),
-            'url' => ['/auth/default/logout', 'language' => false],
-            'linkOptions' => ['data-method' => 'post']
-        ];
+    if(Yii::$app->controller->module->id=='auth' && Yii::$app->controller->action->id=='login'){?>
+        <div class="layout-login-form">
+            <?= $content ?>
+        </div>
+    <?php
+    } else {?>
+        <section class="container-fluid flex-grow">
+            <?= $content ?>
+        </section>
+   <?php
     }
-    echo Nav::widget([
-        'encodeLabels' => false,
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-
-    echo LanguageSelector::widget(['display' => 'label', 'view' => 'pills']);
-
-    NavBar::end();
     ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="hidden-xs">
-                    <?php
-                        $menuItemsKey = '__mainMenuItems' . Yii::$app->language;
-                        if(!$menuItems = Yii::$app->cache->get($menuItemsKey)){
-                            $menuItems = Menu::getMenuItems('main-menu');
-                            Yii::$app->cache->set($menuItemsKey, $menuItems, 3600);
-                        }
-                    
-                        echo Navigation::widget([
-                            'encodeLabels' => false,
-                            'items' => $menuItems,
-                            'options' => [
-                                ['class' => 'nav nav-pills nav-stacked'],
-                                ['class' => 'nav nav-second-level'],
-                                ['class' => 'nav nav-third-level']
-                            ],
-                        ]);
-                    ?>
-                </div>
-                
-                <div>
-                    <?= RecentComments::widget() ?>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]) ?>
-                <?= Alert::widget() ?>
-                <?= $content ?>
-            </div>
-        </div>
-    </div>
+    <?=Footer::widget() ?>
+
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->settings->get('general.title', 'Yee Site', Yii::$app->language)) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?>, <?= yeesoft\Yee::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
