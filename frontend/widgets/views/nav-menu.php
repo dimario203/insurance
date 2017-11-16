@@ -6,20 +6,20 @@
         </button>
         <div class="navbar-collapse collapse" id="collapsingNavbar3">
             <ul class="navbar-nav justify-content-between">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">ОСАГО</a>
+                <li class="nav-item <?= (\Yii::$app->controller->action->id == 'osago-form' || \Yii::$app->controller->action->id == 'osago-list')?'active':'';?>">
+                    <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/osago-form'])?>">ОСАГО</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ПУТЕШЕСТВИЯ</a>
+                <li class="nav-item <?= (\Yii::$app->controller->action->id == 'travel-form' || \Yii::$app->controller->action->id == 'travel-list')?'active':'';?>">
+                    <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/travel-form'])?>">ПУТЕШЕСТВИЯ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">ЗДОРОВЬЕ И ЖИЗНЬ</a>
+                <li class="nav-item <?= (\Yii::$app->controller->action->id == 'live-form' || \Yii::$app->controller->action->id == 'live-list')?'active':'';?>">
+                    <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/live-form'])?>">ЗДОРОВЬЕ И ЖИЗНЬ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">НЕДВИЖИМОСТЬ</a>
+                <li class="nav-item <?= (\Yii::$app->controller->action->id == 'realty-form' || \Yii::$app->controller->action->id == 'realty-list')?'active':'';?>">
+                    <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/realty-form'])?>">НЕДВИЖИМОСТЬ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">КАСКО</a>
+                <li class="nav-item <?= (\Yii::$app->controller->action->id == 'kasko-form' || \Yii::$app->controller->action->id == 'kasko-list')?'active':'';?>">
+                    <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/kasko-form'])?>">КАСКО</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-25 justify-content-end">

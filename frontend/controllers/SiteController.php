@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
 use frontend\actions\PageAction;
 use frontend\actions\PostAction;
@@ -46,7 +47,7 @@ class SiteController extends \yeesoft\controllers\BaseController
     }
 
     /**
-     * Displays homepage.
+     * Displays homepage to Maintenance.
      *
      * @return mixed
      */
@@ -56,11 +57,120 @@ class SiteController extends \yeesoft\controllers\BaseController
     }
 
 
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $settings = SiteSettings::find()->asArray()->limit(1)->one();
+        return $this->render('index', ['settings'=>$settings]);
     }
 
+    /**
+     * Displays Travel-Form.
+     *
+     * @return mixed
+     */
+    public function actionTravelForm()
+    {
+        return $this->render('form/travel-form');
+    }
+
+    /**
+     * Displays OSAGO-Form.
+     *
+     * @return mixed
+     */
+    public function actionOsagoForm()
+    {
+        return $this->render('form/osago-form');
+    }
+
+    /**
+     * Displays Live-Form.
+     *
+     * @return mixed
+     */
+    public function actionLiveForm()
+    {
+        return $this->render('form/live-form');
+    }
+
+    /**
+     * Displays Realty-Form.
+     *
+     * @return mixed
+     */
+    public function actionRealtyForm()
+    {
+        return $this->render('form/realty-form');
+    }
+
+    /**
+     * Displays KASKO-Form.
+     *
+     * @return mixed
+     */
+    public function actionKaskoForm()
+    {
+        return $this->render('form/kasko-form');
+    }
+
+    /**
+     * Displays Travel-List.
+     *
+     * @return mixed
+     */
+    public function actionTravelList()
+    {
+        return $this->render('list/travel-list');
+    }
+
+
+    /**
+     * Displays OSAGO-List.
+     *
+     * @return mixed
+     */
+    public function actionOsagoList()
+    {
+        return $this->render('list/osago-list');
+    }
+
+
+    /**
+     * Displays Live-List.
+     *
+     * @return mixed
+     */
+    public function actionLiveList()
+    {
+        return $this->render('list/live-list');
+    }
+
+
+    /**
+     * Displays Realty-List.
+     *
+     * @return mixed
+     */
+    public function actionRealtyList()
+    {
+        return $this->render('list/realty-list');
+    }
+
+
+    /**
+     * Displays KASKO-List.
+     *
+     * @return mixed
+     */
+    public function actionKaskoList()
+    {
+        return $this->render('list/kasko-list');
+    }
     /**
      * Displays contact page.
      *

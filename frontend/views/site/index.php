@@ -1,6 +1,7 @@
 <?php
 
 use yii\widgets\LinkPager;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 
@@ -31,7 +32,7 @@ $this->title = 'Epolis.shop';
         <div class="row py-5">
             <div class="col-12">
                 <div class="card-deck text-center">
-                    <div class="card border-0 mx-2">
+                    <div id="card-osago" class="card border-0 mx-2">
                         <div class="card-body">
                             <div class="mt-5 card-images align-middle">
                                 <img src="images/car.png" class="inactive">
@@ -43,7 +44,7 @@ $this->title = 'Epolis.shop';
                             ИСКАТЬ
                         </div>
                     </div>
-                    <div class="card border-0 mx-2">
+                    <div id="card-travel" class="card border-0 mx-2">
                         <div class="card-body">
                             <div class="mt-5 card-images align-middle">
                                 <img src="images/earth.png" class="inactive">
@@ -55,7 +56,7 @@ $this->title = 'Epolis.shop';
                             ИСКАТЬ
                         </div>
                     </div>
-                    <div class="card border-0 mx-2">
+                    <div id="card-live" class="card border-0 mx-2">
                         <div class="card-body">
                             <div class="mt-5 card-images align-middle">
                                 <img src="images/heart.png" class="inactive">
@@ -67,7 +68,7 @@ $this->title = 'Epolis.shop';
                             ИСКАТЬ
                         </div>
                     </div>
-                    <div class="card border-0 mx-2">
+                    <div id="card-realty" class="card border-0 mx-2">
                         <div class="card-body">
                             <div class="mt-5 card-images align-middle">
                                 <img src="images/home.png" class="inactive">
@@ -79,7 +80,7 @@ $this->title = 'Epolis.shop';
                             ИСКАТЬ
                         </div>
                     </div>
-                    <div class="card border-0 mx-2">
+                    <div id="card-kasko" class="card border-0 mx-2">
                         <div class="card-body">
                             <div class="mt-5 card-images align-middle">
                                 <img src="images/car2.png" class="inactive">
@@ -187,6 +188,33 @@ $this->title = 'Epolis.shop';
         </div>
     </div>
 </div>
+
+<?php
+$path_osago = \yii\helpers\Url::to(['site/osago-form'], true);
+$path_travel = \yii\helpers\Url::to(['site/travel-form'], true);
+$path_live = \yii\helpers\Url::to(['site/live-form'], true);
+$path_realty = \yii\helpers\Url::to(['site/realty-form'], true);
+$path_kasko = \yii\helpers\Url::to(['site/kasko-form'], true);
+$script = <<<JS
+ $('#card-osago').click(function () {                
+                window.location.href = "$path_osago";
+            });
+ $('#card-travel').click(function () {                
+                window.location.href = "$path_travel";
+            });
+ $('#card-live').click(function () {                
+                window.location.href = "$path_live";
+            });
+ $('#card-realty').click(function () {                
+                window.location.href = "$path_realty";
+            });
+ $('#card-kasko').click(function () {                
+                window.location.href = "$path_kasko";
+            });
+JS;
+$this->registerJs($script, View::POS_READY);
+?>
+
 
 <?php
 $this->registerJsFile(\yii\helpers\Url::toRoute(['/js/for_index.js']), ['depends'=>'yii\web\JqueryAsset', 'position' => yii\web\View::POS_END]);

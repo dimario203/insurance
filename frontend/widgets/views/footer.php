@@ -7,16 +7,19 @@
             <div class="col-md-7">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ОСАГО</a>
+                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/osago-form'])?>">ОСАГО</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ПУТЕШЕСТВИЯ</a>
+                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/travel-form'])?>">ПУТЕШЕСТВИЯ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">ЗДОРОВЬЕ И ЖИЗНЬ</a>
+                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/live-form'])?>">ЗДОРОВЬЕ И ЖИЗНЬ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">КАСКО</a>
+                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/realty-form'])?>">НЕДВИЖИМОСТЬ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/kasko-form'])?>">КАСКО</a>
                     </li>
                 </ul>
             </div>
