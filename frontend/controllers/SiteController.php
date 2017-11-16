@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
 use frontend\actions\PageAction;
@@ -62,10 +63,32 @@ class SiteController extends \yeesoft\controllers\BaseController
      *
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $settings = SiteSettings::find()->asArray()->limit(1)->one();
-        return $this->render('index', ['settings'=>$settings]);
+    public function actionIndex() {
+        $polises = '';
+        $settings = GetSiteSettings::getSettings();
+        if($settings!=[]){
+            if ($settings['find_all']!=1){
+                return $this->render('index', ['polises'=>$polises]);
+            } else {
+                if($settings['find_osago']==1){
+                    $polises = $polises.$this->renderPartial('polisItems/osago-item', [], true);
+                }
+                if($settings['find_travel']==1){
+                    $polises = $polises.$this->renderPartial('polisItems/travel-item', [], true);
+                }
+                if($settings['find_live']==1){
+                    $polises = $polises.$this->renderPartial('polisItems/live-item', [], true);
+                }
+                if($settings['find_realty']==1){
+                    $polises = $polises.$this->renderPartial('polisItems/realty-item', [], true);
+                }
+                if($settings['find_kasko']==1){
+                    $polises = $polises.$this->renderPartial('polisItems/kasko-item', [], true);
+                }
+            }
+        }
+
+        return $this->render('index', ['polises'=>$polises]);
     }
 
     /**

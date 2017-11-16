@@ -27,6 +27,7 @@ Thumbs.db
 /frontend/config/params-local.php
 /backend/config/main-local.php
 /backend/config/params-local.php
+/frontend/web/uploads
 composer.lock
 
 # composer itself is not needed

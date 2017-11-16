@@ -32,66 +32,7 @@ $this->title = 'Epolis.shop';
         <div class="row py-5">
             <div class="col-12">
                 <div class="card-deck text-center">
-                    <div id="card-osago" class="card border-0 mx-2">
-                        <div class="card-body">
-                            <div class="mt-5 card-images align-middle">
-                                <img src="images/car.png" class="inactive">
-                                <img src="images/car-red.png" class="active">
-                            </div>
-                            <h5 class="card-title">ОСАГО</h5>
-                        </div>
-                        <div class="card-footer border-0">
-                            ИСКАТЬ
-                        </div>
-                    </div>
-                    <div id="card-travel" class="card border-0 mx-2">
-                        <div class="card-body">
-                            <div class="mt-5 card-images align-middle">
-                                <img src="images/earth.png" class="inactive">
-                                <img src="images/earth-red.png" class="active">
-                            </div>
-                            <h5 class="card-title">ПУТЕШЕСТВИЯ</h5>
-                        </div>
-                        <div class="card-footer border-0">
-                            ИСКАТЬ
-                        </div>
-                    </div>
-                    <div id="card-live" class="card border-0 mx-2">
-                        <div class="card-body">
-                            <div class="mt-5 card-images align-middle">
-                                <img src="images/heart.png" class="inactive">
-                                <img src="images/heart-red.png" class="active">
-                            </div>
-                            <h5 class="card-title">ЗДОРОВЬЕ И ЖИЗНЬ</h5>
-                        </div>
-                        <div class="card-footer border-0">
-                            ИСКАТЬ
-                        </div>
-                    </div>
-                    <div id="card-realty" class="card border-0 mx-2">
-                        <div class="card-body">
-                            <div class="mt-5 card-images align-middle">
-                                <img src="images/home.png" class="inactive">
-                                <img src="images/home-red.png" class="active">
-                            </div>
-                            <h5 class="card-title">НЕДВИЖИМОСТЬ</h5>
-                        </div>
-                        <div class="card-footer border-0">
-                            ИСКАТЬ
-                        </div>
-                    </div>
-                    <div id="card-kasko" class="card border-0 mx-2">
-                        <div class="card-body">
-                            <div class="mt-5 card-images align-middle">
-                                <img src="images/car2.png" class="inactive">
-                                <img src="images/car2-new.png" class="active">
-                            </div>
-                            <h5 class="card-title">КАСКО</h5>
-                        </div>
-                        <div class="card-footer border-0">
-                            ИСКАТЬ
-                        </div>
-                    </div>
+                    <?=$polises?>
                 </div>
             </div>
         </div>
