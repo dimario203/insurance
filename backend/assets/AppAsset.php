@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/main.css',
+        '/frontend/web/fonts/font-awesome/css/font-awesome.min.css',
 
 
     ];

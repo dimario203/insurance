@@ -21,45 +21,95 @@
                         <option <?= $settings['is_available'] == 0 ? 'selected' : '' ?> value="0">Выкл</option>
                     </select>
                 </div>
+                <br class='clear' />
                 <div class="on-off-polis">
                     <h4 class="site-settings--form-item">Включить / выключить отображение продуктов на сайте</h4>
-                <div class="checkbox">
-                    <input class="settings-input form-control" type="checkbox" name="polis[osago]"
-                           value="1" <?= $settings['find_osago'] == 1 ? 'checked' : '' ?>/>
-                    <label>ОСАГО</label>
-                </div>
-                <div class="checkbox">
-                     <input class="settings-input form-control" type="checkbox" name="polis[travel]"
-                            value="2" <?= $settings['find_travel'] == 1 ? 'checked' : '' ?>/>
-                     <label>Путешествия</label>
-                </div>
-                 <div class="checkbox">
-                      <input class="settings-input form-control" type="checkbox" name="polis[live]"
-                             value="3" <?= $settings['find_live'] == 1 ? 'checked' : '' ?>/>
-                      <label>Жизнь и Здоровье</label>
-                 </div>
-               <div class="checkbox">
-                    <input class="settings-input form-control" type="checkbox" name="polis[realty]"
-                           value="4" <?= $settings['find_realty'] == 1 ? 'checked' : '' ?>/>
-                    <label>Недвижимость</label>
-               </div>
-                <div class="checkbox">
+                    <div class="checkbox polis">
+                        <input class="settings-input form-control" type="checkbox" name="polis[osago]"
+                               value="1" <?= $settings['find_osago'] == 1 ? 'checked' : '' ?>/>
+                        <label>ОСАГО</label>
+                    </div>
+                    <div class="checkbox polis">
+                        <input class="settings-input form-control" type="checkbox" name="polis[travel]"
+                               value="2" <?= $settings['find_travel'] == 1 ? 'checked' : '' ?>/>
+                        <label>Путешествия</label>
+                    </div>
+                    <div class="checkbox polis">
+                        <input class="settings-input form-control" type="checkbox" name="polis[live]"
+                               value="3" <?= $settings['find_live'] == 1 ? 'checked' : '' ?>/>
+                        <label>Жизнь и Здоровье</label>
+                    </div>
+                    <div class="checkbox polis">
+                        <input class="settings-input form-control" type="checkbox" name="polis[realty]"
+                               value="4" <?= $settings['find_realty'] == 1 ? 'checked' : '' ?>/>
+                        <label>Недвижимость</label>
+                    </div>
+                    <div class="checkbox polis">
                         <input class="settings-input form-control" type="checkbox" name="polis[kasko]"
                                value="5" <?= $settings['find_kasko'] == 1 ? 'checked' : '' ?>/>
                         <label>КАСКО</label>
+                    </div>
+                    <div class="checkbox polis">
+                        <input class="settings-input-all form-control" type="checkbox" name="polis[all]"
+                               value="6" <?= $settings['find_all'] == 0 ? 'checked' : '' ?>/>
+                        <label>Отключить все</label>
+                    </div>
                 </div>
-                 <div class="checkbox">
-                      <input class="settings-input-all form-control" type="checkbox" name="polis[all]"
-                             value="6" <?= $settings['find_all'] == 0 ? 'checked' : '' ?>/>
-                      <label>Отключить все</label>
-                 </div>
+                <br class='clear' />
+                <div class="social-networks">
+                    <h4 class="site-settings--form-item">Адреса социальных сетей</h4>
+                    <div class="cellBlock">
+                        <i class="fa fa-facebook-official cellLeft" aria-hidden="true"></i>
+                        <input type="text" class="form-control cellRight" name="network[facebook]" value="<?=$social_networks['facebook']?>">
+                    </div>
+                    <div class="cellBlock">
+                        <i class="fa fa-vk cellLeft" aria-hidden="true"></i>
+                        <input type="text" class="form-control cellRight" name="network[vk]" value="<?=$social_networks['vk']?>">
+                    </div>
+                    <div class="cellBlock">
+                        <i class="fa fa-envelope-open cellLeft" aria-hidden="true"></i>
+                        <input type="text" class="form-control cellRight" name="network[google]" value="<?=$social_networks['google']?>">
+                    </div>
                 </div>
+                <br class='clear' />
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Сохранить"/>
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    .fa-facebook-official, .fa-vk, .fa-envelope-open{
+        color: black;
+        font-size:26px;
+        padding-left: 8px;
+    }
+    .site-settings .on-off-site, .site-settings .on-off-polis,
+    .site-settings .on-off-polis .checkbox.polis{
+        float: left;
+        clear: both;
+    }
+    .cellBlock {
+        width: 70%;
+        display: table;
+    }
+    .cellLeft, .cellRight {
+        display: table-cell !important;
+        display: inline;
+    }
+    .cellLeft {
+        width:5%;
+    }
+    .clear {
+        clear: both;
+        display: block;
+        height: 0;
+        line-height: 0;
+        overflow: hidden;
+        font-size: 0;
+    }
+</style>
 
 <?php
 $script = <<< JS

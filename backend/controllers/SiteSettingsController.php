@@ -21,7 +21,8 @@ class SiteSettingsController Extends DashboardController
     public function actionGetSettings(){
         $set = new EditSiteSettings();
         $settings = $set->getSettings();
-        return $this->render('site-settings', ['settings'=>$settings]);
+        $social_networks = $set->getSocialNetworks();
+        return $this->render('site-settings', ['settings'=>$settings, 'social_networks'=> $social_networks]);
     }
 
 
@@ -37,6 +38,7 @@ class SiteSettingsController Extends DashboardController
             $message = "Настройки сайта не были обновлены, попробуйте еще раз";
         }
         $settings = $set->getSettings();
-        return $this->render('site-settings', ['settings'=>$settings, 'status'=>$status, 'mess'=>$message]);
+        $social_networks = $set->getSocialNetworks();
+        return $this->render('site-settings', ['settings'=>$settings, 'social_networks'=> $social_networks, 'status'=>$status, 'mess'=>$message]);
     }
 }

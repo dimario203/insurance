@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dima
- * Date: 10/24/17
- * Time: 2:59 PM
- */
 
 namespace app\models\company;
 
@@ -47,7 +41,16 @@ class CompanyEdite
             $company->name = $post['name'];
         }
         if(isset($post['url']) && !empty($post['url'])){
-            $company->url = $post['url'];
+            $url = trim(strip_tags($post['url']));
+            if($url!=''){
+                if(strcasecmp($url, trim($company->url)) != 0){
+                    if(stristr($url, 'https://') || stristr($url, 'http://')){
+                        $company->url = $url;
+                    } else {
+                        $company->url = 'http://'.$url;
+                    }
+                }
+            }
         }
         if(isset($post['phone']) && !empty($post['phone'])){
             $company->phone = $post['phone'];

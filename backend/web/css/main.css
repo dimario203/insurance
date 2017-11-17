@@ -98,13 +98,15 @@
 
 .site-settings .on-off-site,
 .site-settings .on-off-polis,
+.site-settings .social-networks,
 .statistic .statistic-polis,
 .statistic .region-company,
 .statistic .period{
-    margin: 30px 20px;
+    margin: 20px 20px;
 }
 .site-settings .on-off-site h4,
 .site-settings .on-off-polis h4,
+.site-settings .social-networks h4,
 .statistic .statistic-polis-header,
 .statistic .statistic-polis h4,
 .statistic .region-company h4,

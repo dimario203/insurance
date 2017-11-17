@@ -17,8 +17,6 @@ class DesigneAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/bootstrap.css',
-        //'css/bootstrap-grid.css',
-        //'css/bootstrap-reboot.css',
         'css/styles.css',
         'css/login.css',
         'fonts/font-awesome/css/font-awesome.min.css',

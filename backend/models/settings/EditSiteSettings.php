@@ -16,7 +16,19 @@ class EditSiteSettings
         return $settings;
     }
 
+
+    public function getSocialNetworks(){
+        $return = [];
+        $social_networks = SocialNetworks::find()->asArray()->all();
+        foreach($social_networks as $network){
+            $return[$network['name']] = $network['url'];
+        }
+        return  $return;
+    }
+
+
     public function setSettings($post){
+        $status = 'ok';
         $settings = SiteSettings::find()->one();
         if(isset($post['is_available'])){
             if($post['is_available']!=$settings->is_available){
@@ -60,11 +72,35 @@ class EditSiteSettings
             }
         }
         if(!$settings->save()){
+            $status = 'error';
+        }
+        if(isset($post['network'])){
+            $social_networks = SocialNetworks::find()->all();
+            if($social_networks!=[]){
+                foreach($social_networks as $network){
+                    if(isset($post['network'][$network->name]) && !empty($post['network'][$network->name])){
+                        $url = trim(strip_tags($post['network'][$network->name]));
+                        if($url!=''){
+                            if(strcasecmp($url, trim($network->url)) != 0){
+                                if(stristr($url, 'https://') || stristr($url, 'http://')){
+                                    $network->url = $url;
+                                } else {
+                                    $network->url = 'http://'.$url;
+                                }
+                                if(!$network->save()){
+                                    $status = 'error';
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        if($status == 'error'){
             return false;
         } else {
             return true;
         }
-
-
     }
 }
