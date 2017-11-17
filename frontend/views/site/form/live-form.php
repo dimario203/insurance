@@ -1,26 +1,27 @@
 <?php
 
 use yii\widgets\LinkPager;
+use frontend\assets\PopperAsset;
 
 /* @var $this yii\web\View */
 
+PopperAsset::register($this);
 $this->title = 'Epolis.shop';
 ?>
 <div class="row header header-form-bg">
-
     <div class="container">
-        <div class="row p-5">
-            <div class="col-10 offset-1 search-form">
-                <div class="row py-5">
-                    <div class="col-2 text-center">
+        <div class="row p-md-5">
+            <div class="col col-md-10 offset-md-1 search-form">
+                <div class="row py-md-5">
+                    <div class="col-md-2 text-center d-none d-sm-none d-md-block">
                         <img src="images/earth.png">
                     </div>
-                    <div class="col-9 text-center">
+                    <div class="col-md-9 text-center">
                         <h2 class="red font-weight-bold align-middle py-2">Страхование путешественников</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-10 offset-1">
+                    <div class="col-md-10 offset-md-1">
                         <form method="post" action="<?= \yii\helpers\Url::to(['site/live-list'])?>">
                             <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                             <div class="form-group py-2">
@@ -51,7 +52,7 @@ $this->title = 'Epolis.shop';
                                        id="birthdays"
                                        placeholder="Укажите дату">
                                 <button type="button" class="btn btn-outline-secondary ml-1" id="add-user"><img
-                                        src="images/+icon.png"></button>
+                                            src="images/+icon.png"></button>
                             </div>
                             <div class="row">
                                 <div class="col-10 offset-1 pb-5">
@@ -79,7 +80,7 @@ $this->title = 'Epolis.shop';
             </div>
         </div>
         <div class="row pt-5">
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="row text-secondary">
                     <div class="col-12">
                         <h2 class="text-uppercase font-size-3 font-weight-bold">Помощь по онлайн страхованию</h2>
@@ -127,7 +128,7 @@ $this->title = 'Epolis.shop';
                     </div>
                 </div>
             </div>
-            <div class="col-6 text-secondary">
+            <div class="col-md-6 text-secondary">
                 <div class="row border-right-0 top-to-bottom-70 pl-3">
                     <p>Выезжающим за рубеж обычно нужно купить туристическую страховку. Такая страховка обеспечивает защиту здоровья и имущества путешественников.</p>
                     <p>Оформив туристическую страховку вы получите:</p>

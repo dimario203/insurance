@@ -22,6 +22,7 @@ class DesigneAsset extends AssetBundle
         'fonts/font-awesome/css/font-awesome.min.css',
     ];
     public $js = [
+        "js/bootstrap.min.js",
         "https://www.w3schools.com/lib/w3.js",
     ];
     public $depends = [

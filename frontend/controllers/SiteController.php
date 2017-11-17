@@ -98,6 +98,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionTravelForm()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('form/travel-form');
     }
 
@@ -108,6 +112,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoForm()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('form/osago-form');
     }
 
@@ -118,6 +126,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveForm()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('form/live-form');
     }
 
@@ -128,6 +140,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyForm()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('form/realty-form');
     }
 
@@ -138,6 +154,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionKaskoForm()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('form/kasko-form');
     }
 
@@ -148,6 +168,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionTravelList()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('list/travel-list');
     }
 
@@ -159,6 +183,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('list/osago-list');
     }
 
@@ -170,6 +198,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveList()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('list/live-list');
     }
 
@@ -181,6 +213,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyList()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('list/realty-list');
     }
 
@@ -192,6 +228,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionKaskoList()
     {
+        \Yii::$app->view->registerMetaTag([
+            'name' => 'viewport',
+            'content' => 'width=device-width, initial-scale=1, maximum-scale=1'
+        ]);
         return $this->render('list/kasko-list');
     }
     /**

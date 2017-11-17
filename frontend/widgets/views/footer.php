@@ -1,32 +1,36 @@
 <footer class="bg-dark text-white mt-4">
     <div class="container py-3">
         <div class="row">
-            <div class="col-md-3">
-                <img src="images/logo.png">
+            <div class="col-6 col-md-12">
+                <div class="row">
+                    <div class="col col-md-3">
+                        <img src="images/logo.png" style="max-width: 100%;">
+                    </div>
+                    <div class="col col-md-7">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/osago-form']) ?>">ОСАГО</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/travel-form']) ?>">ПУТЕШЕСТВИЯ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/live-form']) ?>">ЗДОРОВЬЕ И ЖИЗНЬ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/realty-form']) ?>">НЕДВИЖИМОСТЬ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/kasko-form']) ?>">КАСКО</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 d-none d-sm-none d-md-block">МЫ В СОЦСЕТЯХ</div>
+                </div>
             </div>
-            <div class="col-md-7">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/osago-form'])?>">ОСАГО</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/travel-form'])?>">ПУТЕШЕСТВИЯ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/live-form'])?>">ЗДОРОВЬЕ И ЖИЗНЬ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/realty-form'])?>">НЕДВИЖИМОСТЬ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?=\yii\helpers\Url::to(['site/kasko-form'])?>">КАСКО</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-2">МЫ В СОЦСЕТЯХ</div>
-        </div>
-        <div class="row pt-3">
-            <div class="col-md-10">
+            <div class="col-6 col-md-12">
+                <div class="row pt-md-3">
+                    <div class="col-md-10">
                 <span class="small">
                     <ul class="nav">
                         <li class="nav-item">
@@ -49,7 +53,7 @@
                         </li>
                     </ul>
                 </span>
-            </div>
+                    </div>
             <div class="col-md-2 justify-content-end font-weight-bold">
                 <a <?=$social_networks['facebook']?'href="'.$social_networks['facebook'].'"':''?>" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                 <a <?=$social_networks['vk']?'href="'.$social_networks['vk'].'"':''?>" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
