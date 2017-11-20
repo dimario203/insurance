@@ -1,4 +1,4 @@
-<div id="card-travel" class="card border-0 mx-2">
+<div class="card border-0 mx-2 card-travel">
     <div class="card-body">
         <div class="mt-5 card-images align-middle">
             <img src="images/earth.png" class="inactive">

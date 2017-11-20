@@ -26,36 +26,7 @@ $this->title = 'Epolis.shop';
                 </div>
             </div>
             <ul class="list-unstyled d-block d-sm-block d-md-none">
-                <li class="media">
-                    <img class="m-2 align-self-center" src="images/car.png ">
-                    <div class="media-body align-self-center ml-3">
-                        <h5 class="mt-0 mb-1">ОСАГО</h5>
-                    </div>
-                </li>
-                <li class="media my-2">
-                    <img class="m-2 align-self-center" src="images/earth.png">
-                    <div class="media-body align-self-center ml-3">
-                        <h5 class="mt-0 mb-1">ПУТЕШЕСТВИЯ</h5>
-                    </div>
-                </li>
-                <li class="media my-2">
-                    <img class="m-2 align-self-center" src="images/heart.png">
-                    <div class="media-body align-self-center ml-3">
-                        <h5 class="mt-0 mb-1">ЗДОРОВЬЕ И ЖИЗНЬ</h5>
-                    </div>
-                </li>
-                <li class="media my-2">
-                    <img class="m-2 align-self-center" src="images/home.png">
-                    <div class="media-body align-self-center ml-3">
-                        <h5 class="mt-0 mb-1">НЕДВИЖИМОСТЬ</h5>
-                    </div>
-                </li>
-                <li class="media">
-                    <img class="m-2 align-self-center" src="images/car2.png">
-                    <div class="media-body align-self-center ml-3">
-                        <h5 class="mt-0 mb-1">КАСКО</h5>
-                    </div>
-                </li>
+                <?= $polises_mobile ?>
             </ul>
 
             <div class="row pt-5 justify-content-md-center d-none d-sm-none d-md-block">
@@ -159,19 +130,19 @@ $path_live = \yii\helpers\Url::to(['site/live-form'], true);
 $path_realty = \yii\helpers\Url::to(['site/realty-form'], true);
 $path_kasko = \yii\helpers\Url::to(['site/kasko-form'], true);
 $script = <<<JS
- $('#card-osago').click(function () {                
+ $('.card-osago').click(function () {                
                 window.location.href = "$path_osago";
             });
- $('#card-travel').click(function () {                
+ $('.card-travel').click(function () {                
                 window.location.href = "$path_travel";
             });
- $('#card-live').click(function () {                
+ $('.card-live').click(function () {                
                 window.location.href = "$path_live";
             });
- $('#card-realty').click(function () {                
+ $('.card-realty').click(function () {                
                 window.location.href = "$path_realty";
             });
- $('#card-kasko').click(function () {                
+ $('.card-kasko').click(function () {                
                 window.location.href = "$path_kasko";
             });
 JS;

@@ -290,3 +290,25 @@ input[type="radio"] {
 *, *::after, *::before {
     box-sizing: border-box;
 }
+
+/*   Nav Menu     */
+.nav-menu-header{
+    flex-direction: row;
+    width: 650px;
+    margin: auto;
+}
+#collapsingNavbar3{
+    flex-basis: 70%;
+}
+.navbar .button-header{
+    margin-left: 10px;
+}
+/*---end Nav Menu-----*/
+
+/*   index       */
+@media(max-width: 768px){
+    .item-polis{
+        height: 90px;
+    }
+}
+/*----end index----*/

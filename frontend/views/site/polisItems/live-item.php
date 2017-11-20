@@ -1,4 +1,4 @@
-<div id="card-live" class="card border-0 mx-2">
+<div class="card border-0 mx-2 card-live">
     <div class="card-body">
         <div class="mt-5 card-images align-middle">
             <img src="images/heart.png" class="inactive">
