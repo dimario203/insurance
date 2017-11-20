@@ -105,13 +105,22 @@
     margin: 20px 20px;
 }
 .site-settings .on-off-site h4,
+.site-settings .on-off-site legend,
 .site-settings .on-off-polis h4,
+.site-settings .on-off-polis legend,
 .site-settings .social-networks h4,
+.site-settings .social-networks legend,
 .statistic .statistic-polis-header,
 .statistic .statistic-polis h4,
 .statistic .region-company h4,
 .statistic .period h4{
     color: black;
+}
+.site-settings .social-networks legend,
+.site-settings .on-off-site legend,
+.site-settings .on-off-polis legend{
+    font-size: 17px;
+    //font-weight: bold;
 }
 .site-settings .checkbox,
 .statistic .checkbox,

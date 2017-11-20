@@ -16,17 +16,21 @@ use yii\widgets\Breadcrumbs;
 use yeesoft\comment\widgets\RecentComments;
 use frontend\widgets\NavMenu;
 use frontend\widgets\Footer;
+use frontend\assets\PopperAsset;
 
 //Yii::$app->assetManager->forceCopy = true;
 //AppAsset::register($this);
 //ThemeAsset::register($this);
+PopperAsset::register($this);
 DesigneAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <?= $this->renderMetaTags()?>
     <?php $this->head() ?>

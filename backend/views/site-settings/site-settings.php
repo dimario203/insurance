@@ -13,17 +13,17 @@
                 <?php
             }
             ?>
-            <form method="post" action="<?= \yii\helpers\Url::to(['site-settings/save-settings']) ?>">
-                <div class="on-off-site">
-                    <h4 class="site-settings--form-item">Включить / выключить сайт</h4>
+            <form method="post" action="<?= \yii\helpers\Url::to(['site-settings/save-settings']) ?>" class="form-horizontal">
+                <fieldset class="on-off-site">
+                    <legend class="site-settings--form-item">Включить / выключить сайт</legend>
                     <select name="is_available" class="form-control input-sm">
                         <option <?= $settings['is_available'] == 1 ? 'selected' : '' ?> value="1">Вкл</option>
                         <option <?= $settings['is_available'] == 0 ? 'selected' : '' ?> value="0">Выкл</option>
                     </select>
-                </div>
+                </fieldset>
                 <br class='clear' />
-                <div class="on-off-polis">
-                    <h4 class="site-settings--form-item">Включить / выключить отображение продуктов на сайте</h4>
+                <fieldset class="on-off-polis">
+                    <legend class="site-settings--form-item">Включить / выключить отображение продуктов на сайте</legend>
                     <div class="checkbox polis">
                         <input class="settings-input form-control" type="checkbox" name="polis[osago]"
                                value="1" <?= $settings['find_osago'] == 1 ? 'checked' : '' ?>/>
@@ -54,23 +54,29 @@
                                value="6" <?= $settings['find_all'] == 0 ? 'checked' : '' ?>/>
                         <label>Отключить все</label>
                     </div>
-                </div>
+                </fieldset>
                 <br class='clear' />
-                <div class="social-networks">
-                    <h4 class="site-settings--form-item">Адреса социальных сетей</h4>
-                    <div class="cellBlock">
-                        <i class="fa fa-facebook-official cellLeft" aria-hidden="true"></i>
-                        <input type="text" class="form-control cellRight" name="network[facebook]" value="<?=$social_networks['facebook']?>">
+                <fieldset class="social-networks">
+                    <legend class="site-settings--form-item">Адреса социальных сетей</legend>
+                    <div class="cellBlock  form-group">
+                        <i class="fa fa-facebook-official cellLeft col-sm-2 control-label" aria-hidden="true"></i>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control cellRight" name="network[facebook]" value="<?=$social_networks['facebook']?>" placeholder="Введите URL адрес">
+                        </div>
                     </div>
-                    <div class="cellBlock">
-                        <i class="fa fa-vk cellLeft" aria-hidden="true"></i>
-                        <input type="text" class="form-control cellRight" name="network[vk]" value="<?=$social_networks['vk']?>">
+                    <div class="cellBlock form-group">
+                        <i class="fa fa-vk cellLeft col-sm-2 control-label" aria-hidden="true"></i>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control cellRight" name="network[vk]" value="<?=$social_networks['vk']?>" placeholder="Введите URL адрес">
+                        </div>
                     </div>
-                    <div class="cellBlock">
-                        <i class="fa fa-envelope-open cellLeft" aria-hidden="true"></i>
-                        <input type="text" class="form-control cellRight" name="network[google]" value="<?=$social_networks['google']?>">
+                    <div class="cellBlock form-group">
+                        <i class="fa fa-envelope-open cellLeft col-sm-2 control-label" aria-hidden="true"></i>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control cellRight" name="network[google]" value="<?=$social_networks['google']?>" placeholder="Введите URL адрес">
+                        </div>
                     </div>
-                </div>
+                </fieldset>
                 <br class='clear' />
                 <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                 <input class="button-ok btn btn-sm btn-primary" type="submit" value="Сохранить"/>
@@ -92,12 +98,12 @@
     }
     .cellBlock {
         width: 70%;
-        display: table;
+        //display: table;
     }
-    .cellLeft, .cellRight {
+    /*.cellLeft, .cellRight {
         display: table-cell !important;
         display: inline;
-    }
+    }*/
     .cellLeft {
         width:5%;
     }
@@ -108,6 +114,11 @@
         line-height: 0;
         overflow: hidden;
         font-size: 0;
+    }
+    @media (max-width: 930px) {
+        .cellBlock {
+            width: 100%;
+        }
     }
 </style>
 
