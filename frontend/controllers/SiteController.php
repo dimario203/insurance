@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
@@ -15,6 +16,7 @@ use Yii;
 use yii\base\Module;
 use yii\data\Pagination;
 use yii\helpers\Url;
+use app\models\forms\OsagoForm;
 
 /**
  * Site controller
@@ -115,8 +117,16 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoForm()
     {
-
-        return $this->render('form/osago-form');
+        $power = [
+            '0'=>'от 50 до 70 л.с.',
+            '1'=>'от 71 до 100 л.с.',
+            '2'=>'от 101 до 120 л.с.',
+            '3'=>'от 121 до 150 л.с.',
+            '4'=>'от 151 и выше л.с.'
+        ];
+        $regions = GetRegions::get_Regions();
+        $model = new OsagoForm();
+        return $this->render('form/osago-form', ['model'=>$model, 'regions'=>$regions, 'power'=>$power]);
     }
 
     /**
