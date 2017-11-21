@@ -2,6 +2,8 @@
 
 use yii\widgets\LinkPager;
 use frontend\assets\PopperAsset;
+use yii\web\View;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 
@@ -23,35 +25,56 @@ $this->title = 'Epolis.shop';
                 </div>
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
+                        <?php
+                        $form = ActiveForm::begin([
+                            'method'=>'post',
+                            'action'=>\yii\helpers\Url::to(['site/travel-list']),
+                            'id'=>'travel-form'
+                        ]) ?>
                         <form method="post" action="<?= \yii\helpers\Url::to(['site/travel-list'])?>">
                             <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                             <div class="form-group py-2">
-                                <label for="countries" class="text-center font-weight-bold pb-2">Выберите
-                                    страну</label>
-                                <select class="form-control form-control-lg" id="countries">
-                                    <option>Куда едем</option>
-                                    <option>country 1</option>
-                                    <option>country 2</option>
-                                    <option>country 3</option>
-                                </select>
+                                <label for="countries" class="text-center font-weight-bold pb-2">Выберите страну</label>
+                                <?php
+                                echo $form->field($model, 'country')->dropDownList(
+                                    $countries,
+                                    ['prompt'=>'Куда едем?',
+                                     'class' => 'form-control form-control-lg']
+                                )->label(false);
+                                ?>
                             </div>
-                            <label class="text-center font-weight-bold pb-2">Укажите дату поездки</label>
+                            <label class="text-center font-weight-bold pb-2">Укажите даты поездки</label>
                             <div class="form-row">
                                 <div class="form-group col-6 py-2 px-0">
-                                    <input type="text" class="form-control form-control-lg datepicker"
-                                           placeholder="Выезд">
+                                    <?php
+                                    echo $form->field($model, 'date_from')->textInput(
+                                        ['class' => 'form-control form-control-lg datepicker date-from',
+                                         'name'=>'date-from',
+                                         'placeholder'=>"Туда" ]
+                                    )->label(false);
+                                    ?>
                                 </div>
                                 <div class="form-group col-6 py-2 px-0">
-                                    <input type="text" class="form-control form-control-lg datepicker"
-                                           placeholder="Обратно">
+                                    <?php
+                                    echo $form->field($model, 'date_to')->textInput(
+                                        ['class' => 'form-control form-control-lg datepicker date-from',
+                                            'name'=>'date-to',
+                                            'placeholder'=>"Обратно" ]
+                                    )->label(false);
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group py-2">
-                                <label for="birthdays" class="text-center font-weight-bold pb-2">Дата рождения
-                                    путешественников</label>
-                                <input type="text" class="form-control form-control-lg datepicker"
-                                       id="birthdays"
-                                       placeholder="Укажите дату">
+                                <label for="birthdays" class="text-center font-weight-bold pb-2">Дата рождения путешественников</label>
+                                <?php
+                                echo $form->field($model, 'birth')->textInput(
+                                    ['class' => 'form-control form-control-lg datepicker date-birth',
+                                        'id'=>'birthdays',
+                                        'name'=>'birth',
+                                        'placeholder'=>"Укажите дату" ]
+                                )->label(false);
+                                ?>
+
                                 <button type="button" class="btn btn-outline-secondary ml-1" id="add-user"><img
                                             src="images/+icon.png"></button>
                             </div>
@@ -63,6 +86,7 @@ $this->title = 'Epolis.shop';
                                 </div>
                             </div>
                         </form>
+                        <?php ActiveForm::end() ?>
                     </div>
                 </div>
             </div>
@@ -146,3 +170,25 @@ $this->title = 'Epolis.shop';
         </div>
     </div>
 </div>
+
+<?php
+
+$script = <<<JS
+$('.date-birth').datepicker({
+    format: "dd/mm/yyyy",
+    language: "ru",
+    multidate: true,
+    multidateSeparator: ",",
+    clearBtn: true,
+});
+$('.date-from').datepicker({
+    format: "dd/mm/yyyy",
+    language: "ru"
+});
+$('.date-to').datepicker({
+    format: "dd/mm/yyyy",
+    language: "ru"
+});
+JS;
+$this->registerJs($script, View::POS_READY);
+?>

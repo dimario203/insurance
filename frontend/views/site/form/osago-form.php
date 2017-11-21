@@ -2,7 +2,6 @@
 
 use yii\widgets\LinkPager;
 use frontend\assets\PopperAsset;
-use yii\web\View;
 use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 
@@ -56,14 +55,22 @@ $this->title = 'Epolis.shop';
                                 ?>
                             </div>
                         <div class="form-group py-2">
+                            <div class="radio_buttons">
+                                <?= $form->field($model, 'min_age')->radio([
+                                    'id'=>'radio1'])
+                                    ->label('До 22 лет'); ?>
+                                <?= $form->field($model, 'min_age')->radio([
+                                    'id'=>'radio2'])
+                                    ->label('Более 22 лет'); ?>
+                            </div>
                             <label class="font-weight-bold pb-2">Минимальный возраст</label>
                             <div class="radio_buttons">
                                 <div class="button-age">
-                                    <input type="radio" name="model[min_age]" id="radio1" value="1" checked />
+                                    <input type="radio" name="min_age" id="radio1" value="1" checked />
                                     <label for="radio1">До 22 лет</label>
                                 </div>
                                 <div class="button-age">
-                                    <input type="radio" name="model[min_age]" id="radio2" value="2" />
+                                    <input type="radio" name="min_age" id="radio2" value="2" />
                                     <label for="radio2">Более 22 лет</label>
                                 </div>
 
@@ -73,11 +80,11 @@ $this->title = 'Epolis.shop';
                             <label class="font-weight-bold pb-2">Минимальный стаж вождения</label>
                             <div class="radio_buttons2">
                                 <div class="button-age">
-                                    <input type="radio" name="model[experience]" id="radio3" value="1" checked />
+                                    <input type="radio" name="experience" id="radio3" value="1" checked />
                                     <label for="radio3">До 3 лет</label>
                                 </div>
                                 <div class="button-age">
-                                    <input type="radio" name="model[experience]" id="radio4" value="2" />
+                                    <input type="radio" name="experience" id="radio4" value="2" />
                                     <label for="radio4">Более 3 лет</label>
                                 </div>
 
@@ -182,56 +189,3 @@ $this->title = 'Epolis.shop';
         </div>
     </div>
 </div>
-<style>
-    .radio_buttons,  .radio_buttons2{
-        //margin: 20px;
-        font: 17px Tahoma;
-    }
-    .radio_buttons div, .radio_buttons2 div  {
-        float: left;
-    }
-    .radio_buttons input, .radio_buttons2 input  {
-        position: absolute;
-        left: -9999px;
-    }
-    .radio_buttons label, .radio_buttons2 label {
-        display: block;
-        margin: 0 0 0 -1px;
-        padding: 8px 10px;
-        border: 1px solid #BBBBBB;
-        background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, .12);
-        cursor: pointer;
-    }
-    .radio_buttons input:checked + label,
-    .radio_buttons2 input:checked + label{
-        background: white;
-        box-shadow: inset 0 3px 6px rgba(0, 0, 0, .2);
-    }
-    .radio_buttons div:first-child label,
-    .radio_buttons2 div:first-child label{
-        margin-left: 0;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-    }
-    .radio_buttons div:last-child label,
-    .radio_buttons2 div:last-child label{
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
-    .radio_buttons .button-age,
-    .radio_buttons2 .button-age{
-        width: 150px;
-        height: 30px;
-    }
-    .min-experience{
-        padding-top: 60px !important;
-    }
-    .button-osago .btn{
-        //width:250px;
-        height: 100px;
-        white-space: normal;
-        margin-top: 70px;
-    }
-</style>
-

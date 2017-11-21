@@ -25,6 +25,7 @@ class DesigneAsset extends AssetBundle
     public $js = [
         "js/bootstrap.min.js",
         "js/bootstrap-datepicker.js",
+        "js/bootstrap-datepicker.ru.min.js",
         "https://www.w3schools.com/lib/w3.js",
     ];
     public $depends = [

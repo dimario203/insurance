@@ -13,7 +13,6 @@ class GetRegions
 {
     public static function get_Regions(){
         $result = [];
-        $region_ids = [];
         $local_regins = Locality::find()->asArray()->with('regions')->all();
         foreach($local_regins as $local_regin){
             foreach($local_regin['regions'] as $region){

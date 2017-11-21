@@ -2,10 +2,12 @@
 
 namespace frontend\controllers;
 
+use app\models\forms\TravelForm;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
+use app\models\travel\GetCountry;
 use frontend\actions\PageAction;
 use frontend\actions\PostAction;
 use frontend\models\ContactForm;
@@ -106,8 +108,9 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionTravelForm()
     {
-
-        return $this->render('form/travel-form');
+        $model = new TravelForm();
+        $countries = GetCountry::get_Countries();
+        return $this->render('form/travel-form', ['model'=>$model, 'countries'=>$countries]);
     }
 
     /**

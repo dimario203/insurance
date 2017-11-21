@@ -205,7 +205,7 @@ footer .small .nav-link {
 }
 
 #add-user {
-    margin-top: -74px;
+    margin-top: -96px;
 }
 
 .btn-red {
@@ -312,3 +312,56 @@ input[type="radio"] {
     }
 }
 /*----end index----*/
+
+/*   osago-form   */
+.radio_buttons,  .radio_buttons2{
+//margin: 20px;
+    font: 17px Tahoma;
+}
+.radio_buttons div, .radio_buttons2 div  {
+    float: left;
+}
+.radio_buttons input, .radio_buttons2 input  {
+    position: absolute;
+    left: -9999px;
+}
+.radio_buttons label, .radio_buttons2 label {
+    display: block;
+    margin: 0 0 0 -1px;
+    padding: 8px 10px;
+    border: 1px solid #BBBBBB;
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .12);
+    cursor: pointer;
+}
+.radio_buttons input:checked + label,
+.radio_buttons2 input:checked + label{
+    background: white;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, .2);
+}
+.radio_buttons div:first-child label,
+.radio_buttons2 div:first-child label{
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.radio_buttons div:last-child label,
+.radio_buttons2 div:last-child label{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.radio_buttons .button-age,
+.radio_buttons2 .button-age{
+    width: 150px;
+    height: 30px;
+}
+.min-experience{
+    padding-top: 60px !important;
+}
+.button-osago .btn{
+//width:250px;
+    height: 100px;
+    white-space: normal;
+    margin-top: 70px;
+}
+/*----end osago-form---*/
