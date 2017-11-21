@@ -14,7 +14,7 @@ $this->title = 'Epolis.shop';
             <div class="col col-md-10 offset-md-1 search-form">
                 <div class="row py-md-5">
                     <div class="col-md-2 text-center d-none d-sm-none d-md-block">
-                        <img src="images/car.png">
+                        <img src="images/car-red.png">
                     </div>
                     <div class="col-md-9 text-center">
                         <h2 class="red font-weight-bold align-middle py-2">Страхование авто ОСАГО</h2>
@@ -34,9 +34,8 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'power')->dropDownList(
                                         $power,
                                         ['prompt'=>'Выберите мощность',
-                                         'class' => 'form-control form-control-lg']
-
-
+                                         'class' => 'form-control form-control-lg',
+                                         'name'=>'power']
                                 )->label(false);
                                 ?>
                             </div>
@@ -46,9 +45,8 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'region')->dropDownList(
                                     $regions,
                                     ['prompt'=>'Выберите регион',
-                                        'class' => 'form-control form-control-lg']
-
-
+                                     'class' => 'form-control form-control-lg',
+                                     'name'=>'region']
                                 )->label(false);
                                 ?>
                             </div>
@@ -102,7 +100,6 @@ $this->title = 'Epolis.shop';
                                 </div>
                             </div>
                         </div>
-
                         <?php ActiveForm::end() ?>
                     </div>
                 </div>

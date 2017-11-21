@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use app\models\forms\FormData;
+use app\models\forms\RealtyForm;
 use app\models\forms\TravelForm;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
@@ -27,6 +29,7 @@ use app\models\forms\LiveForm;
 class SiteController extends \yeesoft\controllers\BaseController
 {
     public $freeAccess = true;
+
 
     /**
      * @inheritdoc
@@ -121,13 +124,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoForm()
     {
-        $power = [
-            '0'=>'от 50 до 70 л.с.',
-            '1'=>'от 71 до 100 л.с.',
-            '2'=>'от 101 до 120 л.с.',
-            '3'=>'от 121 до 150 л.с.',
-            '4'=>'от 151 и выше л.с.'
-        ];
+        $power = FormData::getOsagoPower();
         $regions = GetRegions::get_Regions();
         $model = new OsagoForm();
         return $this->render('form/osago-form', ['model'=>$model, 'regions'=>$regions, 'power'=>$power]);
@@ -140,14 +137,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveForm()
     {
-        $price = [
-            '0'=>'50 000 руб.',
-            '1'=>'100 000 руб.',
-            '2'=>'250 000 руб.',
-            '3'=>'500 000 руб.',
-            '4'=>'1 000 000 руб.',
-            '5'=>'более 1 000 000 руб.'
-        ];
+        $price = FormData::getLivePrice();
         $model = new LiveForm();
         $model->worked = 1;
         return $this->render('form/live-form', ['model'=>$model, 'price'=>$price]);
@@ -160,8 +150,10 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyForm()
     {
-
-        return $this->render('form/realty-form');
+        $price = FormData::getRealtyPriceRepair();
+        $regions = GetRegions::get_RealtyRegions();
+        $model = new RealtyForm();
+        return $this->render('form/realty-form', ['model'=>$model, 'regions'=>$regions, 'price'=>$price]);
     }
 
     /**

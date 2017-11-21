@@ -364,4 +364,11 @@ input[type="radio"] {
     white-space: normal;
     margin-top: 70px;
 }
+#realty-form .help-block-error,
+#kasko-form .help-block-error,
+#osago-form .help-block-error,
+#live-form .help-block-error,
+#travel-form .help-block-error{
+    color: red;
+}
 /*----end osago-form---*/

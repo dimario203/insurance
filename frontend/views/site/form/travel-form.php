@@ -17,7 +17,7 @@ $this->title = 'Epolis.shop';
             <div class="col col-md-10 offset-md-1 search-form">
                 <div class="row py-md-5">
                     <div class="col-md-2 text-center d-none d-sm-none d-md-block">
-                        <img src="images/earth.png">
+                        <img src="images/earth-red.png">
                     </div>
                     <div class="col-md-9 text-center">
                         <h2 class="red font-weight-bold align-middle py-2">Страхование путешественников</h2>
@@ -71,7 +71,7 @@ $this->title = 'Epolis.shop';
                                         'id'=>'birthdays',
                                         'name'=>'birth',
                                         'placeholder'=>"Укажите дату" ]
-                                )->label(false);
+                                )->label(false)->error(false);
                                 ?>
 
                                 <button type="button" class="btn btn-outline-secondary ml-1" id="add-user"><img

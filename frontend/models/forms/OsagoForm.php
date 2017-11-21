@@ -14,7 +14,7 @@ class OsagoForm extends  Model
     public function rules()
     {
         return [
-            [['power', 'region', 'min_age', 'experience'], 'required', 'message'=>'Поле не может быть пустым'],
+            [['power', 'region'], 'required', 'message'=>'Поле не может быть пустым'],
         ];
     }
 }

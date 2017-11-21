@@ -16,7 +16,7 @@ $this->title = 'Epolis.shop';
             <div class="col col-md-10 offset-md-1 search-form">
                 <div class="row py-md-5">
                     <div class="col-md-2 text-center d-none d-sm-none d-md-block">
-                        <img src="images/heart.png">
+                        <img src="images/heart-red.png">
                     </div>
                     <div class="col-md-9 text-center">
                         <h2 class="red font-weight-bold align-middle py-2">Страхование здоровья и жизни</h2>
