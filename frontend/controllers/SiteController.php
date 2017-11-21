@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use app\models\forms\FormData;
 use app\models\forms\RealtyForm;
 use app\models\forms\TravelForm;
+use app\models\polis\OsagoFind;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
@@ -127,6 +128,8 @@ class SiteController extends \yeesoft\controllers\BaseController
         $power = FormData::getOsagoPower();
         $regions = GetRegions::get_Regions();
         $model = new OsagoForm();
+        $model->min_age = 1;
+        $model->experience = 1;
         return $this->render('form/osago-form', ['model'=>$model, 'regions'=>$regions, 'power'=>$power]);
     }
 
@@ -186,8 +189,19 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
-
-        return $this->render('list/osago-list');
+        $model = new OsagoForm();
+        $model->load(\Yii::$app->request->post());
+        //print_r( $model); die('qqq');
+        if ($model->validate()) {
+            $osago_find = new OsagoFind();
+            $polises = $osago_find->getOsagoPolis($model);
+            print_r($polises); die('www');
+            return $this->render('list/osago-list', ['polises'=>$polises]);
+        } else {
+            $errors = $model->errors;
+            print_r($errors); die('eee');
+            return $this->render('list/osago-list');
+        }
     }
 
 

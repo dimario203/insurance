@@ -15,6 +15,7 @@ class OsagoForm extends  Model
     {
         return [
             [['power', 'region'], 'required', 'message'=>'Поле не может быть пустым'],
+            [['power', 'region', 'min_age', 'experience'], 'integer']
         ];
     }
 }

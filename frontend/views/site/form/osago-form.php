@@ -35,7 +35,7 @@ $this->title = 'Epolis.shop';
                                         $power,
                                         ['prompt'=>'Выберите мощность',
                                          'class' => 'form-control form-control-lg',
-                                         'name'=>'power']
+                                         /*'name'=>'power'*/]
                                 )->label(false);
                                 ?>
                             </div>
@@ -46,48 +46,41 @@ $this->title = 'Epolis.shop';
                                     $regions,
                                     ['prompt'=>'Выберите регион',
                                      'class' => 'form-control form-control-lg',
-                                     'name'=>'region']
+                                     /*'name'=>'region'*/]
                                 )->label(false);
                                 ?>
                             </div>
                         <div class="form-group py-2">
-                            <!--<div class="radio_buttons">
-                                <?= $form->field($model, 'min_age')->radio([
-                                    'id'=>'radio1'])
-                                    ->label('До 22 лет'); ?>
-                                <?= $form->field($model, 'min_age')->radio([
-                                    'id'=>'radio2'])
-                                    ->label('Более 22 лет'); ?>
-                            </div>-->
                             <label class="font-weight-bold pb-2">Минимальный возраст</label>
                             <div class="radio_buttons">
-                                <div class="button-age">
-                                    <input type="radio" name="min_age" id="radio1" value="1" checked />
-                                    <label for="radio1">До 22 лет</label>
-                                </div>
-                                <div class="button-age">
-                                    <input type="radio" name="min_age" id="radio2" value="2" />
-                                    <label for="radio2">Более 22 лет</label>
-                                </div>
+                                <?php
+                                echo $form->field($model, 'min_age')->radioList(['1'=>'До 22 лет', '2'=>'Более 22 лет'], [
 
+                                    'item' => function ($index, $label, $name, $checked, $value) {
+                                        $check = $value==1 ? 'checked' : '';
+                                        return "<div class=\"button-age\"><input type=\"radio\" name=\"$name\" id=\"radio$value\" value=\"$value\"$check><label for=\"radio$value\"> $label</label></div>";
+                                    }])->label(false);
+                                ?>
                             </div>
                         </div>
                         <div class="form-group py-2 min-experience">
                             <label class="font-weight-bold pb-2">Минимальный стаж вождения</label>
                             <div class="radio_buttons2">
-                                <div class="button-age">
-                                    <input type="radio" name="experience" id="radio3" value="1" checked />
-                                    <label for="radio3">До 3 лет</label>
-                                </div>
-                                <div class="button-age">
-                                    <input type="radio" name="experience" id="radio4" value="2" />
-                                    <label for="radio4">Более 3 лет</label>
-                                </div>
+                                <?php
+                                echo $form->field($model, 'experience')->radioList(['1'=>'До 3 лет', '2'=>'Более 3 лет'], [
+
+                                    'item' => function ($index, $label, $name, $checked, $value) {
+                                        $check = $value==1 ? 'checked' : '';
+                                        return "<div class=\"button-age\"><input type=\"radio\" name=\"$name\" id=\"radio".($value+2)."\" value=\"$value\"$check><label for=\"radio".($value+2)."\"> $label</label></div>";
+                                    }])->label(false);
+                                ?>
+
 
                             </div>
+
                         </div>
                         <div class="form-group py-2">
-                            <div class="form-row button-osago">
+                            <div class="form-row button-osago col-12" >
                                 <div class="col-6" id="submit-1">
                                     <button type="submit" class="btn btn-red btn-lg btn-block font-weight-bold ">
                                         Предварительный расчет

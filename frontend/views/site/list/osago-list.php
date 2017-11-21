@@ -16,7 +16,7 @@ $this->title = 'Epolis.shop';
                     <div class="card-header bg-red text-white rounded">
                         <div class="media">
                             <img src="images/earth.png">
-                            <div class="media-body p-2">Страхование путешественников</div>
+                            <div class="media-body p-2">Страхование ОСАГО</div>
                         </div>
                     </div>
                     <div class="card-body">

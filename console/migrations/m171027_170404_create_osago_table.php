@@ -36,10 +36,35 @@ class m171027_170404_create_osago_table extends Migration
             'region_id',
             'CASCADE'
         );
+
+        $this->createIndex(
+            'idx-osago-company_id',
+            'osago',
+            'company_id'
+        );
+
+        $this->addForeignKey(
+            'fk-osago-company_id',
+            'osago',
+            'company_id',
+            'company',
+            'company_id',
+            'CASCADE'
+        );
     }
 
     public function Down()
     {
+        $this->dropForeignKey(
+            'fk-osago-company_id',
+            'osago'
+        );
+
+        $this->dropIndex(
+            'idx-osago-company_id',
+            'osago'
+        );
+
         $this->dropForeignKey(
             'fk-osago-region_id',
             'osago'
