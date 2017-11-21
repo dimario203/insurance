@@ -55,14 +55,14 @@ $this->title = 'Epolis.shop';
                                 ?>
                             </div>
                         <div class="form-group py-2">
-                            <div class="radio_buttons">
+                            <!--<div class="radio_buttons">
                                 <?= $form->field($model, 'min_age')->radio([
                                     'id'=>'radio1'])
                                     ->label('До 22 лет'); ?>
                                 <?= $form->field($model, 'min_age')->radio([
                                     'id'=>'radio2'])
                                     ->label('Более 22 лет'); ?>
-                            </div>
+                            </div>-->
                             <label class="font-weight-bold pb-2">Минимальный возраст</label>
                             <div class="radio_buttons">
                                 <div class="button-age">

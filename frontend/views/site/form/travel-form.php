@@ -39,7 +39,8 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'country')->dropDownList(
                                     $countries,
                                     ['prompt'=>'Куда едем?',
-                                     'class' => 'form-control form-control-lg']
+                                     'class' => 'form-control form-control-lg',
+                                     'name'=>'country']
                                 )->label(false);
                                 ?>
                             </div>
@@ -180,14 +181,19 @@ $('.date-birth').datepicker({
     multidate: true,
     multidateSeparator: ",",
     clearBtn: true,
+    autoclose: true, 
 });
 $('.date-from').datepicker({
+    todayBtn: "linked",
     format: "dd/mm/yyyy",
-    language: "ru"
+    language: "ru",
+    autoclose: true,    
 });
 $('.date-to').datepicker({
+    todayBtn: "linked",
     format: "dd/mm/yyyy",
-    language: "ru"
+    language: "ru",
+    autoclose: true,    
 });
 JS;
 $this->registerJs($script, View::POS_READY);
