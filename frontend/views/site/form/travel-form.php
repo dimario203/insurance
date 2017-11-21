@@ -31,8 +31,6 @@ $this->title = 'Epolis.shop';
                             'action'=>\yii\helpers\Url::to(['site/travel-list']),
                             'id'=>'travel-form'
                         ]) ?>
-                        <form method="post" action="<?= \yii\helpers\Url::to(['site/travel-list'])?>">
-                            <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                             <div class="form-group py-2">
                                 <label for="countries" class="text-center font-weight-bold pb-2">Выберите страну</label>
                                 <?php
@@ -86,7 +84,6 @@ $this->title = 'Epolis.shop';
                                     </button>
                                 </div>
                             </div>
-                        </form>
                         <?php ActiveForm::end() ?>
                     </div>
                 </div>

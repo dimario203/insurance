@@ -21,7 +21,7 @@ class TravelForm extends  Model
     public function rules()
     {
         return [
-            [['$country', '$date_from', '$date_to', '$birth'], 'required'],
+            [['country', 'date_from', 'date_to', 'birth'], 'required', 'message'=>'Поле не может быть пустым'],
         ];
     }
 }

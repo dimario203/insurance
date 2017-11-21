@@ -19,6 +19,7 @@ use yii\base\Module;
 use yii\data\Pagination;
 use yii\helpers\Url;
 use app\models\forms\OsagoForm;
+use app\models\forms\LiveForm;
 
 /**
  * Site controller
@@ -139,8 +140,17 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveForm()
     {
-
-        return $this->render('form/live-form');
+        $price = [
+            '0'=>'50 000 руб.',
+            '1'=>'100 000 руб.',
+            '2'=>'250 000 руб.',
+            '3'=>'500 000 руб.',
+            '4'=>'1 000 000 руб.',
+            '5'=>'более 1 000 000 руб.'
+        ];
+        $model = new LiveForm();
+        $model->worked = 1;
+        return $this->render('form/live-form', ['model'=>$model, 'price'=>$price]);
     }
 
     /**

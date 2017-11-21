@@ -4,6 +4,8 @@ return [
     'bootstrap' => ['comments', 'yee'],
     'language' => 'en-US',
     'sourceLanguage' => 'en-US',
+    //'language' => 'ru-RU',
+    //'sourceLanguage' => 'ru-RU',
     'components' => [
         'yee' => [
             'class' => 'yeesoft\Yee',

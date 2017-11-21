@@ -2,6 +2,8 @@
 
 use yii\widgets\LinkPager;
 use frontend\assets\PopperAsset;
+use yii\web\View;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 
@@ -14,45 +16,52 @@ $this->title = 'Epolis.shop';
             <div class="col col-md-10 offset-md-1 search-form">
                 <div class="row py-md-5">
                     <div class="col-md-2 text-center d-none d-sm-none d-md-block">
-                        <img src="images/earth.png">
+                        <img src="images/heart.png">
                     </div>
                     <div class="col-md-9 text-center">
-                        <h2 class="red font-weight-bold align-middle py-2">Страхование путешественников</h2>
+                        <h2 class="red font-weight-bold align-middle py-2">Страхование здоровья и жизни</h2>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
-                        <form method="post" action="<?= \yii\helpers\Url::to(['site/live-list'])?>">
-                            <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
+                        <?php
+                        $form = ActiveForm::begin([
+                            'method'=>'post',
+                            'action'=>\yii\helpers\Url::to(['site/live-list']),
+                            'id'=>'live-form'
+                        ]) ?>
                             <div class="form-group py-2">
-                                <label for="countries" class="text-center font-weight-bold pb-2">Выберите
-                                    страну</label>
-                                <select class="form-control form-control-lg" id="countries">
-                                    <option>Куда едем</option>
-                                    <option>country 1</option>
-                                    <option>country 2</option>
-                                    <option>country 3</option>
-                                </select>
-                            </div>
-                            <label class="text-center font-weight-bold pb-2">Укажите дату поездки</label>
-                            <div class="form-row">
-                                <div class="form-group col-6 py-2 px-0">
-                                    <input type="text" class="form-control form-control-lg datepicker"
-                                           placeholder="Выезд">
-                                </div>
-                                <div class="form-group col-6 py-2 px-0">
-                                    <input type="text" class="form-control form-control-lg datepicker"
-                                           placeholder="Обратно">
-                                </div>
+                                <label for="countries" class="text-center font-weight-bold pb-2">Возраст страхуемого</label>
+                                <?php
+                                echo $form->field($model, 'age')->textInput(
+                                    [
+                                        'type'=>'number',
+                                        'class' => 'form-control form-control-lg',
+                                        'name'=>'age',
+                                        'placeholder'=>"от 1 до 75 лет" ]
+                                )->label(false);
+                                ?>
                             </div>
                             <div class="form-group py-2">
-                                <label for="birthdays" class="text-center font-weight-bold pb-2">Дата рождения
-                                    путешественников</label>
-                                <input type="text" class="form-control form-control-lg datepicker"
-                                       id="birthdays"
-                                       placeholder="Укажите дату">
-                                <button type="button" class="btn btn-outline-secondary ml-1" id="add-user"><img
-                                            src="images/+icon.png"></button>
+                                <label for="prices" class="text-center font-weight-bold pb-2">Страховая сумма</label>
+                                <?php
+                                echo $form->field($model, 'summa')->dropDownList(
+                                    $price,
+                                    ['prompt'=>'Выберите сумму',
+                                        'class' => 'form-control form-control-lg',
+                                        'name'=>'summa']
+                                )->label(false);
+                                ?>
+                            </div>
+                            <div class="form-group py-2">
+                                <?php
+                                echo $form->field($model, 'worked')
+                                    ->checkbox([
+                                        'label' => 'Застрахованный работает',
+                                        'name'=>'work',
+                                        'checked' => true,
+                                    ])->error(false);
+                                ?>
                             </div>
                             <div class="row">
                                 <div class="col-10 offset-1 pb-5">
@@ -61,7 +70,7 @@ $this->title = 'Epolis.shop';
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        <?php ActiveForm::end() ?>
                     </div>
                 </div>
             </div>
@@ -73,7 +82,7 @@ $this->title = 'Epolis.shop';
     <div class="container">
         <div class="row">
             <div class="col-12 text-center pt-5">
-                <h2 class="red text-uppercase font-weight-bold">Страхование выезжающих за рубеж</h2>
+                <h2 class="red text-uppercase font-weight-bold">Страхование жизни и здоровья</h2>
             </div>
             <div class="col-12 text-center pt-3">
                 <img src="images/triangle-red.png">

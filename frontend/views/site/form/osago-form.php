@@ -28,8 +28,6 @@ $this->title = 'Epolis.shop';
                                 'action'=>\yii\helpers\Url::to(['site/osago-list']),
                                 'id'=>'osago-form'
                         ]) ?>
-
-                            <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
                             <div class="form-group py-2">
                                 <label class="text-center font-weight-bold pb-2">Мощность двигателя</label>
                                 <?php
@@ -117,7 +115,7 @@ $this->title = 'Epolis.shop';
     <div class="container">
         <div class="row">
             <div class="col-12 text-center pt-5">
-                <h2 class="red text-uppercase font-weight-bold">Страхование выезжающих за рубеж</h2>
+                <h2 class="red text-uppercase font-weight-bold">Страхование ОСАГО онлайн</h2>
             </div>
             <div class="col-12 text-center pt-3">
                 <img src="images/triangle-red.png">
