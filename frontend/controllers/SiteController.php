@@ -192,6 +192,8 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
+        $power = FormData::getOsagoPower();
+        $regions = GetRegions::get_Regions();
         if(\Yii::$app->request->post()) {
             $message = '';
             $model = new OsagoForm();
@@ -244,7 +246,17 @@ class SiteController extends \yeesoft\controllers\BaseController
                         }
                     }
                 }
-                return $this->render('list/osago-list', ['region_polis' => $region_polis, 'another_region_polis' => $another_region_polis, 'pages' => $pages, 'region' => $region, 'message'=>$message]);
+                return $this->render('list/osago-list',
+                    [
+                        'region_polis' => $region_polis,
+                        'another_region_polis' => $another_region_polis,
+                        'pages' => $pages,
+                        'region' => $region,
+                        'message'=>$message,
+                        'model'=>$model,
+                        'regions'=>$regions,
+                        'power'=>$power
+                    ]);
             } else {
                 $errors = $model->errors;
                 return $this->render('list/osago-list');
@@ -287,7 +299,17 @@ class SiteController extends \yeesoft\controllers\BaseController
                         $region_polis = $region_polis . $this->renderPartial('list/osago-list-item', ['polis' => $polis], true);
                     }
                 }
-                return $this->render('list/osago-list', ['region_polis' => $region_polis, 'another_region_polis' => $another_region_polis, 'pages' => $pages, 'region' => $region, 'message'=>$message]);
+                return $this->render('list/osago-list',
+                    [
+                        'region_polis' => $region_polis,
+                        'another_region_polis' => $another_region_polis,
+                        'pages' => $pages,
+                        'region' => $region,
+                        'message'=>$message,
+                        'model'=>$model,
+                        'regions'=>$regions,
+                        'power'=>$power
+                    ]);
             }else{
                 return $this->render('list/osago-list');
             }

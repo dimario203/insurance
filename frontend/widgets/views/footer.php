@@ -7,7 +7,7 @@
                         <img src="images/logo.png" style="max-width: 100%;">
                     </div>
                     <div class="col col-md-7">
-                        <ul class="nav">
+                        <ul class="nav footer-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/osago-form']) ?>">ОСАГО</a>
                             </li>

@@ -303,6 +303,15 @@ input[type="radio"] {
 .navbar .button-header{
     margin-left: 10px;
 }
+.footer-nav{
+    font-size: 14px;
+}
+
+@media(max-width: 1200px) {
+    .footer-nav .nav-link {
+        padding: 0.5rem 6px;
+    }
+}
 /*---end Nav Menu-----*/
 
 /*   index       */
