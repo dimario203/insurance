@@ -372,3 +372,18 @@ input[type="radio"] {
     color: red;
 }
 /*----end osago-form---*/
+
+/*----osago list--------*/
+.inactive-bloc{
+    z-index: -1;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: url(desaturate.svg#greyscale);
+    filter: gray;
+    -webkit-filter: grayscale(1);
+}
+/*------end osago list ------*/

@@ -189,17 +189,28 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
+        $message = '';
         $model = new OsagoForm();
         $model->load(\Yii::$app->request->post());
         //print_r( $model); die('qqq');
         if ($model->validate()) {
+            $region_polis = '';
+            $another_region_polis = '';
             $osago_find = new OsagoFind();
             $polises = $osago_find->getOsagoPolis($model);
-            print_r($polises); die('www');
-            return $this->render('list/osago-list', ['polises'=>$polises]);
+            //print_r($polises); die('www');
+            $region = GetRegions::getRegion($model->region);
+            if($polises['region_polises']!=[]){
+                foreach($polises['region_polises'] as $polis){
+                    $region_polis = $region_polis.$this->renderPartial('list/osago-list-item', ['polis'=>$polis], true);
+                }
+            } else {
+                $message = 'Извините, но в выбранном регионе нет компаний предоставляющих услуги';
+            }
+            return $this->render('list/osago-list', ['region_polis'=>$region_polis, 'region'=>$region]);
         } else {
             $errors = $model->errors;
-            print_r($errors); die('eee');
+            //print_r($errors); die('eee');
             return $this->render('list/osago-list');
         }
     }

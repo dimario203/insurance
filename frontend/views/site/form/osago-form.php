@@ -74,10 +74,7 @@ $this->title = 'Epolis.shop';
                                         return "<div class=\"button-age\"><input type=\"radio\" name=\"$name\" id=\"radio".($value+2)."\" value=\"$value\"$check><label for=\"radio".($value+2)."\"> $label</label></div>";
                                     }])->label(false);
                                 ?>
-
-
                             </div>
-
                         </div>
                         <div class="form-group py-2">
                             <div class="form-row button-osago col-12" >

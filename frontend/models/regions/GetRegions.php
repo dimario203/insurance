@@ -40,4 +40,13 @@ class GetRegions
         }
         return $result;
     }
+
+    public static function getRegion($region_id){
+        $region = Region::findOne($region_id);
+        if($region!=null){
+            return $region->name;
+        } else {
+            return 'Регион не найден';
+        }
+    }
 }

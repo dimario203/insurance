@@ -13,6 +13,7 @@ class m171027_170404_create_osago_table extends Migration
             'power' => $this->SmallInteger(4)->notNull(),
             'age' => $this->SmallInteger(1)->notNull(),
             'experience' => $this->SmallInteger(1)->notNull(),
+            'summa' => $this->integer(),
             'price' => $this->integer(),
         ]);
 
