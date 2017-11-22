@@ -386,4 +386,7 @@ input[type="radio"] {
     filter: gray;
     -webkit-filter: grayscale(1);
 }
+.pagination li{
+    padding-left: 6px;
+}
 /*------end osago list ------*/

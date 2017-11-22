@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use app\models\forms\FormData;
 use app\models\forms\RealtyForm;
 use app\models\forms\TravelForm;
+use app\models\polis\Osago;
 use app\models\polis\OsagoFind;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
@@ -30,6 +31,8 @@ use app\models\forms\LiveForm;
 class SiteController extends \yeesoft\controllers\BaseController
 {
     public $freeAccess = true;
+
+    public $page_size = 2;
 
 
     /**
@@ -189,29 +192,105 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
-        $message = '';
-        $model = new OsagoForm();
-        $model->load(\Yii::$app->request->post());
-        //print_r( $model); die('qqq');
-        if ($model->validate()) {
-            $region_polis = '';
-            $another_region_polis = '';
-            $osago_find = new OsagoFind();
-            $polises = $osago_find->getOsagoPolis($model);
-            //print_r($polises); die('www');
-            $region = GetRegions::getRegion($model->region);
-            if($polises['region_polises']!=[]){
-                foreach($polises['region_polises'] as $polis){
-                    $region_polis = $region_polis.$this->renderPartial('list/osago-list-item', ['polis'=>$polis], true);
+        if(\Yii::$app->request->post()) {
+            $message = '';
+            $model = new OsagoForm();
+            $model->load(\Yii::$app->request->post());
+            //print_r( $model); die('qqq');
+            if ($model->validate()) {
+                $region_polis = '';
+                $another_region_polis = '';
+                $osago_find = new OsagoFind();
+
+                $query = Osago::find()
+                    ->where(['region_id' => $model->region])
+                    ->andWhere(['power' => $model->power])
+                    ->andWhere(['age' => $model->min_age])
+                    ->andWhere(['experience' => $model->experience])
+                    ->with('company');
+
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    //'linkOptions' => ['data-method' => 'post'],
+                    'params' => [
+                        'region_id' => $model->region,
+                        'power' => $model->power,
+                        'min_age' => $model->min_age,
+                        'experience' => $model->experience
+                    ]]);
+
+                $pages->pageSizeParam = 'per-page';
+                $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+                $region = GetRegions::getRegion($model->region);
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $region_polis = $region_polis . $this->renderPartial('list/osago-list-item', ['polis' => $polis], true);
+                    }
+                } else {
+                    $message = 'Извините, но в выбранном регионе нет компаний предоставляющих услуги';
                 }
+                if($count_polises < $this->page_size){
+                    $count = $this->page_size - $count_polises;
+                    $another_region_polises_array =  $osago_find->getAnotherRegionPolis($model, $count);
+                    if ($another_region_polises_array != []) {
+                        foreach ($another_region_polises_array as $polis) {
+                            $another_region_polis = $another_region_polis.$this->renderPartial('list/osago-list-item', ['polis' => $polis], true);
+                        }
+                    }
+                }
+                return $this->render('list/osago-list', ['region_polis' => $region_polis, 'another_region_polis' => $another_region_polis, 'pages' => $pages, 'region' => $region, 'message'=>$message]);
             } else {
-                $message = 'Извините, но в выбранном регионе нет компаний предоставляющих услуги';
+                $errors = $model->errors;
+                return $this->render('list/osago-list');
             }
-            return $this->render('list/osago-list', ['region_polis'=>$region_polis, 'region'=>$region]);
-        } else {
-            $errors = $model->errors;
-            //print_r($errors); die('eee');
-            return $this->render('list/osago-list');
+        } elseif(\Yii::$app->request->get('page')) {
+            $model = new OsagoForm();
+            $model->region = \Yii::$app->request->get('region_id', 1);
+            $model->power = \Yii::$app->request->get('power', 1);
+            $model->min_age = \Yii::$app->request->get('min_age', 1);
+            $model->experience = \Yii::$app->request->get('experience', 1);
+            if($model->validate()){
+                $message = '';
+                $region_polis = '';
+                $another_region_polis = '';
+                $query = Osago::find()
+                    ->where(['region_id' =>  $model->region])
+                    ->andWhere(['power' =>  $model->power])
+                    ->andWhere(['age' => $model->min_age])
+                    ->andWhere(['experience' => $model->experience])
+                    ->with('company');
+                $countQuery = clone $query;
+                $pages = new Pagination(['totalCount' => $countQuery->count(),
+                    'pageSize' => $this->page_size,
+                    'params' => [
+                        'region_id' => $model->region,
+                        'power' => $model->power,
+                        'age' => $model->min_age,
+                        'experience' => $model->experience
+                    ]]);
+                $pages->pageSizeParam = 'per-page';
+                $page = \Yii::$app->request->get('page', 0);
+                $offset = ($page -1) * $this->page_size;
+                $models = $query->offset($offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+                $region = GetRegions::getRegion($model->region);
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $region_polis = $region_polis . $this->renderPartial('list/osago-list-item', ['polis' => $polis], true);
+                    }
+                }
+                return $this->render('list/osago-list', ['region_polis' => $region_polis, 'another_region_polis' => $another_region_polis, 'pages' => $pages, 'region' => $region, 'message'=>$message]);
+            }else{
+                return $this->render('list/osago-list');
+            }
         }
     }
 

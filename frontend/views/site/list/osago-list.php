@@ -98,8 +98,29 @@ $this->title = 'Epolis.shop';
                 </div>
             </div>
             <div class="col-md-9">
-                <h2 class="font-weight-bold">Предложения страховых фирм</h2>
+                <h2 class="font-weight-bold text-center">Предложения страховых фирм</h2>
+                <?php
+                if(isset($message) && !empty($message)){?>
+                    </br>
+                    </br>
+                    <h4 class="text-center"><?=$message?></h4></br>
+                <?php } ?>
                 <?=$region_polis?>
+                    <?php
+                    if($another_region_polis != '') { ?>
+                        <h4 class="text-center">По вашему запросу это все</h4></br>
+                <div class="inactive-bloc">
+                        <h4 class="text-center"><small>Ниже Вы видите полисы страховых компаний в других регионах</small></h4>
+                        <?= $another_region_polis ?>
+                </div>
+                    <?php } ?>
+
+                <div class="col-md-12 center-block">
+                    <?=LinkPager::widget([
+                        'pagination' => $pages,
+                    ]);
+                    ?>
+                </div>
             </div>
         </div>
     </div>
