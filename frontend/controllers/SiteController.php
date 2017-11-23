@@ -202,32 +202,57 @@ class SiteController extends \yeesoft\controllers\BaseController
                     $interval = date_diff($date_born,  $date_now);
                     $age = $interval->y;
                     $category_age = $travel_find->findAgeGroup($age);
-                    $query = Travel::find()
+                    $models = Travel::find()
                         ->where(['country_id' => $model->country])
                         ->andWhere(['duration' => $category_travel_duration])
                         ->andWhere(['age' => $category_age])
                         ->andWhere(['sum_insured' => $model->summ])
-                        ->with('company');
-                    $countQuery = clone $query;
-                    $count_polises = $countQuery->count();
-                    $pages = new Pagination(['totalCount' => $count_polises,
-                        'pageSize' => $this->page_size,
-                        'params' => [
-                            'country' => $model->country,
-                            'date_from' => $model->date_from,
-                            'date_to' => $model->date_to,
-                            'birth' => $model->birth,
-                        ]]);
-                    $pages->pageSizeParam = 'per-page';
-                    $models = $query->offset($pages->offset)
-                        ->limit($pages->limit)
+                        ->with('company')
                         ->asArray()
                         ->all();
+
                     $models_peaple[] = $models;
+                }
+                $polis_ids = [];
+                $data_polises = [];
+                $count_peaple = count($models_peaple);
+                if($count_peaple > 1){
+                    foreach ($models_peaple[0] as $key=>$polis){
+                        $coincidence = 0;
+                        $summary_price = $polis['price'];
+                        for($i=1; $i < $count_peaple; $i++){
+                            $count = 0;
+                            foreach($models_peaple[$i] as $key2=>$polis2){
+                                if($polis['company']['company_id']==$polis2['company']['company_id']){
+                                    $count++;
+                                    $summary_price+=$polis2['price'];
+                                }
+                            }
+                           if($count==0){
+                               $coincidence = 0;
+                                break;
+                           } else {
+                               $coincidence = 1;
+                           }
+                        }
+                        if($coincidence != 0){
+                            $polis_ids[] = $polis['id'];
+                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$summary_price];
+                        }
+                    }
+                } elseif($count_peaple == 1){
+                    //print_r($models_peaple[0]); die('qqq');
+                    foreach ($models_peaple[0] as $key=>$polis){
+                        $polis_ids[] = $polis['id'];
+                        $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
+                    }
+                } else {
+                    return $this->render('list/travel-list', ['pages'=>[]]);
                 }
 
 
-                $country_polis = '';
+
+                /*$country_polis = '';
                 $country_name = GetCountry::get_Country($model->country);
                 $summ_insuranse = FormData::getSummInsurance($model->summ);
                 $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
@@ -258,10 +283,32 @@ class SiteController extends \yeesoft\controllers\BaseController
                 $models = $query->offset($pages->offset)
                     ->limit($pages->limit)
                     ->asArray()
+                    ->all();*/
+
+                //print_r($polis_ids); die('www');
+                $query = Travel::find()
+                    ->where(['in', 'id', $polis_ids])
+                    ->with('company');
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    'params' => [
+                        'country' => $model->country,
+                        'date_from' => $model->date_from,
+                        'date_to' => $model->date_to,
+                        'birth' => $model->birth,
+                    ]]);
+                $pages->pageSizeParam = 'per-page';
+                $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->asArray()
                     ->all();
+
                 if ($models != []) {
                     foreach ($models as $polis) {
                         $summ = FormData::getSummInsurance($polis['sum_insured']);
+                        $polis['price'] = $data_polises[$polis['id']]['price'];
                         $country_polis = $country_polis . $this->renderPartial('list/travel-list-item', ['polis' => $polis, 'summ'=>$summ], true);
                     }
                 } else {
@@ -280,7 +327,7 @@ class SiteController extends \yeesoft\controllers\BaseController
             } else {
                 $errors = $model->errors;
                 //print_r($errors); die('qqq');
-                return $this->render('list/travel-list');
+                return $this->render('list/travel-list', ['pages'=>[]]);
             }
         } elseif(\Yii::$app->request->get('page')) {
             $model = new TravelForm();
@@ -289,7 +336,91 @@ class SiteController extends \yeesoft\controllers\BaseController
             $model->date_to = \Yii::$app->request->get('date_to', 1);
             $model->birth = \Yii::$app->request->get('birth', 1);
             if($model->validate()){
-                $message = '';
+                $models_peaple = [];
+                $peaples = explode(',', $model->birth);
+                foreach($peaples as $peaple){
+                    $message = '';
+                    $country_polis = '';
+                    $country_name = GetCountry::get_Country($model->country);
+                    $summ_insuranse = FormData::getSummInsurance($model->summ);
+                    $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                    $travel_find = new TravelFind();
+                    $category_travel_duration = $travel_find->findCategoryDuration($duration);
+                    $date_born = date_create(trim($peaple));
+                    $date_now= date_create();
+                    $interval = date_diff($date_born,  $date_now);
+                    $age = $interval->y;
+                    $category_age = $travel_find->findAgeGroup($age);
+                    $models = Travel::find()
+                        ->where(['country_id' => $model->country])
+                        ->andWhere(['duration' => $category_travel_duration])
+                        ->andWhere(['age' => $category_age])
+                        ->andWhere(['sum_insured' => $model->summ])
+                        ->with('company')
+                        ->asArray()
+                        ->all();
+
+                    $models_peaple[] = $models;
+                }
+                $polis_ids = [];
+                $data_polises = [];
+                $count_peaple = count($models_peaple);
+                if($count_peaple > 1){
+                    foreach ($models_peaple[0] as $key=>$polis){
+                        $coincidence = 0;
+                        $summary_price = $polis['price'];
+                        for($i=1; $i < $count_peaple; $i++){
+                            $count = 0;
+                            foreach($models_peaple[$i] as $key2=>$polis2){
+                                if($polis['company']['company_id']==$polis2['company']['company_id']){
+                                    $count++;
+                                    $summary_price+=$polis2['price'];
+                                }
+                            }
+                            if($count==0){
+                                $coincidence = 0;
+                                break;
+                            } else {
+                                $coincidence = 1;
+                            }
+                        }
+                        if($coincidence != 0){
+                            $polis_ids[] = $polis['id'];
+                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$summary_price];
+                        }
+                    }
+                } elseif($count_peaple == 1){
+                    //print_r($models_peaple[0]); die('qqq');
+                    foreach ($models_peaple[0] as $key=>$polis){
+                        $polis_ids[] = $polis['id'];
+                        $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
+                    }
+                } else {
+                    return $this->render('list/travel-list', ['pages'=>[]]);
+                }
+                $query = Travel::find()
+                    ->where(['in', 'id', $polis_ids])
+                    ->with('company');
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    'params' => [
+                        'country' => $model->country,
+                        'date_from' => $model->date_from,
+                        'date_to' => $model->date_to,
+                        'birth' => $model->birth,
+                    ]]);
+                $pages->pageSizeParam = 'per-page';
+                $page = \Yii::$app->request->get('page', 0);
+                $offset = ($page -1) * $this->page_size;
+                $models = $query->offset($offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+
+                /*$message = '';
                 $country_polis = '';
                 $country_name = GetCountry::get_Country($model->country);
                 $summ_insuranse = FormData::getSummInsurance($model->summ);
@@ -323,7 +454,9 @@ class SiteController extends \yeesoft\controllers\BaseController
                 $models = $query->offset($offset)
                     ->limit($pages->limit)
                     ->asArray()
-                    ->all();
+                    ->all();*/
+
+
                 if ($models != []) {
                     foreach ($models as $polis) {
                         $summ = FormData::getSummInsurance($polis['sum_insured']);
@@ -343,10 +476,10 @@ class SiteController extends \yeesoft\controllers\BaseController
             } else {
                 $errors = $model->errors;
                 //print_r($errors); die('qqq');
-                return $this->render('list/travel-list');
+                return $this->render('list/travel-list', ['pages'=>[]]);
             }
         }
-        return $this->render('list/travel-list');
+        return $this->render('list/travel-list', ['pages'=>[]]);
     }
 
 
