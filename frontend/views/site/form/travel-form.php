@@ -38,7 +38,8 @@ $this->title = 'Epolis.shop';
                                     $countries,
                                     ['prompt'=>'Куда едем?',
                                      'class' => 'form-control form-control-lg',
-                                     'name'=>'country']
+                                     //'name'=>'country'
+                                    ]
                                 )->label(false);
                                 ?>
                             </div>
@@ -48,7 +49,7 @@ $this->title = 'Epolis.shop';
                                     <?php
                                     echo $form->field($model, 'date_from')->textInput(
                                         ['class' => 'form-control form-control-lg datepicker date-from',
-                                         'name'=>'date-from',
+                                         //'name'=>'date-from',
                                          'placeholder'=>"Туда" ]
                                     )->label(false);
                                     ?>
@@ -57,7 +58,7 @@ $this->title = 'Epolis.shop';
                                     <?php
                                     echo $form->field($model, 'date_to')->textInput(
                                         ['class' => 'form-control form-control-lg datepicker date-from',
-                                            'name'=>'date-to',
+                                            //'name'=>'date-to',
                                             'placeholder'=>"Обратно" ]
                                     )->label(false);
                                     ?>
@@ -69,7 +70,7 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'birth')->textInput(
                                     ['class' => 'form-control form-control-lg datepicker date-birth',
                                         'id'=>'birthdays',
-                                        'name'=>'birth',
+                                        //'name'=>'birth',
                                         'placeholder'=>"Укажите дату" ]
                                 )->label(false)->error(false);
                                 ?>
@@ -172,25 +173,27 @@ $this->title = 'Epolis.shop';
 <?php
 
 $script = <<<JS
-$('.date-birth').datepicker({
-    format: "dd/mm/yyyy",
-    language: "ru",
-    multidate: true,
-    multidateSeparator: ",",
-    clearBtn: true,
-    autoclose: true, 
-});
-$('.date-from').datepicker({
-    todayBtn: "linked",
-    format: "dd/mm/yyyy",
-    language: "ru",
-    autoclose: true,    
-});
-$('.date-to').datepicker({
-    todayBtn: "linked",
-    format: "dd/mm/yyyy",
-    language: "ru",
-    autoclose: true,    
+$(document).ready(function(){
+    $('.date-birth').datepicker({
+        format: "mm/dd/yyyy",
+        language: "ru",
+        multidate: true,
+        multidateSeparator: ",",
+        clearBtn: true,
+        autoclose: true, 
+    });
+    $('.date-from').datepicker({
+        todayBtn: "linked",
+        format: "mm/dd/yyyy",
+        language: "ru",
+        autoclose: true,    
+    });
+    $('.date-to').datepicker({
+        todayBtn: "linked",
+        format: "mm/dd/yyyy",
+        language: "ru",
+        autoclose: true,    
+    });
 });
 JS;
 $this->registerJs($script, View::POS_READY);

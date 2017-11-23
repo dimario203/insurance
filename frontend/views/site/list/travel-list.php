@@ -2,6 +2,8 @@
 
 use yii\widgets\LinkPager;
 use frontend\assets\PopperAsset;
+use yii\bootstrap\ActiveForm;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 
@@ -12,197 +14,221 @@ $this->title = 'Epolis.shop';
     <div class="container">
         <div class="row pt-md-5">
             <div class="col-md-3">
-                <div class="card bg-light border-0">
+                <div class="card bg-light border-0 modal-form-overlay">
                     <div class="card-header bg-red text-white rounded">
                         <div class="media">
                             <img src="images/earth.png">
                             <div class="media-body p-2">Страхование путешественников</div>
+                            <span class="close-form-travel">x</span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Юго Восточная Азия</p>
-                        <p class="card-text">Сумма: 50 000€</p>
-                        <p class="card-text text-right small"><a href="#">изменить запрос</a></p>
-                        <p class="card-text">Сумма страховки:</p>
+                        <p class="card-text"><?=$country_name?></p>
+                        <p class="card-text">Сумма: <?=$summ_insuranse?> €</p>
+                        <p class="card-text text-right small" id="edit-request"><a href="#">изменить запрос</a></p>
+                        <hr>
 
-                        <select class="form-control form-control-lg result-select bg-white mb-2" id="euro">
-                            <option>50 000€</option>
-                            <option>50 001€</option>
-                            <option>50 002€</option>
-                        </select>
 
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Отмена поездки</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Задержка авиарейса</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Отмена поездки</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Задержка авиарейса</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Отмена поездки</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Задержка авиарейса</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Отмена поездки</span>
-                        </label>
-                        <label class="result-control result-radio">
-                            <input name="radio" type="radio" class="result-control-input">
-                            <span class="result-control-indicator"></span>
-                            <span class="result-control-description">Задержка авиарейса</span>
-                        </label>
+                        <div class="form-travel-list none">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <?php
+                                    $form = ActiveForm::begin([
+                                        'method'=>'post',
+                                        'action'=>\yii\helpers\Url::to(['site/travel-list']),
+                                        'id'=>'travel-form'
+                                    ]) ?>
+                                    <div class="form-group py-2">
+                                        <label for="countries" class="text-center font-weight-bold pb-2">Выберите страну</label>
+                                        <?php
+                                        echo $form->field($model, 'country')->dropDownList(
+                                            $countries,
+                                            ['prompt'=>'Куда едем?',
+                                                'class' => 'form-control form-control-lg',
+                                                //'name'=>'country'
+                                            ]
+                                        )->label(false);
+                                        ?>
+                                    </div>
+                                    <label class="text-center font-weight-bold pb-2">Укажите даты поездки</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-6 py-2 px-0">
+                                            <?php
+                                            echo $form->field($model, 'date_from')->textInput(
+                                                ['class' => 'form-control form-control-lg datepicker date-from',
+                                                    //'name'=>'date-from',
+                                                    'placeholder'=>"Туда" ]
+                                            )->label(false);
+                                            ?>
+                                        </div>
+                                        <div class="form-group col-6 py-2 px-0">
+                                            <?php
+                                            echo $form->field($model, 'date_to')->textInput(
+                                                ['class' => 'form-control form-control-lg datepicker date-from',
+                                                    //'name'=>'date-to',
+                                                    'placeholder'=>"Обратно" ]
+                                            )->label(false);
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <label for="birthdays" class="text-center font-weight-bold pb-2">Дата рождения путешественников</label>
+                                        <?php
+                                        echo $form->field($model, 'birth')->textInput(
+                                            ['class' => 'form-control form-control-lg datepicker date-birth',
+                                                'id'=>'birthdays',
+                                                //'name'=>'birth',
+                                                'placeholder'=>"Укажите дату" ]
+                                        )->label(false)->error(false);
+                                        ?>
 
-                        <button type="submit" class="btn btn-red btn-lg btn-block my-3">
-                            Пересчитать
-                        </button>
+                                        <button type="button" class="btn btn-outline-secondary ml-1" id="add-user"><img
+                                                    src="images/+icon.png"></button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-10 offset-1 pb-5">
+                                            <button type="submit" class="btn btn-red btn-lg btn-block font-weight-bold ">
+                                                Найти страховку
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <?php ActiveForm::end() ?>
+                                </div>
+                            </div>
+                        </div>
 
-                        <p class="card-text text-center small"><a href="#">отправить на email</a></p>
+
+                        <div class="additional-payd">
+                            <p class="card-text">Сумма страховки:</p>
+
+                            <select class="form-control form-control-lg result-select bg-white mb-2" id="euro">
+                                <option>50 000€</option>
+                                <option>50 001€</option>
+                                <option>50 002€</option>
+                            </select>
+
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Отмена поездки</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Задержка авиарейса</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Отмена поездки</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Задержка авиарейса</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Отмена поездки</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Задержка авиарейса</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Отмена поездки</span>
+                            </label>
+                            <label class="result-control result-radio">
+                                <input name="radio" type="radio" class="result-control-input">
+                                <span class="result-control-indicator"></span>
+                                <span class="result-control-description">Задержка авиарейса</span>
+                            </label>
+
+                            <button type="submit" class="btn btn-red btn-lg btn-block my-3">
+                                Пересчитать
+                            </button>
+
+                            <p class="card-text text-center small"><a href="#">отправить на email</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
-                <h2 class="font-weight-bold">Предложения страховых фирм</h2>
-                <div class="card bg-light border-0 my-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-12 text-center py-md-3">
-                                        <img src="http://placehold.it/150x50">
-                                    </div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">сравнить</a></p></div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">Что включено</a></p></div>
-                                </div>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4 border border-top-0 border-bottom-0">
-                                <p>Сумма страховки</p>
-                                <p><span class="font-weight-bold">50 000 €</span></p>
-                                <p>Тип полиса</p>
-                                <p><span class="font-weight-bold">Базовый</span></p>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4">
-                                <p>Цена полиса</p>
-                                <p><span class="font-weight-bold">1 021 Руб.</span></p>
-                                <button type="submit" class="btn btn-red btn-lg btn-block my-md-3">
-                                    Оформить полис
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-light border-0 my-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-12 text-center py-md-3">
-                                        <img src="http://placehold.it/150x50">
-                                    </div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">сравнить</a></p></div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">Что включено</a></p></div>
-                                </div>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4 border border-top-0 border-bottom-0">
-                                <p>Сумма страховки</p>
-                                <p><span class="font-weight-bold">50 000 €</span></p>
-                                <p>Тип полиса</p>
-                                <p><span class="font-weight-bold">Базовый</span></p>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4">
-                                <p>Цена полиса</p>
-                                <p><span class="font-weight-bold">1 021 Руб.</span></p>
-                                <button type="submit" class="btn btn-red btn-lg btn-block my-md-3">
-                                    Оформить полис
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-light border-0 my-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-12 text-center py-md-3">
-                                        <img src="http://placehold.it/150x50">
-                                    </div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">сравнить</a></p></div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">Что включено</a></p></div>
-                                </div>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4 border border-top-0 border-bottom-0">
-                                <p>Сумма страховки</p>
-                                <p><span class="font-weight-bold">50 000 €</span></p>
-                                <p>Тип полиса</p>
-                                <p><span class="font-weight-bold">Базовый</span></p>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4">
-                                <p>Цена полиса</p>
-                                <p><span class="font-weight-bold">1 021 Руб.</span></p>
-                                <button type="submit" class="btn btn-red btn-lg btn-block my-md-3">
-                                    Оформить полис
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card bg-light border-0 my-5">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-12 text-center py-md-3">
-                                        <img src="http://placehold.it/150x50">
-                                    </div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">сравнить</a></p></div>
-                                    <div class="col-6"><p class="text-center small"><a href="#">Что включено</a></p></div>
-                                </div>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4 border border-top-0 border-bottom-0">
-                                <p>Сумма страховки</p>
-                                <p><span class="font-weight-bold">50 000 €</span></p>
-                                <p>Тип полиса</p>
-                                <p><span class="font-weight-bold">Базовый</span></p>
-                                <hr class="d-block d-sm-block d-md-none">
-                            </div>
-                            <div class="col-md-4">
-                                <p>Цена полиса</p>
-                                <p><span class="font-weight-bold">1 021 Руб.</span></p>
-                                <button type="submit" class="btn btn-red btn-lg btn-block my-md-3">
-                                    Оформить полис
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <h2 class="font-weight-bold text-center">Предложения страховых фирм</h2>
+                <?php
+                if (isset($message) && !empty($message)) {
+                    ?>
+                    </br>
+                    </br>
+                    <h4 class="text-center"><?= $message ?></h4></br>
+                <?php } ?>
+                <?= $country_polis ?>
+                <h4 class="text-center">По вашему запросу это все</h4></br>
+
+                <div class="col-md-12 center-block">
+                    <?= LinkPager::widget([
+                        'pagination' => $pages,
+                    ]);
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="overlay-default"></div>
+
+<style>
+    .additional-payd{
+        z-index: 5;
+    }
+</style>
+
+<?php
+$script = <<<JS
+$(document).ready(function(){
+           $("#edit-request").click(function(){
+               $('.form-travel-list').show();
+               $('.overlay-default').show();
+               $('.close-form-travel').show();
+               $('.additional-payd').hide();
+           });
+           $(".close-form-travel").click(function(){
+               $('.form-travel-list').hide();
+               $('.overlay-default').hide();
+               $('.close-form-travel').hide();
+               $('.additional-payd').show();
+           });
+           $(".overlay-default").click(function(){
+               $('.form-travel-list').hide();
+               $('.overlay-default').hide();
+               $('.close-form-travel').hide();
+               $('.additional-payd').show();
+           });
+           $('.date-birth').datepicker({
+                format: "mm/dd/yyyy",
+                language: "ru",
+                multidate: true,
+                multidateSeparator: ",",
+                clearBtn: true,
+                autoclose: true, 
+            });
+            $('.date-from').datepicker({
+                todayBtn: "linked",
+                format: "mm/dd/yyyy",
+                language: "ru",
+                autoclose: true,    
+            });
+            $('.date-to').datepicker({
+                todayBtn: "linked",
+                format: "mm/dd/yyyy",
+                language: "ru",
+                autoclose: true,    
+            });
+       })
+JS;
+$this->registerJs($script, View::POS_READY);
+?>

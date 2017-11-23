@@ -19,4 +19,13 @@ class GetCountry
         $result = ArrayHelper::map($result, 'country_id', 'name');
         return $result;
     }
+
+    public static function get_Country($country_id){
+        $country_name = '';
+        $country = Country::findOne($country_id);
+        if($country!=null){
+            $country_name = $country->name;
+        }
+        return $country_name;
+    }
 }

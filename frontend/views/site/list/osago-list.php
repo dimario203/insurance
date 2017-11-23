@@ -19,7 +19,7 @@ $this->title = 'Epolis.shop';
                         <div class="media">
                             <img src="images/car.png">
                             <div class="media-body p-2">Страхование ОСАГО</div>
-                            <span class="close-form-osago">X</span>
+                            <span class="close-form-osago">x</span>
                         </div>
                     </div>
                     <div class="card-body">
@@ -151,62 +151,7 @@ $this->title = 'Epolis.shop';
 </div>
 <div class="overlay-default"></div>
 
-<style>
-    .overlay-default {
-        z-index: 5;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: rgba(16,16,16,0.6);
-        display: none;
-    }
-    .modal-form-overlay{
-        z-index: 11;
-    }
-    .none{
-        display: none;
-    }
-    .close-form-osago{
-        display: none;
-        cursor: pointer;
-    }
-    .form-osago-list #osagoform-power,
-    .form-osago-list #osagoform-region{
-        font-size: 14px;
-    }
-    .form-osago-list .radio_buttons .button-age,
-    .form-osago-list .radio_buttons2 .button-age{
-        margin-top: 15px;
-    }
-    .form-osago-list .min-experience{
-        margin-top: 70px !important
-    }
-    .form-osago-list #submit-1,
-    .form-osago-list #submit-2{
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    .form-osago-list #submit-1 button,
-    .form-osago-list #submit-2 button{
-        font-size: 14px;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    .form-osago-list .button-osago .btn{
-        height: 65px;
-        margin-top: 20px;
-    }
-    .form-osago-list .form-buttons{
-        padding-top: 50px !important;
-        margin-top: 50px;
-    }
-    .form-osago-list #osagoform-min_age,
-    .form-osago-list #osagoform-experience{
-        margin-left: 20px;
-    }
-</style>
+
 
 <?php
 $script = <<<JS

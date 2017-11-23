@@ -7,11 +7,13 @@ use app\models\forms\RealtyForm;
 use app\models\forms\TravelForm;
 use app\models\polis\Osago;
 use app\models\polis\OsagoFind;
+use app\models\polis\TravelFind;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
 use app\models\travel\GetCountry;
+use app\models\travel\Travel;
 use frontend\actions\PageAction;
 use frontend\actions\PostAction;
 use frontend\models\ContactForm;
@@ -180,7 +182,170 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionTravelList()
     {
+        $countries = GetCountry::get_Countries();
+        if(\Yii::$app->request->post()) {
+            $message = '';
+            $model = new TravelForm();
+            $model->load(\Yii::$app->request->post());
+            if ($model->validate()) {
+                $models_peaple = [];
+                $peaples = explode(',', $model->birth);
+                foreach($peaples as $peaple){
+                    $country_polis = '';
+                    $country_name = GetCountry::get_Country($model->country);
+                    $summ_insuranse = FormData::getSummInsurance($model->summ);
+                    $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                    $travel_find = new TravelFind();
+                    $category_travel_duration = $travel_find->findCategoryDuration($duration);
+                    $date_born = date_create(trim($peaple));
+                    $date_now= date_create();
+                    $interval = date_diff($date_born,  $date_now);
+                    $age = $interval->y;
+                    $category_age = $travel_find->findAgeGroup($age);
+                    $query = Travel::find()
+                        ->where(['country_id' => $model->country])
+                        ->andWhere(['duration' => $category_travel_duration])
+                        ->andWhere(['age' => $category_age])
+                        ->andWhere(['sum_insured' => $model->summ])
+                        ->with('company');
+                    $countQuery = clone $query;
+                    $count_polises = $countQuery->count();
+                    $pages = new Pagination(['totalCount' => $count_polises,
+                        'pageSize' => $this->page_size,
+                        'params' => [
+                            'country' => $model->country,
+                            'date_from' => $model->date_from,
+                            'date_to' => $model->date_to,
+                            'birth' => $model->birth,
+                        ]]);
+                    $pages->pageSizeParam = 'per-page';
+                    $models = $query->offset($pages->offset)
+                        ->limit($pages->limit)
+                        ->asArray()
+                        ->all();
+                    $models_peaple[] = $models;
+                }
 
+
+                $country_polis = '';
+                $country_name = GetCountry::get_Country($model->country);
+                $summ_insuranse = FormData::getSummInsurance($model->summ);
+                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                $travel_find = new TravelFind();
+                $category_travel_duration = $travel_find->findCategoryDuration($duration);
+                $date_born = date_create(trim($model->birth));
+                $date_now= date_create();
+                $interval = date_diff($date_born,  $date_now);
+                $age = $interval->y;
+                $category_age = $travel_find->findAgeGroup($age);
+                $query = Travel::find()
+                    ->where(['country_id' => $model->country])
+                    ->andWhere(['duration' => $category_travel_duration])
+                    ->andWhere(['age' => $category_age])
+                    ->andWhere(['sum_insured' => $model->summ])
+                    ->with('company');
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    'params' => [
+                        'country' => $model->country,
+                        'date_from' => $model->date_from,
+                        'date_to' => $model->date_to,
+                        'birth' => $model->birth,
+                    ]]);
+                $pages->pageSizeParam = 'per-page';
+                $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $summ = FormData::getSummInsurance($polis['sum_insured']);
+                        $country_polis = $country_polis . $this->renderPartial('list/travel-list-item', ['polis' => $polis, 'summ'=>$summ], true);
+                    }
+                } else {
+                    $message = 'Извините, но по введенным вами данным предложений нет ';
+                }
+                return $this->render('list/travel-list',
+                    [
+                        'country_polis' => $country_polis,
+                        'country_name' => $country_name,
+                        'pages' => $pages,
+                        'message'=>$message,
+                        'model'=>$model,
+                        'countries' => $countries,
+                        'summ_insuranse' => $summ_insuranse,
+                    ]);
+            } else {
+                $errors = $model->errors;
+                //print_r($errors); die('qqq');
+                return $this->render('list/travel-list');
+            }
+        } elseif(\Yii::$app->request->get('page')) {
+            $model = new TravelForm();
+            $model->country = \Yii::$app->request->get('country', 1);
+            $model->date_from = \Yii::$app->request->get('date_from', 1);
+            $model->date_to = \Yii::$app->request->get('date_to', 1);
+            $model->birth = \Yii::$app->request->get('birth', 1);
+            if($model->validate()){
+                $message = '';
+                $country_polis = '';
+                $country_name = GetCountry::get_Country($model->country);
+                $summ_insuranse = FormData::getSummInsurance($model->summ);
+                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                $travel_find = new TravelFind();
+                $category_travel_duration = $travel_find->findCategoryDuration($duration);
+                $date_born = date_create(trim($model->birth));
+                $date_now= date_create();
+                $interval = date_diff($date_born,  $date_now);
+                $age = $interval->y;
+                $category_age = $travel_find->findAgeGroup($age);
+                $query = Travel::find()
+                    ->where(['country_id' => $model->country])
+                    ->andWhere(['duration' => $category_travel_duration])
+                    ->andWhere(['age' => $category_age])
+                    ->andWhere(['sum_insured' => $model->summ])
+                    ->with('company');
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    'params' => [
+                        'country' => $model->country,
+                        'date_from' => $model->date_from,
+                        'date_to' => $model->date_to,
+                        'birth' => $model->birth,
+                    ]]);
+                $pages->pageSizeParam = 'per-page';
+                $page = \Yii::$app->request->get('page', 0);
+                $offset = ($page -1) * $this->page_size;
+                $models = $query->offset($offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $summ = FormData::getSummInsurance($polis['sum_insured']);
+                        $country_polis = $country_polis . $this->renderPartial('list/travel-list-item', ['polis' => $polis, 'summ'=>$summ], true);
+                    }
+                }
+                return $this->render('list/travel-list',
+                    [
+                        'country_polis' => $country_polis,
+                        'country_name' => $country_name,
+                        'pages' => $pages,
+                        'message'=>$message,
+                        'model'=>$model,
+                        'countries' => $countries,
+                        'summ_insuranse' => $summ_insuranse,
+                    ]);
+            } else {
+                $errors = $model->errors;
+                //print_r($errors); die('qqq');
+                return $this->render('list/travel-list');
+            }
+        }
         return $this->render('list/travel-list');
     }
 

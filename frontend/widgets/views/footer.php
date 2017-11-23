@@ -62,11 +62,3 @@
         </div>
     </div>
 </footer>
-
-<style>
-    .fa-facebook-official, .fa-vk, .fa-envelope-open{
-        color: white;
-        font-size:26px;
-        padding-left: 8px;
-    }
-</style>

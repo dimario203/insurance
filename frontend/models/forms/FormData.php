@@ -40,15 +40,78 @@ class FormData
         '8'=>'9 000 000 руб.',
     ];
 
+    const TRAVEL_DURATION = [
+        '0'=>7,
+        '1'=>14,
+        '2'=>30,
+        '3'=>60,
+        '4'=>90,
+        '5'=>180,
+        '6'=>360,
+    ];
+
+    const TRAVEL_AGE_GROUP = [
+        '0'=>[0, 2],
+        '1'=>[3, 64],
+        '2'=>[65, 69],
+        '3'=>[70, 500],
+    ];
+
+    const TRAVEL_SUMM_INSURED = [
+        '0'=>35000,
+        '1'=>50000,
+        '2'=>100000,
+    ];
+
+    /**
+     * @return array
+     */
     public static function getOsagoPower(){
         return self::OSAGO_POWER;
     }
 
+    /**
+     * @return array
+     */
     public static function getLivePrice(){
         return self::LIVE_PRICE;
     }
 
+    /**
+     * @return array
+     */
     public static function getRealtyPriceRepair(){
         return self::REALTY_PRICE_REPAIR;
     }
+
+    /**
+     * @return array
+     */
+    public static function getTravelDurations(){
+        return self::TRAVEL_DURATION;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTravelAgeGroups(){
+        return self::TRAVEL_AGE_GROUP;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTravelSummInsures(){
+        return self::TRAVEL_AGE_GROUP;
+    }
+
+    public static function getSummInsurance($id){
+        $result = self::TRAVEL_SUMM_INSURED[1];
+        if(isset(self::TRAVEL_SUMM_INSURED[$id])){
+            $result = self::TRAVEL_SUMM_INSURED[$id];
+        }
+        return $result;
+    }
+
+
 }
