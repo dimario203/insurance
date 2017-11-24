@@ -29,15 +29,16 @@ $this->title = 'Epolis.shop';
                         <hr>
 
 
+                        <?php
+                        $form = ActiveForm::begin([
+                            'method'=>'post',
+                            'action'=>\yii\helpers\Url::to(['site/travel-list']),
+                            'id'=>'travel-form'
+                        ]) ?>
                         <div class="form-travel-list none">
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
-                                    <?php
-                                    $form = ActiveForm::begin([
-                                        'method'=>'post',
-                                        'action'=>\yii\helpers\Url::to(['site/travel-list']),
-                                        'id'=>'travel-form'
-                                    ]) ?>
+
                                     <div class="form-group py-2">
                                         <label for="countries" class="text-center font-weight-bold pb-2">Выберите страну</label>
                                         <?php
@@ -92,7 +93,7 @@ $this->title = 'Epolis.shop';
                                             </button>
                                         </div>
                                     </div>
-                                    <?php ActiveForm::end() ?>
+
                                 </div>
                             </div>
                         </div>
@@ -100,52 +101,42 @@ $this->title = 'Epolis.shop';
 
                         <div class="additional-payd">
                             <p class="card-text">Сумма страховки:</p>
-
-                            <select class="form-control form-control-lg result-select bg-white mb-2" id="euro">
-                                <option>50 000€</option>
-                                <option>50 001€</option>
-                                <option>50 002€</option>
-                            </select>
-
+                            <?php
+                            echo $form->field($model, 'summ')->dropDownList(
+                                $all_summ_insurance,
+                                ['prompt'=>'Выберите сумму страховки',
+                                    'class' => 'form-control form-control-lg result-select bg-white mb-2',
+                                    'id' => "euro"
+                                ]
+                            )->label(false);
+                            ?>
+                            <?php
+                            foreach($types_additional_payd as $key=>$payd){?>
+                                <label class="result-control result-radio">
+                                    <?php
+                                    echo $form->field($model, "additional_payd[$key]", ['template' => "<span class=\"result-control-indicator\"></span>{input}<span class=\"result-control-indicator\"></span> <span class=\"result-control-description\">$payd</span>"])
+                                        ->checkbox([
+                                                'class'=>'result-control-input',
+                                        ], false)->label(false)->error(false);
+                                    ?>
+                                </label>
+                            <?php
+                            }  ?>
                             <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Отмена поездки</span>
+                                <?php
+                                echo $form->field($model, "travel_accident", ['template' => "<span class=\"result-control-indicator\"></span>{input}<span class=\"result-control-indicator\"></span> <span class=\"result-control-description\">Несчастный случай</span>"])
+                                    ->checkbox([
+                                        'class' => 'result-control-input',
+                                    ], false)->label(false)->error(false);
+                                ?>
                             </label>
                             <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Задержка авиарейса</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Отмена поездки</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Задержка авиарейса</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Отмена поездки</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Задержка авиарейса</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Отмена поездки</span>
-                            </label>
-                            <label class="result-control result-radio">
-                                <input name="radio" type="radio" class="result-control-input">
-                                <span class="result-control-indicator"></span>
-                                <span class="result-control-description">Задержка авиарейса</span>
+                                <?php
+                                echo $form->field($model, "civil_responsibility", ['template' => "<span class=\"result-control-indicator\"></span>{input}<span class=\"result-control-indicator\"></span> <span class=\"result-control-description\">Гражданская ответственность</span>"])
+                                    ->checkbox([
+                                        'class' => 'result-control-input',
+                                    ], false)->label(false)->error(false);
+                                ?>
                             </label>
 
                             <button type="submit" class="btn btn-red btn-lg btn-block my-3">
@@ -154,6 +145,7 @@ $this->title = 'Epolis.shop';
 
                             <p class="card-text text-center small"><a href="#">отправить на email</a></p>
                         </div>
+                        <?php ActiveForm::end() ?>
                     </div>
                 </div>
             </div>

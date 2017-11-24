@@ -12,8 +12,12 @@ use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
 use app\models\settings\SiteSettings;
 use app\models\statistic\Statistic;
+use app\models\travel\AdditionalPaid;
+use app\models\travel\CivilResponsibility;
+use app\models\travel\GetAditionalPayd;
 use app\models\travel\GetCountry;
 use app\models\travel\Travel;
+use app\models\travel\TravelAccident;
 use frontend\actions\PageAction;
 use frontend\actions\PostAction;
 use frontend\models\ContactForm;
@@ -188,15 +192,18 @@ class SiteController extends \yeesoft\controllers\BaseController
             $model = new TravelForm();
             $model->load(\Yii::$app->request->post());
             if ($model->validate()) {
+                //print_r($model); die('www');
+                $country_polis = '';
+                $country_name = GetCountry::get_Country($model->country);
+                $summ_insuranse = FormData::getSummInsurance($model->summ);
+                $all_summ_insurance = FormData::getTravelSummInsurances();
+                $types_additional_payd = GetAditionalPayd::getTypesAdditionalPayd();
+                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                $travel_find = new TravelFind();
+                $category_travel_duration = $travel_find->findCategoryDuration($duration);
                 $models_peaple = [];
                 $peaples = explode(',', $model->birth);
                 foreach($peaples as $peaple){
-                    $country_polis = '';
-                    $country_name = GetCountry::get_Country($model->country);
-                    $summ_insuranse = FormData::getSummInsurance($model->summ);
-                    $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
-                    $travel_find = new TravelFind();
-                    $category_travel_duration = $travel_find->findCategoryDuration($duration);
                     $date_born = date_create(trim($peaple));
                     $date_now= date_create();
                     $interval = date_diff($date_born,  $date_now);
@@ -236,56 +243,134 @@ class SiteController extends \yeesoft\controllers\BaseController
                            }
                         }
                         if($coincidence != 0){
+                            $add_price = 0;
+                            $break_polis = 0;
+                            $count_add_payd = 0;
+                            if(!empty($model->additional_payd)){
+                                foreach($model->additional_payd as $payd_id=>$payd){
+                                    if($payd != 0) {
+                                        $count_add_payd++;
+                                        $company_additional_payd = AdditionalPaid::find()
+                                            ->where(['company_id' => $polis['company']['company_id']])
+                                            ->andWhere(['paid_id' => $payd_id])
+                                            ->limit(1)
+                                            ->one();
+                                        if($company_additional_payd!=null){
+                                            $add_price+= $company_additional_payd->price;
+                                        } else {
+                                            $break_polis = 1;
+                                        }
+                                    }
+                                }
+                            }
+                            if($count_add_payd > 0){
+                                if($break_polis > 0){
+                                    continue;
+                                } else {
+                                    $polis['price'] = $summary_price + $add_price * $count_peaple;
+                                }
+                            } else {
+                                $polis['price'] = $summary_price;
+                            }
+                            if($model->civil_responsibility ==1){
+                                $civil_responsibility = CivilResponsibility::find()
+                                    ->where(['company_id' => $polis['company']['company_id']])
+                                    ->andWhere(['country_id' => $model->country])
+                                    ->andWhere(['duration' => $category_travel_duration])
+                                    ->limit(1)
+                                    ->one();
+                                if($civil_responsibility!=null){
+                                    $polis['price']+=$civil_responsibility->price * $count_peaple;
+                                } else {
+                                    continue;
+                                }
+                            }
+                            if($model->travel_accident ==1){
+                                $travel_accident = TravelAccident::find()
+                                    ->where(['company_id' => $polis['company']['company_id']])
+                                    ->andWhere(['country_id' => $model->country])
+                                    ->andWhere(['duration' => $category_travel_duration])
+                                    ->andWhere(['sum_insured' => $model->summ])
+                                    ->limit(1)
+                                    ->one();
+                                if($travel_accident!=null){
+                                    $polis['price']+=$travel_accident->price * $count_peaple;
+                                } else {
+                                    continue;
+                                }
+                            }
                             $polis_ids[] = $polis['id'];
-                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$summary_price];
+                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
                         }
                     }
                 } elseif($count_peaple == 1){
-                    //print_r($models_peaple[0]); die('qqq');
                     foreach ($models_peaple[0] as $key=>$polis){
+                        $add_price = 0;
+                        $break_polis = 0;
+                        $count_add_payd = 0;
+                        if(!empty($model->additional_payd)){
+                            foreach($model->additional_payd as $payd_id=>$payd){
+                                if($payd != 0) {
+                                    $count_add_payd++;
+                                    $company_additional_payd = AdditionalPaid::find()
+                                        ->where(['company_id' => $polis['company']['company_id']])
+                                        ->andWhere(['paid_id' => $payd_id])
+                                        ->limit(1)
+                                        ->one();
+                                    if($company_additional_payd!=null){
+                                        $add_price+= $company_additional_payd->price;
+                                    } else {
+                                        $break_polis = 1;
+                                    }
+                                }
+                            }
+                        }
+                        if($count_add_payd > 0){
+                            if($break_polis > 0){
+                                continue;
+                            } else {
+                                $polis['price'] = $polis['price'] + $add_price;
+                            }
+                        }
+                        if($model->civil_responsibility ==1){
+                            //print_r($model->civil_responsibility); die('www');
+                            $civil_responsibility = CivilResponsibility::find()
+                                ->where(['company_id' => $polis['company']['company_id']])
+                                ->andWhere(['country_id' => $model->country])
+                                ->andWhere(['duration' => $category_travel_duration])
+                                ->limit(1)
+                                ->one();
+                            if($civil_responsibility!=null){
+                                //print_r($model->civil_responsibility); die('www');
+                                $polis['price']+=$civil_responsibility->price;
+                            } else {
+                                continue;
+                            }
+                        }
+                        if($model->travel_accident ==1){
+                            //print_r($model->summ); die('xxx');
+                            $travel_accident = TravelAccident::find()
+                                ->where(['company_id' => $polis['company']['company_id']])
+                                ->andWhere(['country_id' => $model->country])
+                                ->andWhere(['duration' => $category_travel_duration])
+                                ->andWhere(['sum_insured' => $model->summ])
+                                ->limit(1)
+                                ->one();
+                            //print_r($travel_accident); die('sss');
+                            if($travel_accident!=null){
+                                $polis['price']+=$travel_accident->price;
+                            } else {
+                                continue;
+                            }
+                        }
+
                         $polis_ids[] = $polis['id'];
                         $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
                     }
                 } else {
                     return $this->render('list/travel-list', ['pages'=>[]]);
                 }
-
-
-
-                /*$country_polis = '';
-                $country_name = GetCountry::get_Country($model->country);
-                $summ_insuranse = FormData::getSummInsurance($model->summ);
-                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
-                $travel_find = new TravelFind();
-                $category_travel_duration = $travel_find->findCategoryDuration($duration);
-                $date_born = date_create(trim($model->birth));
-                $date_now= date_create();
-                $interval = date_diff($date_born,  $date_now);
-                $age = $interval->y;
-                $category_age = $travel_find->findAgeGroup($age);
-                $query = Travel::find()
-                    ->where(['country_id' => $model->country])
-                    ->andWhere(['duration' => $category_travel_duration])
-                    ->andWhere(['age' => $category_age])
-                    ->andWhere(['sum_insured' => $model->summ])
-                    ->with('company');
-                $countQuery = clone $query;
-                $count_polises = $countQuery->count();
-                $pages = new Pagination(['totalCount' => $count_polises,
-                    'pageSize' => $this->page_size,
-                    'params' => [
-                        'country' => $model->country,
-                        'date_from' => $model->date_from,
-                        'date_to' => $model->date_to,
-                        'birth' => $model->birth,
-                    ]]);
-                $pages->pageSizeParam = 'per-page';
-                $models = $query->offset($pages->offset)
-                    ->limit($pages->limit)
-                    ->asArray()
-                    ->all();*/
-
-                //print_r($polis_ids); die('www');
+                //print_r($polis_ids); die('eee');
                 $query = Travel::find()
                     ->where(['in', 'id', $polis_ids])
                     ->with('company');
@@ -298,13 +383,17 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'date_from' => $model->date_from,
                         'date_to' => $model->date_to,
                         'birth' => $model->birth,
+                        'summ' => $model->summ,
+                        'additional_payd' => serialize($model->additional_payd),
+                        'travel_accident' => $model->travel_accident,
+                        'civil_responsibility' => $model->civil_responsibility,
                     ]]);
                 $pages->pageSizeParam = 'per-page';
                 $models = $query->offset($pages->offset)
                     ->limit($pages->limit)
                     ->asArray()
                     ->all();
-
+                //print_r($model->civil_responsibility); die('sss');
                 if ($models != []) {
                     foreach ($models as $polis) {
                         $summ = FormData::getSummInsurance($polis['sum_insured']);
@@ -323,6 +412,9 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'model'=>$model,
                         'countries' => $countries,
                         'summ_insuranse' => $summ_insuranse,
+                        'all_summ_insurance' => $all_summ_insurance,
+                        'types_additional_payd' => $types_additional_payd,
+
                     ]);
             } else {
                 $errors = $model->errors;
@@ -335,17 +427,23 @@ class SiteController extends \yeesoft\controllers\BaseController
             $model->date_from = \Yii::$app->request->get('date_from', 1);
             $model->date_to = \Yii::$app->request->get('date_to', 1);
             $model->birth = \Yii::$app->request->get('birth', 1);
+            $model->summ = \Yii::$app->request->get('summ', 1);
+            $model->additional_payd = unserialize(\Yii::$app->request->get('additional_payd'));
+            $model->civil_responsibility = \Yii::$app->request->get('civil_responsibility', 1);
+            $model->travel_accident = \Yii::$app->request->get('travel_accident', 1);
             if($model->validate()){
+                $message = '';
+                $country_polis = '';
+                $country_name = GetCountry::get_Country($model->country);
+                $summ_insuranse = FormData::getSummInsurance($model->summ);
+                $all_summ_insurance = FormData::getTravelSummInsurances();
+                $types_additional_payd = GetAditionalPayd::getTypesAdditionalPayd();
+                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
+                $travel_find = new TravelFind();
+                $category_travel_duration = $travel_find->findCategoryDuration($duration);
                 $models_peaple = [];
                 $peaples = explode(',', $model->birth);
                 foreach($peaples as $peaple){
-                    $message = '';
-                    $country_polis = '';
-                    $country_name = GetCountry::get_Country($model->country);
-                    $summ_insuranse = FormData::getSummInsurance($model->summ);
-                    $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
-                    $travel_find = new TravelFind();
-                    $category_travel_duration = $travel_find->findCategoryDuration($duration);
                     $date_born = date_create(trim($peaple));
                     $date_now= date_create();
                     $interval = date_diff($date_born,  $date_now);
@@ -385,13 +483,126 @@ class SiteController extends \yeesoft\controllers\BaseController
                             }
                         }
                         if($coincidence != 0){
+                            $add_price = 0;
+                            $break_polis = 0;
+                            $count_add_payd = 0;
+                            if(!empty($model->additional_payd)){
+                                foreach($model->additional_payd as $payd_id=>$payd){
+                                    if($payd != 0) {
+                                        $count_add_payd++;
+                                        $company_additional_payd = AdditionalPaid::find()
+                                            ->where(['company_id' => $polis['company']['company_id']])
+                                            ->andWhere(['paid_id' => $payd_id])
+                                            ->limit(1)
+                                            ->one();
+                                        if($company_additional_payd!=null){
+                                            $add_price+= $company_additional_payd->price;
+                                        } else {
+                                            $break_polis = 1;
+                                        }
+                                    }
+                                }
+                            }
+                            if($count_add_payd > 0){
+                                if($break_polis > 0){
+                                    continue;
+                                } else {
+                                    $polis['price'] = $summary_price + $add_price * $count_peaple;
+                                }
+                            } else {
+                                $polis['price'] = $summary_price;
+                            }
+                            if($model->civil_responsibility ==1){
+                                $civil_responsibility = CivilResponsibility::find()
+                                    ->where(['company_id' => $polis['company']['company_id']])
+                                    ->andWhere(['country_id' => $model->country])
+                                    ->andWhere(['duration' => $category_travel_duration])
+                                    ->limit(1)
+                                    ->one();
+                                if($civil_responsibility!=null){
+                                    $polis['price']+=$civil_responsibility->price * $count_peaple;
+                                } else {
+                                    continue;
+                                }
+                            }
+                            if($model->travel_accident ==1){
+                                $travel_accident = TravelAccident::find()
+                                    ->where(['company_id' => $polis['company']['company_id']])
+                                    ->andWhere(['country_id' => $model->country])
+                                    ->andWhere(['duration' => $category_travel_duration])
+                                    ->andWhere(['sum_insured' => $model->summ])
+                                    ->limit(1)
+                                    ->one();
+                                if($travel_accident!=null){
+                                    $polis['price']+=$travel_accident->price * $count_peaple;
+                                } else {
+                                    continue;
+                                }
+                            }
                             $polis_ids[] = $polis['id'];
-                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$summary_price];
+                            $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
                         }
                     }
                 } elseif($count_peaple == 1){
                     //print_r($models_peaple[0]); die('qqq');
                     foreach ($models_peaple[0] as $key=>$polis){
+                        $add_price = 0;
+                        $break_polis = 0;
+                        $count_add_payd = 0;
+                        if(!empty($model->additional_payd)){
+                            foreach($model->additional_payd as $payd_id=>$payd){
+                                if($payd != 0) {
+                                    $count_add_payd++;
+                                    $company_additional_payd = AdditionalPaid::find()
+                                        ->where(['company_id' => $polis['company']['company_id']])
+                                        ->andWhere(['paid_id' => $payd_id])
+                                        ->limit(1)
+                                        ->one();
+                                    if($company_additional_payd!=null){
+                                        $add_price+= $company_additional_payd->price;
+                                    } else {
+                                        $break_polis = 1;
+                                    }
+                                }
+                            }
+                        }
+                        if($count_add_payd > 0){
+                            if($break_polis > 0){
+                                continue;
+                            } else {
+                                $polis['price'] = $polis['price'] + $add_price;
+                            }
+                        }
+                        if($model->civil_responsibility ==1){
+                            //print_r($model->civil_responsibility); die('www');
+                            $civil_responsibility = CivilResponsibility::find()
+                                ->where(['company_id' => $polis['company']['company_id']])
+                                ->andWhere(['country_id' => $model->country])
+                                ->andWhere(['duration' => $category_travel_duration])
+                                ->limit(1)
+                                ->one();
+                            if($civil_responsibility!=null){
+                                //print_r($model->civil_responsibility); die('www');
+                                $polis['price']+=$civil_responsibility->price;
+                            } else {
+                                continue;
+                            }
+                        }
+                        if($model->travel_accident ==1){
+                            $travel_accident = TravelAccident::find()
+                                ->where(['company_id' => $polis['company']['company_id']])
+                                ->andWhere(['country_id' => $model->country])
+                                ->andWhere(['duration' => $category_travel_duration])
+                                ->andWhere(['sum_insured' => $model->summ])
+                                ->limit(1)
+                                ->one();
+                            if($travel_accident!=null){
+                                $polis['price']+=$travel_accident->price;
+                            } else {
+                                continue;
+                            }
+                        }
+                        //print_r($model->civil_responsibility); die('sss');
                         $polis_ids[] = $polis['id'];
                         $data_polises[$polis['id']] = ['id'=>$polis['id'], 'price'=>$polis['price']];
                     }
@@ -410,6 +621,10 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'date_from' => $model->date_from,
                         'date_to' => $model->date_to,
                         'birth' => $model->birth,
+                        'summ' => $model->summ,
+                        'additional_payd' => serialize($model->additional_payd),
+                        'travel_accident' => $model->travel_accident,
+                        'civil_responsibility' => $model->civil_responsibility,
                     ]]);
                 $pages->pageSizeParam = 'per-page';
                 $page = \Yii::$app->request->get('page', 0);
@@ -419,47 +634,10 @@ class SiteController extends \yeesoft\controllers\BaseController
                     ->asArray()
                     ->all();
 
-
-                /*$message = '';
-                $country_polis = '';
-                $country_name = GetCountry::get_Country($model->country);
-                $summ_insuranse = FormData::getSummInsurance($model->summ);
-                $duration = (strtotime (trim($model->date_from))-strtotime (trim($model->date_to)))/(60*60*24);
-                $travel_find = new TravelFind();
-                $category_travel_duration = $travel_find->findCategoryDuration($duration);
-                $date_born = date_create(trim($model->birth));
-                $date_now= date_create();
-                $interval = date_diff($date_born,  $date_now);
-                $age = $interval->y;
-                $category_age = $travel_find->findAgeGroup($age);
-                $query = Travel::find()
-                    ->where(['country_id' => $model->country])
-                    ->andWhere(['duration' => $category_travel_duration])
-                    ->andWhere(['age' => $category_age])
-                    ->andWhere(['sum_insured' => $model->summ])
-                    ->with('company');
-                $countQuery = clone $query;
-                $count_polises = $countQuery->count();
-                $pages = new Pagination(['totalCount' => $count_polises,
-                    'pageSize' => $this->page_size,
-                    'params' => [
-                        'country' => $model->country,
-                        'date_from' => $model->date_from,
-                        'date_to' => $model->date_to,
-                        'birth' => $model->birth,
-                    ]]);
-                $pages->pageSizeParam = 'per-page';
-                $page = \Yii::$app->request->get('page', 0);
-                $offset = ($page -1) * $this->page_size;
-                $models = $query->offset($offset)
-                    ->limit($pages->limit)
-                    ->asArray()
-                    ->all();*/
-
-
                 if ($models != []) {
                     foreach ($models as $polis) {
                         $summ = FormData::getSummInsurance($polis['sum_insured']);
+                        $polis['price'] = $data_polises[$polis['id']]['price'];
                         $country_polis = $country_polis . $this->renderPartial('list/travel-list-item', ['polis' => $polis, 'summ'=>$summ], true);
                     }
                 }
@@ -472,6 +650,8 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'model'=>$model,
                         'countries' => $countries,
                         'summ_insuranse' => $summ_insuranse,
+                        'all_summ_insurance' => $all_summ_insurance,
+                        'types_additional_payd' => $types_additional_payd,
                     ]);
             } else {
                 $errors = $model->errors;

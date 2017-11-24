@@ -101,8 +101,8 @@ class FormData
     /**
      * @return array
      */
-    public static function getTravelSummInsures(){
-        return self::TRAVEL_AGE_GROUP;
+    public static function getTravelSummInsurances(){
+        return self::TRAVEL_SUMM_INSURED;
     }
 
     public static function getSummInsurance($id){

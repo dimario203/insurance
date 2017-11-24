@@ -16,9 +16,10 @@ class TravelForm extends  Model
     public $date_from;
     public $date_to;
     public $birth;
-    public $travel_accident;
+    public $travel_accident = [];
     public $civil_responsibility;
     public $summ;
+    public $additional_payd;
 
 
     public function rules()
@@ -27,6 +28,7 @@ class TravelForm extends  Model
             [['country', 'date_from', 'date_to', 'birth'], 'required', 'message'=>'Поле не может быть пустым'],
             [['travel_accident', 'civil_responsibility'], 'default', 'value'=>0 ],
             ['summ', 'default', 'value'=>1 ],
+            ['additional_payd', 'each', 'rule' => ['integer']],
         ];
     }
 }

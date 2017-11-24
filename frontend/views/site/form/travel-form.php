@@ -181,6 +181,7 @@ $(document).ready(function(){
         multidateSeparator: ",",
         clearBtn: true,
         autoclose: true, 
+        startView: 3,
     });
     $('.date-from').datepicker({
         todayBtn: "linked",

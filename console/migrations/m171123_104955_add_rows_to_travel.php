@@ -22,30 +22,30 @@ class m171123_104955_add_rows_to_travel extends Migration
         $this->insert('{{%travel}}', ['company_id' => 1, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
        
-        $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
         $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-        $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 300]);
         $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
         $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
         $this->insert('{{%travel}}', ['company_id' => 2, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
 
-        $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 300]);
         $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-        $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 500]);
         $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
         $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
         $this->insert('{{%travel}}', ['company_id' => 3, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
 
-        $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 400]);
         $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-        $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+        $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 250]);
         $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
         $this->insert('{{%travel}}', ['company_id' => 4, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
@@ -67,30 +67,30 @@ class m171123_104955_add_rows_to_travel extends Migration
          $this->delete('travel', ['company_id' => 1, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
 
-         $this->delete('travel', ['company_id' => 2, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 2, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
          $this->delete('travel', ['company_id' => 2, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-         $this->delete('travel', ['company_id' => 2, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 2, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 300]);
          $this->delete('travel', ['company_id' => 2, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
          $this->delete('travel', ['company_id' => 2, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
          $this->delete('travel', ['company_id' => 2, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
 
-         $this->delete('travel', ['company_id' => 3, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 3, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 300]);
          $this->delete('travel', ['company_id' => 3, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-         $this->delete('travel', ['company_id' => 3, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 3, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 500]);
          $this->delete('travel', ['company_id' => 3, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
          $this->delete('travel', ['company_id' => 3, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
          $this->delete('travel', ['company_id' => 3, 'country_id' => 3, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
 
-         $this->delete('travel', ['company_id' => 4, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 4, 'country_id' => 1, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 400]);
          $this->delete('travel', ['company_id' => 4, 'country_id' => 1, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
-         $this->delete('travel', ['company_id' => 4, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);
+         $this->delete('travel', ['company_id' => 4, 'country_id' => 2, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 250]);
          $this->delete('travel', ['company_id' => 4, 'country_id' => 2, 'duration' => 1, 'age' => 1, 'sum_insured' => 1, 'price' => 200]);
 
          $this->delete('travel', ['company_id' => 4, 'country_id' => 3, 'duration' => 0, 'age' => 1, 'sum_insured' => 1, 'price' => 100]);

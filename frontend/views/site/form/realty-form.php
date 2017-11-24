@@ -37,7 +37,8 @@ $this->title = 'Epolis.shop';
                                     $regions,
                                     ['prompt'=>'Выберите город',
                                      'class' => 'form-control form-control-lg',
-                                     'name'=>'region']
+                                     //'name'=>'region'
+                                    ]
                                 )->label(false);
                                 ?>
                             </div>
@@ -48,7 +49,8 @@ $this->title = 'Epolis.shop';
                                     $price,
                                     ['prompt'=>'Выберите сумму',
                                         'class' => 'form-control form-control-lg',
-                                        'name'=>'price_repair']
+                                        //'name'=>'price_repair'
+                                    ]
                                 )->label(false);
                                 ?>
                             </div>
@@ -57,7 +59,7 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'lease')
                                     ->checkbox([
                                         'label' => 'Квартира сдается в аренду',
-                                        'name'=>'lease',
+                                        //'name'=>'lease',
                                     ])->error(false);
                                 ?>
                             </div>
