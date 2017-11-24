@@ -189,6 +189,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionTravelList()
     {
+        $status = 'ok';
         $countries = GetCountry::get_Countries();
         if(\Yii::$app->request->post()) {
             $message = '';
@@ -417,12 +418,13 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'summ_insuranse' => $summ_insuranse,
                         'all_summ_insurance' => $all_summ_insurance,
                         'types_additional_payd' => $types_additional_payd,
+                        'status' => $status,
 
                     ]);
             } else {
-                $errors = $model->errors;
-                //print_r($errors); die('qqq');
-                return $this->render('list/travel-list', ['pages'=>[]]);
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                $status = 'error';
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         } elseif(\Yii::$app->request->get('page')) {
             $model = new TravelForm();
@@ -655,14 +657,17 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'summ_insuranse' => $summ_insuranse,
                         'all_summ_insurance' => $all_summ_insurance,
                         'types_additional_payd' => $types_additional_payd,
+                        'status' => $status
                     ]);
             } else {
-                $errors = $model->errors;
-                //print_r($errors); die('qqq');
-                return $this->render('list/travel-list', ['pages'=>[]]);
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                $status = 'error';
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         }
-        return $this->render('list/travel-list', ['pages'=>[]]);
+        $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+        $status = 'error';
+        return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
     }
 
 
@@ -673,6 +678,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionOsagoList()
     {
+        $status = 'ok';
         $power = FormData::getOsagoPower();
         $regions = GetRegions::get_Regions();
         if(\Yii::$app->request->post()) {
@@ -736,11 +742,13 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'message'=>$message,
                         'model'=>$model,
                         'regions'=>$regions,
-                        'power'=>$power
+                        'power'=>$power,
+                        'status'=>$status
                     ]);
             } else {
-                $errors = $model->errors;
-                return $this->render('list/osago-list');
+                $status = 'error';
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         } elseif(\Yii::$app->request->get('page')) {
             $model = new OsagoForm();
@@ -789,13 +797,18 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'message'=>$message,
                         'model'=>$model,
                         'regions'=>$regions,
-                        'power'=>$power
+                        'power'=>$power,
+                        'status'=>$status
                     ]);
             }else{
-                return $this->render('list/osago-list');
+                $status = 'error';
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         }
-        return $this->render('list/osago-list', ['pages'=>[]]);
+        $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+        $status = 'error';
+        return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
     }
 
 
@@ -806,6 +819,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveList()
     {
+        $status = 'ok';
         $model = new LiveForm();
         $all_summ_insurance = FormData::getLivePrice();
         $all_pay_hospital = FormData::getPayHospital();
@@ -866,24 +880,13 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'all_pay_hospital' => $all_pay_hospital,
                         'all_pay_surgey' => $all_pay_surgey,
                         'age' => $model->age,
-                        'summ_insurance' => $summ_insurance
+                        'summ_insurance' => $summ_insurance,
+                        'status' => $status,
                     ]);
             } else {
-                $errors = $model->errors;
                 $status = 'error';
                 $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-                return $this->render('list/live-list',
-                    [
-                        'live_polis' => '',
-                        'pages' => [],
-                        'model' => $model,
-                        'message'=>$message,
-                        'all_summ_insurance' => [],
-                        'all_pay_hospital' => [],
-                        'all_pay_surgey' => [],
-                        'age' => 0,
-                        'summ_insurance' => 0
-                    ]);
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
 
         } elseif(\Yii::$app->request->get('page')) {
@@ -947,39 +950,18 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'all_pay_hospital' => $all_pay_hospital,
                         'all_pay_surgey' => $all_pay_surgey,
                         'age' => $model->age,
-                        'summ_insurance' => $summ_insurance
+                        'summ_insurance' => $summ_insurance,
+                        'status' => $status,
                     ]);
             } else {
-                $errors = $model->errors;
-                //print_r($model); die('333');
+                $status = 'error';
                 $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-                return $this->render('list/live-list',
-                    [
-                        'live_polis' => '',
-                        'pages' => [],
-                        'model' => $model,
-                        'message'=>$message,
-                        'all_summ_insurance' => [],
-                        'all_pay_hospital' => [],
-                        'all_pay_surgey' => [],
-                        'age' => 0,
-                        'summ_insurance' => 0
-                    ]);
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         }
         $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-        return $this->render('list/live-list',
-            [
-                'live_polis' => '',
-                'pages' => [],
-                'model' => $model,
-                'message'=>$message,
-                'all_summ_insurance' => [],
-                'all_pay_hospital' => [],
-                'all_pay_surgey' => [],
-                'age' => 0,
-                'summ_insurance' => 0
-            ]);
+        $status = 'error';
+        return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
     }
 
 
@@ -990,6 +972,7 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyList()
     {
+        $status = 'ok';
         $message = '';
         $regions = GetRegions::get_Regions();
         $model = new RealtyForm();
@@ -1054,23 +1037,12 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'summ_insurance' => $summ_insurance,
                         'regions' => $regions,
                         'region' => $region,
+                        'status'=>$status,
                     ]);
             } else {
-                $errors = $model->errors;
                 $status = 'error';
                 $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-                return $this->render('list/realty-list',
-                    [
-                        'live_polis' => '',
-                        'pages' => [],
-                        'model' => $model,
-                        'message'=>$message,
-                        'all_summ_insurance' => [],
-                        'all_pay_hospital' => [],
-                        'all_pay_surgey' => [],
-                        'age' => 0,
-                        'summ_insurance' => 0
-                    ]);
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
         } elseif(\Yii::$app->request->get('page')) {
             $model->region = \Yii::$app->request->get('region_id', 1);
@@ -1136,39 +1108,18 @@ class SiteController extends \yeesoft\controllers\BaseController
                         'summ_insurance' => $summ_insurance,
                         'regions' => $regions,
                         'region' => $region,
+                        'status'=>$status
                     ]);
             } else {
-                $errors = $model->errors;
                 $status = 'error';
                 $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-                return $this->render('list/realty-list',
-                    [
-                        'live_polis' => '',
-                        'pages' => [],
-                        'model' => $model,
-                        'message'=>$message,
-                        'all_summ_insurance' => [],
-                        'all_pay_hospital' => [],
-                        'all_pay_surgey' => [],
-                        'age' => 0,
-                        'summ_insurance' => 0
-                    ]);
+                return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
             }
 
         }
         $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
-        return $this->render('list/live-list',
-            [
-                'live_polis' => '',
-                'pages' => [],
-                'model' => $model,
-                'message'=>$message,
-                'all_summ_insurance' => [],
-                'all_pay_hospital' => [],
-                'all_pay_surgey' => [],
-                'age' => 0,
-                'summ_insurance' => 0
-            ]);
+        $status = 'error';
+        return $this->render('list/realty-list', ['status'=>$status, 'message'=>$message]);
 
     }
 
