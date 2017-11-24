@@ -9,6 +9,7 @@ use app\models\polis\Live;
 use app\models\polis\LiveFind;
 use app\models\polis\Osago;
 use app\models\polis\OsagoFind;
+use app\models\polis\Realty;
 use app\models\polis\TravelFind;
 use app\models\regions\GetRegions;
 use app\models\settings\GetSiteSettings;
@@ -164,8 +165,8 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyForm()
     {
-        $price = FormData::getRealtyPriceRepair();
-        $regions = GetRegions::get_RealtyRegions();
+        $price = FormData::getRealtyPriceRepairAll();
+        $regions = GetRegions::get_Regions();
         $model = new RealtyForm();
         return $this->render('form/realty-form', ['model'=>$model, 'regions'=>$regions, 'price'=>$price]);
     }
@@ -989,8 +990,186 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionRealtyList()
     {
+        $message = '';
+        $regions = GetRegions::get_Regions();
+        $model = new RealtyForm();
+        $all_realty_price_repair = FormData::getRealtyPriceRepairAll();
+        $all_realty_price_constraction = FormData::getRealtyPriceConstractionAll();
+        $all_realty_price_civil_resp = FormData::getRealtyPriceCivilRespAll();
+        if(\Yii::$app->request->post()) {
+            $model->load(\Yii::$app->request->post());
+            if ($model->validate()) {
+                //print_r( $model); die('www');
+                $realty_polis = '';
+                $realty_price_repair = FormData::getRealtyPriceRepair($model->repair_price);
+                $realty_price_constraction = FormData::getRealtyPriceConstraction($model->constraction_price);
+                $realty_price_civil_resp = FormData::getRealtyPriceCivilResp($model->civil_resp);
+                $summ_insurance = ($realty_price_repair + $realty_price_constraction + $realty_price_civil_resp);
+                $summ_insurance = number_format($summ_insurance, 0, '.', ' ').' руб.';
+                $region = GetRegions::getRegion($model->region);
 
-        return $this->render('list/realty-list');
+                $query = Realty::find()
+                    ->where(['region_id' => $model->region])
+                    ->andWhere(['repair_price' => $model->repair_price])
+                    ->andWhere(['lease' => $model->lease])
+                    ->andWhere(['constraction_price' => $model->constraction_price])
+                    ->andWhere(['civil_resp' => $model->civil_resp])
+                    ->with('company');
+
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    //'linkOptions' => ['data-method' => 'post'],
+                    'params' => [
+                        'region_id' =>  $model->region,
+                        'repair_price' => $model->repair_price,
+                        'lease' => $model->lease,
+                        'constraction_price' => $model->constraction_price,
+                        'civil_resp' => $model->civil_resp,
+                    ]]);
+
+                $pages->pageSizeParam = 'per-page';
+                $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $realty_polis = $realty_polis.$this->renderPartial('list/realty-list-item', ['polis' => $polis, 'summ_insuranse' => $summ_insurance], true);
+                    }
+                } else {
+                    $message = 'Извините, но выбранным Вами параметрам нет компаний предоставляющих услуги';
+                }
+                return $this->render('list/realty-list',
+                    [
+                        'live_polis' => $realty_polis,
+                        'pages' => $pages,
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_realty_price_repair' => $all_realty_price_repair,
+                        'all_realty_price_constraction' => $all_realty_price_constraction,
+                        'all_realty_price_civil_resp' => $all_realty_price_civil_resp,
+                        'summ_insurance' => $summ_insurance,
+                        'regions' => $regions,
+                        'region' => $region,
+                    ]);
+            } else {
+                $errors = $model->errors;
+                $status = 'error';
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/realty-list',
+                    [
+                        'live_polis' => '',
+                        'pages' => [],
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => [],
+                        'all_pay_hospital' => [],
+                        'all_pay_surgey' => [],
+                        'age' => 0,
+                        'summ_insurance' => 0
+                    ]);
+            }
+        } elseif(\Yii::$app->request->get('page')) {
+            $model->region = \Yii::$app->request->get('region_id', 1);
+            $model->repair_price = \Yii::$app->request->get('repair_price', 1);
+            $model->lease = \Yii::$app->request->get('lease');
+            $model->constraction_price = \Yii::$app->request->get('constraction_price');
+            $model->civil_resp = \Yii::$app->request->get('civil_resp');
+            if($model->validate()){
+                //print_r( $model); die('www');
+                $realty_polis = '';
+                $realty_price_repair = FormData::getRealtyPriceRepair($model->repair_price);
+                $realty_price_constraction = FormData::getRealtyPriceConstraction($model->constraction_price);
+                $realty_price_civil_resp = FormData::getRealtyPriceCivilResp($model->civil_resp);
+                $summ_insurance = ($realty_price_repair + $realty_price_constraction + $realty_price_civil_resp);
+                $summ_insurance = number_format($summ_insurance, 0, '.', ' ').' руб.';
+                $region = GetRegions::getRegion($model->region);
+
+                $query = Realty::find()
+                    ->where(['region_id' => $model->region])
+                    ->andWhere(['repair_price' => $model->repair_price])
+                    ->andWhere(['lease' => $model->lease])
+                    ->andWhere(['constraction_price' => $model->constraction_price])
+                    ->andWhere(['civil_resp' => $model->civil_resp])
+                    ->with('company');
+
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    //'linkOptions' => ['data-method' => 'post'],
+                    'params' => [
+                        'region_id' =>  $model->region,
+                        'repair_price' => $model->repair_price,
+                        'lease' => $model->lease,
+                        'constraction_price' => $model->constraction_price,
+                        'civil_resp' => $model->civil_resp,
+                    ]]);
+
+                $pages->pageSizeParam = 'per-page';
+                $page = \Yii::$app->request->get('page', 0);
+                $offset = ($page -1) * $this->page_size;
+                $models = $query->offset($offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $realty_polis = $realty_polis.$this->renderPartial('list/realty-list-item', ['polis' => $polis, 'summ_insuranse' => $summ_insurance], true);
+                    }
+                } else {
+                    $message = 'Извините, но выбранным Вами параметрам нет компаний предоставляющих услуги';
+                }
+                return $this->render('list/realty-list',
+                    [
+                        'live_polis' => $realty_polis,
+                        'pages' => $pages,
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_realty_price_repair' => $all_realty_price_repair,
+                        'all_realty_price_constraction' => $all_realty_price_constraction,
+                        'all_realty_price_civil_resp' => $all_realty_price_civil_resp,
+                        'summ_insurance' => $summ_insurance,
+                        'regions' => $regions,
+                        'region' => $region,
+                    ]);
+            } else {
+                $errors = $model->errors;
+                $status = 'error';
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/realty-list',
+                    [
+                        'live_polis' => '',
+                        'pages' => [],
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => [],
+                        'all_pay_hospital' => [],
+                        'all_pay_surgey' => [],
+                        'age' => 0,
+                        'summ_insurance' => 0
+                    ]);
+            }
+
+        }
+        $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+        return $this->render('list/live-list',
+            [
+                'live_polis' => '',
+                'pages' => [],
+                'model' => $model,
+                'message'=>$message,
+                'all_summ_insurance' => [],
+                'all_pay_hospital' => [],
+                'all_pay_surgey' => [],
+                'age' => 0,
+                'summ_insurance' => 0
+            ]);
+
     }
 
 

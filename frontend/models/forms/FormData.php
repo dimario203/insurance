@@ -29,15 +29,42 @@ class FormData
     ];
 
     const REALTY_PRICE_REPAIR = [
-        '0'=>'30 000 руб.',
-        '1'=>'50 000 руб.',
-        '2'=>'100 000 руб.',
-        '3'=>'250 000 руб.',
-        '4'=>'500 000 руб.',
-        '5'=>'1 000 000 руб.',
-        '6'=>'2 500 000 руб.',
-        '7'=>'6 500 000 руб.',
-        '8'=>'9 000 000 руб.',
+        '0'=>0,
+        '1'=>30000,
+        '2'=>50000,
+        '3'=>100000,
+        '4'=>250000,
+        '5'=>500000,
+        '6'=>1000000,
+        '7'=>2500000,
+        '8'=>6500000,
+        '9'=>9000000,
+    ];
+
+    const REALTY_PRICE_CONSTRACTION = [
+        '0'=>0,
+        '1'=>30000,
+        '2'=>50000,
+        '3'=>100000,
+        '4'=>250000,
+        '5'=>500000,
+        '6'=>1000000,
+        '7'=>2500000,
+        '8'=>6500000,
+        '9'=>9000000,
+    ];
+
+    const REALTY_PRICE_CIVIL_RESPONS = [
+        '0'=>0,
+        '1'=>30000,
+        '2'=>50000,
+        '3'=>100000,
+        '4'=>250000,
+        '5'=>500000,
+        '6'=>1000000,
+        '7'=>2500000,
+        '8'=>6500000,
+        '9'=>9000000,
     ];
 
     const TRAVEL_DURATION = [
@@ -103,13 +130,6 @@ class FormData
     /**
      * @return array
      */
-    public static function getRealtyPriceRepair(){
-        return self::REALTY_PRICE_REPAIR;
-    }
-
-    /**
-     * @return array
-     */
     public static function getTravelDurations(){
         return self::TRAVEL_DURATION;
     }
@@ -165,6 +185,65 @@ class FormData
             $result = self::LIVE_PRICE[$id];
         }
         return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceRepairAll(){
+        $result = [];
+        $data = self::REALTY_PRICE_REPAIR;
+        foreach($data as $key=>$price){
+            $result[$key] = number_format($price, 0, '.', ' ').' руб.';
+        }
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceConstractionAll(){
+        $result = [];
+        $data = self::REALTY_PRICE_CONSTRACTION;
+        foreach($data as $key=>$price){
+            $result[$key] = number_format($price, 0, '.', ' ').' руб.';
+        }
+        return $result;
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceCivilRespAll(){
+        $result = [];
+        $data = self::REALTY_PRICE_CIVIL_RESPONS;
+        foreach($data as $key=>$price){
+            $result[$key] = number_format($price, 0, '.', ' ').' руб.';
+        }
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceRepair($id){
+        return self::REALTY_PRICE_REPAIR[$id];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceConstraction($id){
+        return self::REALTY_PRICE_CONSTRACTION[$id];
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getRealtyPriceCivilResp($id){
+        return self::REALTY_PRICE_CIVIL_RESPONS[$id];
     }
 
 

@@ -13,14 +13,19 @@ use \yii\base\Model;
 class RealtyForm extends  Model
 {
     public $region;
-    public $price_repair;
+    public $repair_price;
     public $lease;
+    public $constraction_price;
+    public $civil_resp;
 
 
     public function rules()
     {
         return [
-            [['region', 'price_repair', 'lease'], 'required', 'message'=>'Поле не может быть пустым'],
+            [['region', 'repair_price', 'lease'], 'required', 'message'=>'Поле не может быть пустым'],
+            [['repair_price', 'lease', 'constraction_price', 'civil_resp'], 'integer'],
+            [['constraction_price', 'civil_resp'], 'default', 'value'=>0 ],
+            ['lease', 'default', 'value'=>0 ],
         ];
     }
 }

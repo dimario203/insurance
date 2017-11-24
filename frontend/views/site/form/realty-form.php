@@ -37,7 +37,6 @@ $this->title = 'Epolis.shop';
                                     $regions,
                                     ['prompt'=>'Выберите город',
                                      'class' => 'form-control form-control-lg',
-                                     //'name'=>'region'
                                     ]
                                 )->label(false);
                                 ?>
@@ -45,11 +44,10 @@ $this->title = 'Epolis.shop';
                             <div class="form-group py-2">
                                 <label for="countries" class="text-center font-weight-bold pb-2">Внутренняя отделка</label>
                                 <?php
-                                echo $form->field($model, 'price_repair')->dropDownList(
+                                echo $form->field($model, 'repair_price')->dropDownList(
                                     $price,
                                     ['prompt'=>'Выберите сумму',
                                         'class' => 'form-control form-control-lg',
-                                        //'name'=>'price_repair'
                                     ]
                                 )->label(false);
                                 ?>
@@ -59,7 +57,6 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'lease')
                                     ->checkbox([
                                         'label' => 'Квартира сдается в аренду',
-                                        //'name'=>'lease',
                                     ])->error(false);
                                 ?>
                             </div>

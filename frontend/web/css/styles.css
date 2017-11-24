@@ -424,7 +424,8 @@ input[type="radio"] {
 }
 .close-form-osago,
 .close-form-travel,
-.close-form-live{
+.close-form-live,
+.close-form-realty{
     display: none;
     cursor: pointer;
 }
