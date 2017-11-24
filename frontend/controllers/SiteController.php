@@ -5,6 +5,8 @@ namespace frontend\controllers;
 use app\models\forms\FormData;
 use app\models\forms\RealtyForm;
 use app\models\forms\TravelForm;
+use app\models\polis\Live;
+use app\models\polis\LiveFind;
 use app\models\polis\Osago;
 use app\models\polis\OsagoFind;
 use app\models\polis\TravelFind;
@@ -792,6 +794,7 @@ class SiteController extends \yeesoft\controllers\BaseController
                 return $this->render('list/osago-list');
             }
         }
+        return $this->render('list/osago-list', ['pages'=>[]]);
     }
 
 
@@ -802,8 +805,180 @@ class SiteController extends \yeesoft\controllers\BaseController
      */
     public function actionLiveList()
     {
+        $model = new LiveForm();
+        $all_summ_insurance = FormData::getLivePrice();
+        $all_pay_hospital = FormData::getPayHospital();
+        $all_pay_surgey = FormData::getPaySurgey();
+        if(\Yii::$app->request->post()) {
+            $message = '';
+            $model->load(\Yii::$app->request->post());
+            if ($model->validate()) {
+                //print_r($model); die('www');
+                $live_polis = '';
+                $summ_insurance = FormData::getLiveSummInsurance($model->summa);
+                $live_find = new LiveFind();
+                $category_age = $live_find->findAgeGroup($model->age);
+                /*if (!isset($model->worked) || empty($model->worked) || ($model->worked == 0)) {
+                    $work = 0;
+                }*/
+                $query = Live::find()
+                    ->where(['age' => $category_age])
+                    ->andWhere(['sum_insured' => $model->summa])
+                    ->andWhere(['work' => $model->worked])
+                    ->andWhere(['pay_hospital' => $model->pay_hospital])
+                    ->andWhere(['pay_surgery' => $model->pay_surgery])
+                    ->with('company');
 
-        return $this->render('list/live-list');
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    //'linkOptions' => ['data-method' => 'post'],
+                    'params' => [
+                        'age' => $model->age,
+                        'summa' => $model->summa,
+                        'worked' => $model->worked,
+                        'pay_hospital' => $model->pay_hospital,
+                        'pay_surgery' => $model->pay_surgery,
+                    ]]);
+
+                $pages->pageSizeParam = 'per-page';
+                $models = $query->offset($pages->offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $live_polis = $live_polis.$this->renderPartial('list/live-list-item', ['polis' => $polis, 'summ_insuranse' => $summ_insurance], true);
+                    }
+                } else {
+                    $message = 'Извините, но выбранным Вами параметрам нет компаний предоставляющих услуги';
+                }
+                return $this->render('list/live-list',
+                    [
+                        'live_polis' => $live_polis,
+                        'pages' => $pages,
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => $all_summ_insurance,
+                        'all_pay_hospital' => $all_pay_hospital,
+                        'all_pay_surgey' => $all_pay_surgey,
+                        'age' => $model->age,
+                        'summ_insurance' => $summ_insurance
+                    ]);
+            } else {
+                $errors = $model->errors;
+                $status = 'error';
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/live-list',
+                    [
+                        'live_polis' => '',
+                        'pages' => [],
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => [],
+                        'all_pay_hospital' => [],
+                        'all_pay_surgey' => [],
+                        'age' => 0,
+                        'summ_insurance' => 0
+                    ]);
+            }
+
+        } elseif(\Yii::$app->request->get('page')) {
+            $model->age = \Yii::$app->request->get('age', 1);
+            $model->summa = \Yii::$app->request->get('summa');
+            $model->worked = \Yii::$app->request->get('worked');
+            $model->pay_hospital = \Yii::$app->request->get('pay_hospital');
+            $model->pay_surgery = \Yii::$app->request->get('pay_surgery');
+            if($model->validate()){
+                $message = '';
+                $live_polis = '';
+                $summ_insurance = FormData::getLiveSummInsurance($model->summa);
+                $live_find = new LiveFind();
+                $category_age = $live_find->findAgeGroup($model->age);
+                /*if (!isset($model->worked) || empty($model->worked) || ($model->worked == 0)) {
+                    $work = 0;
+                }*/
+                $query = Live::find()
+                    ->where(['age' => $category_age])
+                    ->andWhere(['sum_insured' => $model->summa])
+                    ->andWhere(['work' => $model->worked])
+                    ->andWhere(['pay_hospital' => $model->pay_hospital])
+                    ->andWhere(['pay_surgery' => $model->pay_surgery])
+                    ->with('company');
+
+                $countQuery = clone $query;
+                $count_polises = $countQuery->count();
+                $pages = new Pagination(['totalCount' => $count_polises,
+                    'pageSize' => $this->page_size,
+                    //'linkOptions' => ['data-method' => 'post'],
+                    'params' => [
+                        'age' => $model->age,
+                        'summa' => $model->summa,
+                        'worked' => $model->worked,
+                        'pay_hospital' => $model->pay_hospital,
+                        'pay_surgery' => $model->pay_surgery,
+                    ]]);
+
+                $pages->pageSizeParam = 'per-page';
+                $page = \Yii::$app->request->get('page', 0);
+                $offset = ($page -1) * $this->page_size;
+                $models = $query->offset($offset)
+                    ->limit($pages->limit)
+                    ->asArray()
+                    ->all();
+
+                if ($models != []) {
+                    foreach ($models as $polis) {
+                        $live_polis = $live_polis.$this->renderPartial('list/live-list-item', ['polis' => $polis, 'summ_insuranse' => $summ_insurance], true);
+                    }
+                } else {
+                    $message = 'Извините, но выбранным Вами параметрам нет компаний предоставляющих услуги';
+                }
+                return $this->render('list/live-list',
+                    [
+                        'live_polis' => $live_polis,
+                        'pages' => $pages,
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => $all_summ_insurance,
+                        'all_pay_hospital' => $all_pay_hospital,
+                        'all_pay_surgey' => $all_pay_surgey,
+                        'age' => $model->age,
+                        'summ_insurance' => $summ_insurance
+                    ]);
+            } else {
+                $errors = $model->errors;
+                //print_r($model); die('333');
+                $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+                return $this->render('list/live-list',
+                    [
+                        'live_polis' => '',
+                        'pages' => [],
+                        'model' => $model,
+                        'message'=>$message,
+                        'all_summ_insurance' => [],
+                        'all_pay_hospital' => [],
+                        'all_pay_surgey' => [],
+                        'age' => 0,
+                        'summ_insurance' => 0
+                    ]);
+            }
+        }
+        $message = 'Извините, произошел сбой системмы, попробуйте повторить поиск';
+        return $this->render('list/live-list',
+            [
+                'live_polis' => '',
+                'pages' => [],
+                'model' => $model,
+                'message'=>$message,
+                'all_summ_insurance' => [],
+                'all_pay_hospital' => [],
+                'all_pay_surgey' => [],
+                'age' => 0,
+                'summ_insurance' => 0
+            ]);
     }
 
 

@@ -17,7 +17,7 @@ $this->title = 'Epolis.shop';
                 <div class="card bg-light border-0 modal-form-overlay">
                     <div class="card-header bg-red text-white rounded">
                         <div class="media">
-                            <img src="images/car.png">
+                            <img class="logo-form-list" src="images/car.png">
                             <div class="media-body p-2">Страхование ОСАГО</div>
                             <span class="close-form-osago">x</span>
                         </div>

@@ -423,12 +423,17 @@ input[type="radio"] {
     display: none;
 }
 .close-form-osago,
-.close-form-travel{
+.close-form-travel,
+.close-form-live{
     display: none;
     cursor: pointer;
 }
 .form-osago-list #osagoform-power,
-.form-osago-list #osagoform-region{
+.form-osago-list #osagoform-region,
+#liveform-pay_hospital,
+#liveform-pay_surgery,
+.form-live-list #liveform-age,
+.form-live-list #liveform-summa{
     font-size: 14px;
 }
 .form-osago-list .radio_buttons .button-age,
@@ -460,5 +465,12 @@ input[type="radio"] {
 .form-osago-list #osagoform-min_age,
 .form-osago-list #osagoform-experience{
     margin-left: 20px;
+}
+.button-form-list{
+    font-size: 14px;
+    padding: 0.5rem 0.5rem;
+}
+.logo-form-list{
+    width: 50px;
 }
 /*------end osago list ------*/

@@ -63,6 +63,29 @@ class FormData
         '2'=>100000,
     ];
 
+    const LIVE_PAY_HOSPITAL =  [
+        '0'=>'50 000 руб.',
+        '1'=>'100 000 руб.',
+        '2'=>'200 000 руб.',
+        '3'=>'300 000 руб.',
+        '4'=>'500 000 руб.',
+    ];
+
+
+    const LIVE_PAY_SURGEY =  [
+        '0'=>'50 000 руб.',
+        '1'=>'100 000 руб.',
+        '2'=>'200 000 руб.',
+        '3'=>'300 000 руб.',
+        '4'=>'500 000 руб.',
+    ];
+
+    const LIVE_AGE_GROUP = [
+        '0'=>[0, 2],
+        '1'=>[3, 64],
+        '2'=>[65, 69],
+        '3'=>[70, 500],
+    ];
     /**
      * @return array
      */
@@ -105,10 +128,41 @@ class FormData
         return self::TRAVEL_SUMM_INSURED;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function getSummInsurance($id){
         $result = self::TRAVEL_SUMM_INSURED[1];
         if(isset(self::TRAVEL_SUMM_INSURED[$id])){
             $result = self::TRAVEL_SUMM_INSURED[$id];
+        }
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPayHospital(){
+        return self::LIVE_PAY_HOSPITAL;
+    }
+
+
+    /**
+     * @return array
+     */
+    public static function getPaySurgey(){
+        return self::LIVE_PAY_SURGEY;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getLiveSummInsurance($id){
+        $result = self::LIVE_PRICE[1];
+        if(isset(self::LIVE_PRICE[$id])){
+            $result = self::LIVE_PRICE[$id];
         }
         return $result;
     }

@@ -37,7 +37,7 @@ $this->title = 'Epolis.shop';
                                     [
                                         'type'=>'number',
                                         'class' => 'form-control form-control-lg',
-                                        'name'=>'age',
+                                        //'name'=>'age',
                                         'placeholder'=>"от 1 до 75 лет" ]
                                 )->label(false);
                                 ?>
@@ -49,7 +49,8 @@ $this->title = 'Epolis.shop';
                                     $price,
                                     ['prompt'=>'Выберите сумму',
                                         'class' => 'form-control form-control-lg',
-                                        'name'=>'summa']
+                                        //'name'=>'summa'
+                                    ]
                                 )->label(false);
                                 ?>
                             </div>
@@ -58,8 +59,9 @@ $this->title = 'Epolis.shop';
                                 echo $form->field($model, 'worked')
                                     ->checkbox([
                                         'label' => 'Застрахованный работает',
-                                        'name'=>'work',
+                                        //'name'=>'work',
                                         'checked' => true,
+                                        'value' =>1,
                                     ])->error(false);
                                 ?>
                             </div>
