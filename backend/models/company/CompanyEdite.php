@@ -44,11 +44,13 @@ class CompanyEdite
             $url = trim(strip_tags($post['url']));
             if($url!=''){
                 if(strcasecmp($url, trim($company->url)) != 0){
-                    if(stristr($url, 'https://') || stristr($url, 'http://')){
+                    //$company->url = \Yii::$app->formatter->asUrl($url, ['target'=>'_blank']);
+                    /*if(stristr($url, 'https://') || stristr($url, 'http://')){
                         $company->url = $url;
                     } else {
                         $company->url = 'http://'.$url;
-                    }
+                    }*/
+                    $company->url = $url;
                 }
             }
         }

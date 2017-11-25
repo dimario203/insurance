@@ -55,9 +55,9 @@
                 </span>
                     </div>
             <div class="col-md-2 justify-content-end font-weight-bold">
-                <a <?=$social_networks['facebook']?'href="'.$social_networks['facebook'].'"':''?>" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-                <a <?=$social_networks['vk']?'href="'.$social_networks['vk'].'"':''?>" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
-                <a <?=$social_networks['google']?'href="'.$social_networks['google'].'"':''?>" target="_blank"><i class="fa fa-envelope-open" aria-hidden="true"></i></a>
+                <?=$social_networks['facebook']?'<a  href="'.$social_networks['facebook'].'" target="_blank">  <i class="fa fa-facebook-official" aria-hidden="true"></i></a>':''?>
+                <?=$social_networks['vk']?'<a href="'.$social_networks['vk'].'"  target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>':''?>
+                <?=$social_networks['google']?'<a  href="'.$social_networks['google'].'"  target="_blank"><i class="fa fa-envelope-open" aria-hidden="true"></i></a>':''?>
             </div>
         </div>
     </div>

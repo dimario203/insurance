@@ -43,7 +43,7 @@ use yii\helpers\Url;
                     ?>
                     <tr>
                         <td ><?= $company['name'] ?></td>
-                        <td class="company-td-url"><a href="<?= $company['url'] ?>" target="_blank"><?= $company['url'] ?></a></td>
+                        <td class="company-td-url"><?=\Yii::$app->formatter->asUrl($company['url'], ['target'=>'_blank']);?></td>
                         <td><?= $company['phone'] ?></td>
                         <td><?= $company['commission'] ?></td>
                         <td><?= $company['logo'] ?></td>
