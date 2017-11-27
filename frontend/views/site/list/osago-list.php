@@ -15,7 +15,7 @@ $this->title = 'Epolis.shop';
         <?php
         if($status == 'error'){?>
             <div class="row pt-md-5">
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <h3 class="font-weight-bold text-center"><?=$message?></h3>
                 </div>
             </div>
@@ -23,7 +23,7 @@ $this->title = 'Epolis.shop';
         } else {
             ?>
             <div class="row pt-md-5">
-                <div class="col-md-3">
+                <div class="col-lg-3">
                     <div class="card bg-light border-0 modal-form-overlay">
                         <div class="card-header bg-red text-white rounded">
                             <div class="media">
@@ -40,7 +40,7 @@ $this->title = 'Epolis.shop';
 
                             <div class="form-osago-list none">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-lg-12">
                                         <?php
                                         $form = ActiveForm::begin([
                                             'method' => 'post',
@@ -131,7 +131,7 @@ $this->title = 'Epolis.shop';
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-lg-9">
                     <h2 class="font-weight-bold text-center">Предложения страховых фирм</h2>
                     <?php
                     if (isset($message) && !empty($message)) {
@@ -152,12 +152,14 @@ $this->title = 'Epolis.shop';
                         </div>
                     <?php } ?>
 
-                    <div class="col-md-12 center-block">
+
+                    <div class="col-lg-2 text-center list-pagination">
                         <?= LinkPager::widget([
                             'pagination' => $pages,
                         ]);
                         ?>
                     </div>
+
                 </div>
             </div>
             <?php

@@ -51,8 +51,8 @@ $this->title = 'Epolis.shop';
                                 ?>
                             </div>
                         <div class="form-group py-2">
-                            <label class="font-weight-bold pb-2">Минимальный возраст</label>
-                            <div class="radio_buttons">
+                            <label class="font-weight-bold pb-2 text-center">Минимальный возраст</label>
+                            <div class="radio_buttons  text-center">
                                 <?php
                                 echo $form->field($model, 'min_age')->radioList(['1'=>'До 22 лет', '2'=>'Более 22 лет'], [
 
@@ -64,8 +64,8 @@ $this->title = 'Epolis.shop';
                             </div>
                         </div>
                         <div class="form-group py-2 min-experience">
-                            <label class="font-weight-bold pb-2">Минимальный стаж вождения</label>
-                            <div class="radio_buttons2">
+                            <label class="font-weight-bold pb-2 text-center">Минимальный стаж вождения</label>
+                            <div class="radio_buttons2 ">
                                 <?php
                                 echo $form->field($model, 'experience')->radioList(['1'=>'До 3 лет', '2'=>'Более 3 лет'], [
 

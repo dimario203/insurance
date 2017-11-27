@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark navbar-expand-smd bg-red py-3">
     <div class="container">
-        <a href="/" class="navbar-brand"><img src="images/logo.png"></a>
-        <div class="navbar-collapse d-none d-lg-block" id="collapsingNavbar3">
+        <a href="/" class="navbar-brand"><img src="images/logo3.png"></a>
+        <div class="navbar-collapse d-none d-xl-block" id="collapsingNavbar3">
             <ul class="navbar-nav justify-content-between nav-menu-header">
                 <?=$items?>
             </ul>

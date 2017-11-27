@@ -15,7 +15,7 @@ $this->title = 'Epolis.shop';
         <?php
         if($status == 'error'){?>
             <div class="row pt-md-5">
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <h3 class="font-weight-bold text-center"><?=$message?></h3>
                 </div>
             </div>
@@ -23,12 +23,12 @@ $this->title = 'Epolis.shop';
         } else {
             ?>
             <div class="row pt-md-5">
-                <div class="col-md-3">
+                <div class="col-lg-3">
                     <div class="card bg-light border-0 modal-form-overlay">
                         <div class="card-header bg-red text-white rounded">
                             <div class="media">
                                 <img class="logo-form-list" src="images/earth.png">
-                                <div class="media-body p-2">Страхование путешественников</div>
+                                <div class="media-body p-2">Страхование Жизни и Здоровья</div>
                                 <span class="close-form-live">x</span>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ $this->title = 'Epolis.shop';
                             ]) ?>
                             <div class="form-live-list none">
                                 <div class="row">
-                                    <div class="col-md-10 offset-md-1">
+                                    <div class="col-lg-12">
                                         <div class="form-group py-2">
                                             <label for="countries" class="text-center font-weight-bold pb-2">Возраст
                                                 страхуемого</label>
@@ -85,9 +85,9 @@ $this->title = 'Epolis.shop';
                                             ?>
                                         </div>
                                         <div class="row">
-                                            <div class="col-10 offset-1 pb-5">
+                                            <div class="col-12 pb-5">
                                                 <button type="submit"
-                                                        class="btn btn-red btn-lg btn-block font-weight-bold  text-center button-form-list">
+                                                        class="btn btn-red btn-lg btn-block font-weight-bold  text-center button-submit-list">
                                                     Найти страховку
                                                 </button>
                                             </div>
@@ -129,7 +129,7 @@ $this->title = 'Epolis.shop';
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-lg-9">
                     <h2 class="font-weight-bold text-center">Предложения страховых фирм</h2>
                     <?php
                     if (isset($message) && !empty($message)) {
@@ -141,7 +141,7 @@ $this->title = 'Epolis.shop';
                     <?= $live_polis ?>
                     <h4 class="text-center">По вашему запросу это все</h4></br>
 
-                    <div class="col-md-12 center-block">
+                    <div class="col-lg-2 text-center list-pagination">
                         <?= LinkPager::widget([
                             'pagination' => $pages,
                         ]);
@@ -156,12 +156,6 @@ $this->title = 'Epolis.shop';
 </div>
 
 <div class="overlay-default"></div>
-
-<style>
-    .additional-payd{
-        z-index: 5;
-    }
-</style>
 
 <?php
 $script = <<<JS
